@@ -95,7 +95,7 @@ function App() {
           <MessageList messages={messages} />
         )}
         {activeComponent === 2 && (
-          <TrusteeList />
+          <TrustedPersons />
         )}
       </section>
 
