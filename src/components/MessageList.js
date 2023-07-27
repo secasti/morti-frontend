@@ -37,6 +37,7 @@ MessageList.propTypes = {
         })
         //add create new message function required
         //load messages function(api call)
+        //this is for future
     )
 }
 

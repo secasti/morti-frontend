@@ -9,6 +9,7 @@ const Message = (props) => {
         <div className='single-msg'>
             <h3 className='msg-title'> {props.title} </h3>
             <p className='msg-text'> {props.text} </p>
+            <p className='recipient-id'> recipientId: {props.recipientId} </p>
         </div>
     )
 };

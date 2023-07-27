@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import MessageList from './components/MessageList';
-import Trusteee from './components/TrusteeList';
+import TrustedPerson from './components/TrustedPersons';
 
 function App() {
  //message hard-coded practice data
@@ -97,7 +97,7 @@ function App() {
           <MessageList messages={messages} />
         )}
         {activeComponent === 2 && (
-          <TrusteeList />
+          <TrustedPersons />
         )}
       </section>
 
