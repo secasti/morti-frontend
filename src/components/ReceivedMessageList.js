@@ -13,11 +13,11 @@ const ReceivedMessageList = (props) =>{
             return (
                 <li key={message.received_user_id}>
                     <ReceivedMessage
-                    received_user_id={message.received_user_id}
-                    received_title={message.received_title}
-                    received_text={message.received_text}
-                    received_recipient_id={message.received_recipient_id}
-                    received_is_sent={message.received_is_sent}
+                        received_user_id={message.received_user_id}
+                        received_title={message.received_title}
+                        received_text={message.received_text}
+                        received_recipient_id={message.received_recipient_id}
+                        received_is_sent={message.received_is_sent}
                     ></ReceivedMessage>
                 </li>
             );
