@@ -46,11 +46,11 @@ const NewMessageForm = ({ messages, addMessage }) => {
         };
     return (
         <section className="cardform__container">
-        <h3 className="create-card-title"> Create New Farewell Message</h3>
+        <h3 className="create-card-title"> New Farewell</h3>
         <form onSubmit={handleSubmit} className="cardform" >
             <div className="message">
             {/* title */}
-            <label htmlFor='title'>Farewell Title:</label>
+            <label htmlFor='title'>Title:</label>
                 <input
                     type="text"
                     id="title"

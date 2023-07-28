@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 // import axios from 'axios';
 import TrustedPersons from './components/TrustedPersons';
-import './App.css';
 import MessagePage from './components/MessagePage';
+import './App.css';
 
 function App() {
  //message hard-coded practice data

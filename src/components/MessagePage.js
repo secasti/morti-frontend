@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import MessageList from './MessageList';
 import NewMessageForm from './NewMessageForm';
 import './MessagePage.css';
+import MessageList from './MessageList';
 
 const MessagePage = ({messages, addMessage}) =>{
+    console.log("MessagePage rendered");
     return (
         <section className="message__page">
             {/* render list of messages */}
-            {/* <div class="message-list">
+            <div class="message-list">
                 <MessageList messages={ messages } />  
-            </div> */}
+            </div>
             {/* render form to create new message */}
             <div className="new-msg-form">
                 <NewMessageForm 
@@ -35,4 +36,4 @@ MessagePage.propTypes = {
         addMessage: PropTypes.func.isRequired,
 };
 
-export default MessageList
+export default MessagePage
