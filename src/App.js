@@ -1,9 +1,9 @@
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import TrustedPersons from './components/TrustedPersons';
 import './App.css';
-import MessageList from './components/MessageList';
+import MessagePage from './components/MessagePage';
 
 function App() {
  //message hard-coded practice data
@@ -17,7 +17,7 @@ function App() {
   isSent: false
 },
 {
-  id: 1,
+  id: 2,
   userId: 1,
   title: "Letter For Selene",
   text: "Thank you for being there for me. I love you!",
@@ -26,14 +26,19 @@ function App() {
   isSent: false
 },
 {
-  id: 1,
+  id: 3,
   userId: 1,
   title: "Letter For Anna",
   text: "Thank you for being there for me. I love you!",
   // audio: 
-  recipientId: 2, 
+  recipientId: 3, 
   isSent: false
 }]
+
+// Function to add a new message to MESSAGE_DATA
+const addMessage = (newMessage) => {
+  setMessages([...messages, newMessage]);
+};
 
   // Message data state
   const [messages, setMessages] = useState(MESSAGE_DATA);
@@ -79,7 +84,7 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <h1>My App</h1>
+        <h1>M O R T I</h1>
         <nav>
           <button onClick={() => setActive(1)}>Messages</button>
           <button onClick={() => setActive(2)}>Trusted Persons</button>
@@ -92,7 +97,7 @@ function App() {
           <p>Welcome! This is the introductory text for the page.</p>
         )}
         {activeComponent === 1 && (
-          <MessageList messages={messages} />
+          <MessagePage messages={messages} addMessage={addMessage} />
         )}
         {activeComponent === 2 && (
           <TrustedPersons />
