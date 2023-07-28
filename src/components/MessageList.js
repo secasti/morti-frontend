@@ -7,21 +7,23 @@ import './MessageList.css';
 
 const MessageList = (props) =>{
     return (
-        <div class="messages">
-            {
-                props.messages.map((message) => (
-                    < Message 
-                        key={ message.id } 
-                        userId={ message.userId }
-                        title= { message.title }
-                        text = { message.text }
-                        // audio = { message.audio }
-                        recipientId = { message.recipientId }
-                        isSent = {message.isSent}
-                    />
-                ))
-            }
-        </div>
+       <section className="message__page">
+            <div class="messages">
+                {
+                    props.messages.map((message) => (
+                        < Message 
+                            key={ message.id } 
+                            userId={ message.userId }
+                            title= { message.title }
+                            text = { message.text }
+                            // audio = { message.audio }
+                            recipientId = { message.recipientId }
+                            isSent = {message.isSent}
+                        />
+                    ))
+                }
+            </div>
+        </section> 
     );
 };
 

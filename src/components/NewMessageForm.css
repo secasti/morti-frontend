@@ -1,0 +1,54 @@
+/* NewMessageForm.css */
+
+/* Dark Mode color palette */
+:root {
+    --bg-color: #1a1a1a; /* Dark background color for the main content */
+    --text-color: #f2f2f2; /* Light text color for dark mode */
+    --primary-color: #4CAF50; /* Green for accent elements */
+    --form-bg-color: #111; /* Slightly darker shade for the message form background */
+  }
+  
+  .cardform__container {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 16px;
+  }
+  
+  .create-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .cardform {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .cardform label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .cardform input[type="text"] {
+    padding: 8px;
+    border: none;
+    background-color: var(--form-bg-color); /* Slightly darker background color for form inputs */
+    color: var(--text-color);
+    border-radius: 4px;
+  }
+  
+  .cardform input[type="submit"] {
+    padding: 8px 16px;
+    border: none;
+    background-color: var(--primary-color); /* Green background color for submit button */
+    color: var(--text-color);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cardform input[type="submit"]:hover {
+    background-color: var(--secondary-color); /* Blue background color on hover */
+  }
+  

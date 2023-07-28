@@ -1,29 +1,37 @@
 /* Message.css */
 
-/* Modern Classic color palette */
+/* Dark Mode color palette */
 :root {
-    --classic-bg-color: #F7F2E7; /* Off-White */
-    --classic-fg-color: #454545; /* Dark Gray */
-    --classic-accent-color: #D4A190; /* Light Peach */
-  }
-  
-  .single-msg {
-    background-color: var(--classic-bg-color);
-    color: var(--classic-fg-color);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Add max-width to prevent the text from overflowing */
-    max-width: 300px; /* Adjust the value based on your design */
-  }
-  
-  .msg-title {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .msg-text {
-    margin-top: 8px;
-  }
-  
+  --bg-color: #1a1a1a; /* Dark background color for the main content */
+  --text-color: #f2f2f2; /* Light text color for dark mode */
+  --primary-color: #4CAF50; /* Green for accent elements */
+  --secondary-color: #2196F3; /* Blue for buttons and links */
+}
+
+.single-msg {
+  background-color: #2a2a2a; /* Darker background color for each card */
+  color: var(--text-color);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Add max-width to prevent the text from overflowing */
+  max-width: 300px; /* Adjust the value based on your design */
+}
+
+.msg-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary-color); /* Green color for the title */
+}
+
+.msg-text {
+  margin-top: 8px;
+}
+
+/* Add a subtle transition effect when hovering over the cards */
+.single-msg:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}

@@ -5,7 +5,7 @@ import './App.css';
 import TrustedPersons from './components/TrustedPersons';
 import MessageList from './components/MessageList';
 import ReceivedMessageList from './components/ReceivedMessageList';
-
+import MessagePage from './components/MessagePage';
 
 function App() {
  //message hard-coded practice data
@@ -19,7 +19,7 @@ function App() {
   isSent: false
 },
 {
-  id: 1,
+  id: 2,
   userId: 1,
   title: "Letter For Selene",
   text: "Thank you for being there for me. I love you!",
@@ -28,16 +28,15 @@ function App() {
   isSent: false
 },
 {
-  id: 1,
+  id: 3,
   userId: 1,
   title: "Letter For Anna",
   text: "Thank you for being there for me. I love you!",
   // audio: 
-  recipientId: 2, 
+  recipientId: 3, 
   isSent: false
 }]
 
-// hard-coded trustee data
   const TRUSTEE_DATA = [{
   trustee_id: 1,
   trustee_name: "sancho",
@@ -99,6 +98,11 @@ function App() {
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
+// Function to add a new message to MESSAGE_DATA
+const addMessage = (newMessage) => {
+  setMessages([...messages, newMessage]);
+};
+
   // Function to set active component
   const setActive = (componentIndex) => {
     setActiveComponent(componentIndex);
@@ -145,7 +149,7 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <h1>My App</h1>
+        <h1>M O R T I</h1>
         <nav>
           <button onClick={() => setActive(1)}>Messages</button>
           <button onClick={() => setActive(2)}>Trusted Persons</button>
@@ -159,7 +163,7 @@ function App() {
           <p>Welcome! This is the introductory text for the page.</p>
         )}
         {activeComponent === 1 && (
-          <MessageList messages={messages} />
+          <MessagePage messages={messages} addMessage={addMessage} />
         )}
         {/* I thought we were doing one container for lists and smaller components? */}
         {activeComponent === 2 && (
