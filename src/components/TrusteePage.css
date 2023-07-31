@@ -1,0 +1,33 @@
+/* Dark mode styles */
+:root {
+    --dark-bg-color: #1a1a1a; /* Dark background color for dark mode */
+    --light-text-color: #f2f2f2; /* Light text color for dark mode */
+    --list-bg-color: #272727; /* Dark background color for the message list */
+    --form-bg-color: #272727; /* Dark background color for the message form */
+    --list-width: 50%; /* Width of the message list (adjust as needed) */
+}
+
+.trustee__page {
+    display: flex;
+    gap: 1%;
+    padding: 5%;
+}
+
+.trustee-list {
+    background-color: var(--dark-bg-color);
+    color: var(--light-text-color);
+    flex: 1;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: var(--list-width);
+}
+
+.new-trustee-form {
+    background-color: var(--form-bg-color);
+    color: var(--light-text-color);
+    flex: 1;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

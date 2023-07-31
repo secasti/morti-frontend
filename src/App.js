@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import TrustedPersons from './components/TrustedPersons';
+import TrusteePage from './components/TrusteePage';
 import MessageList from './components/MessageList';
 import ReceivedMessageList from './components/ReceivedMessageList';
 import MessagePage from './components/MessagePage';
@@ -99,9 +99,27 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
 // Function to add a new message to MESSAGE_DATA
-const addMessage = (newMessage) => {
+  const addMessage = (newMessage) => {
   setMessages([...messages, newMessage]);
 };
+
+// Function to add a new trustee to TRUSTEE_DATA
+  const addTrustee = (newTrustee) => {
+  setTrustees([...trustees, newTrustee]);
+};
+
+  const getReceivedMessages = (response) => {
+  const newMessages = response.map((message) => {
+    return {
+      'received_user_id': message.received_user_id,
+      'received_title': message.received_title,
+      'received_text': message.received_text,
+      'received_recipient_id': message.received_recipient_id,
+      'received_is_sent': message.received_is_sent
+    }
+  })
+setReceivedMessages(RECEIVED_MESSAGE_DATA);
+}
 
   // Function to set active component
   const setActive = (componentIndex) => {
@@ -133,18 +151,7 @@ const addMessage = (newMessage) => {
       </div>
     );
   }
-  const getReceivedMessages = (response) => {
-      const newMessages = response.map((message) => {
-        return {
-          'received_user_id': message.received_user_id,
-          'received_title': message.received_title,
-          'received_text': message.received_text,
-          'received_recipient_id': message.received_recipient_id,
-          'received_is_sent': message.received_is_sent
-        }
-      })
-    setReceivedMessages(RECEIVED_MESSAGE_DATA);
-  }
+
   // If authenticated, show the main content based on the active component
   return (
     <div className="App">
@@ -165,9 +172,11 @@ const addMessage = (newMessage) => {
         {activeComponent === 1 && (
           <MessagePage messages={messages} addMessage={addMessage} />
         )}
-        {/* I thought we were doing one container for lists and smaller components? */}
         {activeComponent === 2 && (
-          <TrustedPersons trustees={trustees}/>
+          <TrusteePage 
+          trustees={trustees} 
+          addTrustee={addTrustee}
+          />
         )}
         {activeComponent === 3 && (
           <ReceivedMessageList 

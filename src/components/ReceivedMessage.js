@@ -6,9 +6,9 @@ const ReceivedMessage = (props) => {
 
     return (
         <div className='single-msg'>
-            <h3 className='msg-title'> {props.received_title} </h3>
+            <h3 className='msg-title'>{props.received_title} </h3>
             <p className='msg-text'> {props.received_text} </p>
-            <button onClick={console.log('pressed delete!')}>🗑</button>
+            <button onClick={console.log('pressed delete a received message!')}>🗑</button>
         </div>
     )
 };

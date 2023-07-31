@@ -36,4 +36,4 @@ MessagePage.propTypes = {
         addMessage: PropTypes.func.isRequired,
 };
 
-export default MessagePage
+export default MessagePage;
