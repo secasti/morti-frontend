@@ -4,7 +4,7 @@ import NewTrusteeForm from './NewTrusteeForm';
 import TrusteeList from './TrusteeList';
 import './TrusteePage.css';
 
-const TrustedPersons = ({trustees, addTrustee}) => {
+const TrusteePage = ({trustees, addTrustee}) => {
     return (
         <section className='trustee__page'>
             <div className='trustee-list'>
@@ -17,4 +17,15 @@ const TrustedPersons = ({trustees, addTrustee}) => {
     );
 };
 
-export default TrustedPersons;
+TrusteePage.propTypes = {
+    messages: PropTypes.arrayOf(
+        PropTypes.shape({
+            trustee_id: PropTypes.number,
+            trustee_name: PropTypes.string.isRequired,
+            trustee_email: PropTypes.string.isRequired
+        })
+    ).isRequired,
+        addMessage: PropTypes.func.isRequired,
+};
+
+export default TrusteePage;
