@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NewTrusteeForm from './NewTrusteeForm';
 import TrusteeList from './TrusteeList';
 import './TrusteePage.css';
 
-const TrustedPersons = ({trustees}) => {
+const TrustedPersons = ({trustees, addTrustee}) => {
     return (
         <section>
             <h2>This is  TrustedPersons</h2>
@@ -11,6 +12,7 @@ const TrustedPersons = ({trustees}) => {
                 <TrusteeList trustees={trustees}></TrusteeList>
             </div>
             <div>
+                <NewTrusteeForm addTrustee={addTrustee}></NewTrusteeForm>
             </div>
         </section>
     );
