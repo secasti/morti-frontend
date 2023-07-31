@@ -15,6 +15,7 @@ const TrusteeList = (props) => {
                         trustee_id={trustee.trustee_id}
                         trustee_name={trustee.trustee_name}
                         trustee_email={trustee.trustee_email}
+                        updateDeleteTrustee={props.updateDeleteTrustee}
                     ></Trustee>
                 </li>
             );
@@ -36,7 +37,8 @@ TrusteeList.propTypes = {
             trustee_name: PropTypes.string.isRequired,
             trustee_email: PropTypes.string.isRequired
         })
-    ).isRequired
+    ).isRequired,
+    updateDeleteTrustee:PropTypes.func,
 };
 
 export default TrusteeList;
