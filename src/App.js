@@ -108,6 +108,14 @@ function App() {
   setTrustees([...trustees, newTrustee]);
 };
 
+  const updateDeleteTrustee = (trusteeId) => {
+    const updatedTrustees = trustees.filter(function (trustees) {
+      return trustees.trustee_id !== trusteeId;
+    });
+
+    setTrustees(updatedTrustees)
+  };
+
   const getReceivedMessages = (response) => {
   const newMessages = response.map((message) => {
     return {
@@ -119,7 +127,7 @@ function App() {
     }
   })
 setReceivedMessages(RECEIVED_MESSAGE_DATA);
-}
+};
 
   // Function to set active component
   const setActive = (componentIndex) => {
@@ -176,6 +184,7 @@ setReceivedMessages(RECEIVED_MESSAGE_DATA);
           <TrusteePage 
           trustees={trustees} 
           addTrustee={addTrustee}
+          updateDeleteTrustee={updateDeleteTrustee}
           />
         )}
         {activeComponent === 3 && (

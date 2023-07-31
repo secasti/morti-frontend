@@ -4,11 +4,11 @@ import NewTrusteeForm from './NewTrusteeForm';
 import TrusteeList from './TrusteeList';
 import './TrusteePage.css';
 
-const TrusteePage = ({trustees, addTrustee}) => {
+const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee}) => {
     return (
         <section className='trustee__page'>
             <div className='trustee-list'>
-                <TrusteeList trustees={trustees}></TrusteeList>
+                <TrusteeList trustees={trustees} updateDeleteTrustee={updateDeleteTrustee}></TrusteeList>
             </div>
             <div className='new-trustee-form'>
                 <NewTrusteeForm addTrustee={addTrustee}></NewTrusteeForm>
@@ -26,6 +26,7 @@ TrusteePage.propTypes = {
         })
     ).isRequired,
         addMessage: PropTypes.func.isRequired,
+        updateDeleteTrustee: PropTypes.func.isRequired
 };
 
 export default TrusteePage;
