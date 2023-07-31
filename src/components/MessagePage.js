@@ -9,7 +9,7 @@ const MessagePage = ({messages, addMessage}) =>{
     return (
         <section className="message__page">
             {/* render list of messages */}
-            <div class="message-list">
+            <div className="message-list">
                 <MessageList messages={ messages } />  
             </div>
             {/* render form to create new message */}
