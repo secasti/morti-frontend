@@ -6,12 +6,11 @@ import './TrusteePage.css';
 
 const TrustedPersons = ({trustees, addTrustee}) => {
     return (
-        <section>
-            <h2>This is  TrustedPersons</h2>
-            <div>
+        <section className='trustee__page'>
+            <div className='trustee-list'>
                 <TrusteeList trustees={trustees}></TrusteeList>
             </div>
-            <div>
+            <div className='new-trustee-form'>
                 <NewTrusteeForm addTrustee={addTrustee}></NewTrusteeForm>
             </div>
         </section>
