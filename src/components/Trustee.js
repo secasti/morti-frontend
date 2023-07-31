@@ -5,8 +5,10 @@ import './Trustee.css';
 const Trustee = (props) => {
 
     return (
-        <section>
-            This the Trustee component
+        <section className='single-msg'>
+            <h3 className='msg-title'> {props.trustee_name} </h3>
+            <p className='msg-text'> {props.trustee_email} </p>
+            <button onClick={console.log('pressed delete a trustee!')}>🗑</button>
         </section>
     );
 };
