@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import TrusteePage from './components/TrusteePage';
-import MessageList from './components/MessageList';
 import ReceivedMessageList from './components/ReceivedMessageList';
 import MessagePage from './components/MessagePage';
 
@@ -92,7 +91,7 @@ function App() {
   const [trustees, setTrustees] = useState(TRUSTEE_DATA);
   const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
 
-  // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages?)
+  // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages)
   const [activeComponent, setActiveComponent] = useState(0);
 
   // Authentication state

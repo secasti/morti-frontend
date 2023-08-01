@@ -28,6 +28,7 @@ const MessagePage = ({messages, addMessage, deleteMessage}) =>{
 MessagePage.propTypes = {
     messages: PropTypes.arrayOf(
         PropTypes.shape({
+            message_id: PropTypes.number,
             userId: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,

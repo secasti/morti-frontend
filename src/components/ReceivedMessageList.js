@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import ReceivedMessage from "./ReceivedMessage";
-import './ReceivedMessage.css';
-
+import './ReceivedMessageList.css';
 
 const ReceivedMessageList = (props) =>{
 
@@ -25,7 +24,7 @@ const ReceivedMessageList = (props) =>{
             );
         });
     };
-// class vs className?
+
     return (
         <div className="messages">
             <ol>{getReceivedMessagesJSX(receivedMessages)}</ol>
@@ -50,6 +49,6 @@ ReceivedMessageList.propTypes = {
         //load messages function(api call)
     ).isRequired,
     deleteMessage: PropTypes.func
-}
+};
 
 export default ReceivedMessageList;

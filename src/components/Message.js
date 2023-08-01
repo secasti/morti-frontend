@@ -14,7 +14,7 @@ const Message = (props) => {
             <p className='msg-text'> {props.text} </p>
             <button onClick={toggleDelete}>🗑</button>
         </div>
-    )
+    );
 };
 
 Message.propTypes = {

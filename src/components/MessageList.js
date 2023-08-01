@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import Message from './Message';
 import './MessageList.css';
 
-
-
 const MessageList = (props) =>{
     return (
         <section className="message__page">
@@ -32,6 +30,7 @@ const MessageList = (props) =>{
 MessageList.propTypes = {
     messages: PropTypes.arrayOf (
         PropTypes.shape({
+            message_id: PropTypes.number,
             userId: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
@@ -43,6 +42,6 @@ MessageList.propTypes = {
         //load messages function(api call)
     ).isRequired,
     deleteMessage: PropTypes.func
-}
+};
 
 export default MessageList
