@@ -13,11 +13,11 @@ const ReceivedMessageList = (props) =>{
             return (
                 <li key={message.received_user_id}>
                     <ReceivedMessage
-                        received_user_id={message.received_user_id}
-                        received_title={message.received_title}
-                        received_text={message.received_text}
-                        received_recipient_id={message.received_recipient_id}
-                        received_is_sent={message.received_is_sent}
+                        id={message.id}
+                        title={message.title}
+                        text={message.text}
+                        recipientId={message.recipientId}
+                        isSent={message.isSent}
                     ></ReceivedMessage>
                 </li>
             );
@@ -36,12 +36,12 @@ ReceivedMessageList.propTypes = {
     // to be from anywhere?
     receivedMessages: PropTypes.arrayOf (
         PropTypes.shape({
-            received_user_id: PropTypes.number.isRequired,
-            received_title: PropTypes.string.isRequired,
-            received_text: PropTypes.string.isRequired,
+            userId: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
             // audio: PropTypes.string.isRequired,
-            received_recipient_id: PropTypes.number.isRequired,
-            received_is_sent: PropTypes.bool.isRequired
+            recipientId: PropTypes.number.isRequired,
+            isSent: PropTypes.bool.isRequired
         })
         //add create new message function required
         //load messages function(api call)

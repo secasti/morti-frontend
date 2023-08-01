@@ -4,22 +4,26 @@ import './ReceivedMessage.css';
 
 const ReceivedMessage = (props) => {
 
+    const toggleDelete = () => {
+        props.deleteMessage(props.title)
+    }
+
     return (
         <div className='single-msg'>
-            <h3 className='msg-title'>{props.received_title} </h3>
-            <p className='msg-text'> {props.received_text} </p>
+            <h3 className='msg-title'>{props.title} </h3>
+            <p className='msg-text'> {props.text} </p>
             <button onClick={console.log('pressed delete a received message!')}>🗑</button>
         </div>
     )
 };
 
 ReceivedMessage.propTypes = {
-    received_user_id: PropTypes.number.isRequired,
-    received_title: PropTypes.string.isRequired,
-    received_text: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
     // audio: PropTypes.string.isRequired,
-    received_recipient_id: PropTypes.number.isRequired,
-    received_is_sent: PropTypes.bool.isRequired
+    recipientId: PropTypes.number.isRequired,
+    isSent: PropTypes.bool.isRequired
 };
 
 export default ReceivedMessage;

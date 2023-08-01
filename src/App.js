@@ -52,45 +52,45 @@ function App() {
 }]
 
   const RECEIVED_MESSAGE_DATA = [{
-  received_user_id: 4,
+  id: 4,
   userId: 1,
-  received_title: "Boo bish!",
-  received_text: "Ok, NOW you can play with the quija",
+  title: "Boo bish!",
+  text: "Ok, NOW you can play with the quija",
   // audio: 
-  received_recipient_id: 2, 
-  received_is_sent: false
+  recipientId: 2, 
+  isSent: false
 }, {
-  received_user_id: 3,
+  id: 3,
   userId: 1,
-  received_title: "Hey I've transcended",
-  received_text: "It's wildin' up here... like being high but actually!",
+  title: "Hey I've transcended",
+  text: "It's wildin' up here... like being high but actually!",
   // audio: 
-  received_recipient_id: 2, 
-  received_is_sent: false
+  recipientId: 2, 
+  isSent: false
 },
 {
-  received_user_id: 2,
+  id: 2,
   userId: 1,
-  received_title: "I'm haunting you!",
-  received_text: "Do you notice me? Write down your dreams bish",
+  title: "I'm haunting you!",
+  text: "Do you notice me? Write down your dreams bish",
   // audio: 
-  received_recipient_id: 2, 
-  received_is_sent: false
+  recipientId: 2, 
+  isSent: false
 },
 {
-  received_user_id: 1,
+  id: 1,
   userId: 1,
-  received_title: "I'll visit ya!",
-  received_text: "On 1/2/2033 I'll visit you in the form of a animal",
+  title: "I'll visit ya!",
+  text: "On 1/2/2033 I'll visit you in the form of a animal",
   // audio: 
-  received_recipient_id: 2, 
-  received_is_sent: false
+  recipientId: 2, 
+  isSent: false
 }]
 
   // States
   const [messages, setMessages] = useState(MESSAGE_DATA);
-  const [trustees, setTrustees] = useState(TRUSTEE_DATA)
-  const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA)
+  const [trustees, setTrustees] = useState(TRUSTEE_DATA);
+  const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
 
   // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages?)
   const [activeComponent, setActiveComponent] = useState(0);
@@ -103,7 +103,7 @@ function App() {
   setMessages([...messages, newMessage]);
 };
 
-// Function to add a new trustee to TRUSTEE_DATA
+// TRUSTEE functions
   const addTrustee = (newTrustee) => {
   setTrustees([...trustees, newTrustee]);
 };
@@ -116,18 +116,20 @@ function App() {
     setTrustees(updatedTrustees)
   };
 
+// RECEIVED MESSAGES functions
+
   const getReceivedMessages = (response) => {
-  const newMessages = response.map((message) => {
-    return {
-      'received_user_id': message.received_user_id,
-      'received_title': message.received_title,
-      'received_text': message.received_text,
-      'received_recipient_id': message.received_recipient_id,
-      'received_is_sent': message.received_is_sent
-    }
-  })
-setReceivedMessages(RECEIVED_MESSAGE_DATA);
-};
+    const newMessages = response.map((message) => {
+      return {
+        'userId': message.userId,
+        'title': message.title,
+        'text': message.text,
+        'recipientId': message.recipientId,
+        'isSent': message.isSent
+      };
+    });
+  setReceivedMessages(RECEIVED_MESSAGE_DATA);
+  };
 
   // Function to set active component
   const setActive = (componentIndex) => {
