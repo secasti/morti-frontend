@@ -8,24 +8,29 @@ const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee}) => {
     return (
         <section className='trustee__page'>
             <div className='trustee-list'>
-                <TrusteeList trustees={trustees} updateDeleteTrustee={updateDeleteTrustee}></TrusteeList>
+                <TrusteeList 
+                trustees={trustees} 
+                updateDeleteTrustee={updateDeleteTrustee}
+                ></TrusteeList>
             </div>
             <div className='new-trustee-form'>
-                <NewTrusteeForm addTrustee={addTrustee}></NewTrusteeForm>
+                <NewTrusteeForm 
+                addTrustee={addTrustee}
+                ></NewTrusteeForm>
             </div>
         </section>
     );
 };
 
 TrusteePage.propTypes = {
-    messages: PropTypes.arrayOf(
+    trustees: PropTypes.arrayOf(
         PropTypes.shape({
-            trustee_id: PropTypes.number,
-            trustee_name: PropTypes.string.isRequired,
-            trustee_email: PropTypes.string.isRequired
+            user_id: PropTypes.number,
+            first_name: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired
         })
     ).isRequired,
-        addMessage: PropTypes.func.isRequired,
+        addTrustee: PropTypes.func.isRequired,
         updateDeleteTrustee: PropTypes.func.isRequired
 };
 

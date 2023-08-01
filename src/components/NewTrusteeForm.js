@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import "./NewTrusteeForm.css";
 
 const INITIAL_FORM_DATA = {
-    trustee_id: "",
-    trustee_name: "",
-    trustee_email: ""
+    user_id: "",
+    first_name: "",
+    email: ""
 };
 
 const NewTrusteeForm = (props) => {
@@ -33,21 +33,21 @@ const NewTrusteeForm = (props) => {
             {/* is below class same as other form? */}
             <form onSubmit={onFormSubmit} className="cardform">
                 <div className="message">
-                    <label htmlFor='trustee_name'>Name:</label>
+                    <label htmlFor='first_name'>Name:</label>
                     <input
                     type="text"
-                    id="trustee_name"
-                    name="trustee_name"
-                    value={trusteeFormData.trustee_name}
+                    id="first_name"
+                    name="first_name"
+                    value={trusteeFormData.first_name}
                     onChange={anInputChanged}
                     ></input>
                 </div>
-                <label htmlFor='trustee_email'>Email:</label>
+                <label htmlFor='email'>Email:</label>
                     <input
                     type="text"
-                    id="trustee_email"
-                    name="trustee_email"
-                    value={trusteeFormData.trustee_email}
+                    id="email"
+                    name="email"
+                    value={trusteeFormData.email}
                     onChange={anInputChanged}
                     ></input>
                 <input 
