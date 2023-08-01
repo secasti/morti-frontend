@@ -10,7 +10,7 @@ import MessagePage from './components/MessagePage';
 function App() {
  //message hard-coded practice data
   const MESSAGE_DATA = [{
-  id: 1,
+  message_id: 1,
   userId: 1,
   title: "Letter For Susi",
   text: "Thank you for being there for me. I love you!",
@@ -19,8 +19,8 @@ function App() {
   isSent: false
 },
 {
-  id: 2,
-  userId: 1,
+  message_id: 2,
+  userId: 2,
   title: "Letter For Selene",
   text: "Thank you for being there for me. I love you!",
   // audio: 
@@ -28,8 +28,8 @@ function App() {
   isSent: false
 },
 {
-  id: 3,
-  userId: 1,
+  message_id: 3,
+  userId: 3,
   title: "Letter For Anna",
   text: "Thank you for being there for me. I love you!",
   // audio: 
@@ -52,7 +52,7 @@ function App() {
 }]
 
   const RECEIVED_MESSAGE_DATA = [{
-  id: 4,
+  message_id: 4,
   userId: 1,
   title: "Boo bish!",
   text: "Ok, NOW you can play with the quija",
@@ -60,8 +60,8 @@ function App() {
   recipientId: 2, 
   isSent: false
 }, {
-  id: 3,
-  userId: 1,
+  message_id: 3,
+  userId: 2,
   title: "Hey I've transcended",
   text: "It's wildin' up here... like being high but actually!",
   // audio: 
@@ -69,8 +69,8 @@ function App() {
   isSent: false
 },
 {
-  id: 2,
-  userId: 1,
+  message_id: 2,
+  userId: 3,
   title: "I'm haunting you!",
   text: "Do you notice me? Write down your dreams bish",
   // audio: 
@@ -78,8 +78,8 @@ function App() {
   isSent: false
 },
 {
-  id: 1,
-  userId: 1,
+  message_id: 1,
+  userId: 4,
   title: "I'll visit ya!",
   text: "On 1/2/2033 I'll visit you in the form of a animal",
   // audio: 
@@ -121,6 +121,7 @@ function App() {
   const getReceivedMessages = (response) => {
     const newMessages = response.map((message) => {
       return {
+        'message_id': message.message_id,
         'userId': message.userId,
         'title': message.title,
         'text': message.text,
@@ -129,6 +130,32 @@ function App() {
       };
     });
   setReceivedMessages(RECEIVED_MESSAGE_DATA);
+  };
+
+  const deleteMessage = (messageId, messageType) => {
+    let updatedMessages;
+
+    switch (messageType) {
+      
+      case 'receivedMessage':
+        updatedMessages = receivedMessages.filter(function (receivedMessages) {
+          return receivedMessages.message_id !== messageId;
+        });
+        setReceivedMessages(updatedMessages);
+        break;
+
+      case 'message':
+        console.log('in message switch')
+        updatedMessages = messages.filter(function (messages) {
+          return messages.message_id !== messageId;
+        });
+        setMessages(updatedMessages);
+        break;
+
+      default:
+        console.error('Invalid messageType', messageType);
+        break;
+    }
   };
 
   // Function to set active component
@@ -180,7 +207,10 @@ function App() {
           <p>Welcome! This is the introductory text for the page.</p>
         )}
         {activeComponent === 1 && (
-          <MessagePage messages={messages} addMessage={addMessage} />
+          <MessagePage messages={messages} 
+          addMessage={addMessage} 
+          deleteMessage={deleteMessage}
+          />
         )}
         {activeComponent === 2 && (
           <TrusteePage 
@@ -193,6 +223,7 @@ function App() {
           <ReceivedMessageList 
           receivedMessages={receivedMessages}
           getReceivedMessages={getReceivedMessages}
+          deleteMessage={deleteMessage}
           />
         )}
       </section>

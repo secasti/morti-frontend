@@ -11,13 +11,15 @@ const ReceivedMessageList = (props) =>{
     const getReceivedMessagesJSX = (receivedMessages) => {
         return receivedMessages.map((message) => {
             return (
-                <li key={message.received_user_id}>
+                <li key={message.userId}>
                     <ReceivedMessage
-                        id={message.id}
+                        message_id={message.message_id}
+                        userId={message.userId}
                         title={message.title}
                         text={message.text}
                         recipientId={message.recipientId}
                         isSent={message.isSent}
+                        deleteMessage={props.deleteMessage}
                     ></ReceivedMessage>
                 </li>
             );
@@ -25,7 +27,7 @@ const ReceivedMessageList = (props) =>{
     };
 // class vs className?
     return (
-        <div class="messages">
+        <div className="messages">
             <ol>{getReceivedMessagesJSX(receivedMessages)}</ol>
         </div>
     );
@@ -36,6 +38,7 @@ ReceivedMessageList.propTypes = {
     // to be from anywhere?
     receivedMessages: PropTypes.arrayOf (
         PropTypes.shape({
+            message_id: PropTypes.number,
             userId: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
@@ -45,7 +48,8 @@ ReceivedMessageList.propTypes = {
         })
         //add create new message function required
         //load messages function(api call)
-    )
+    ).isRequired,
+    deleteMessage: PropTypes.func
 }
 
 export default ReceivedMessageList;

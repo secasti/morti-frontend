@@ -38,7 +38,7 @@ TrusteeList.propTypes = {
             trustee_email: PropTypes.string.isRequired
         })
     ).isRequired,
-    updateDeleteTrustee:PropTypes.func,
+    updateDeleteTrustee: PropTypes.func,
 };
 
 export default TrusteeList;

@@ -8,10 +8,15 @@ const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee}) => {
     return (
         <section className='trustee__page'>
             <div className='trustee-list'>
-                <TrusteeList trustees={trustees} updateDeleteTrustee={updateDeleteTrustee}></TrusteeList>
+                <TrusteeList 
+                trustees={trustees} 
+                updateDeleteTrustee={updateDeleteTrustee}
+                ></TrusteeList>
             </div>
             <div className='new-trustee-form'>
-                <NewTrusteeForm addTrustee={addTrustee}></NewTrusteeForm>
+                <NewTrusteeForm 
+                addTrustee={addTrustee}
+                ></NewTrusteeForm>
             </div>
         </section>
     );
