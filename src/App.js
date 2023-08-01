@@ -37,17 +37,17 @@ function App() {
 }]
 
   const TRUSTEE_DATA = [{
-  trustee_id: 1,
-  trustee_name: "sancho",
-  trustee_email: "sancho@gmail.com"
+  user_id: 1,
+  first_name: "sancho",
+  email: "sancho@gmail.com"
 }, {
-  trustee_id: 2,
-  trustee_name: "kween",
-  trustee_email: "kween@gmail.com"
+  user_id: 2,
+  first_name: "kween",
+  email: "kween@gmail.com"
 }, {
-  trustee_id: 3,
-  trustee_name: "ruka",
-  trustee_email: "ruka@gmail.com"
+  user_id: 3,
+  first_name: "ruka",
+  email: "ruka@gmail.com"
 }]
 
   const RECEIVED_MESSAGE_DATA = [{
@@ -109,7 +109,7 @@ function App() {
 
   const updateDeleteTrustee = (trusteeId) => {
     const updatedTrustees = trustees.filter(function (trustees) {
-      return trustees.trustee_id !== trusteeId;
+      return trustees.user_id !== trusteeId;
     });
 
     setTrustees(updatedTrustees)

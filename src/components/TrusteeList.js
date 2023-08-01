@@ -10,11 +10,11 @@ const TrusteeList = (props) => {
     const getTrusteesJSX = (trustees) => {
         return trustees.map((trustee) => {
             return (
-                <li key={trustee.trustee_id}>
+                <li key={trustee.user_id}>
                     <Trustee
-                        trustee_id={trustee.trustee_id}
-                        trustee_name={trustee.trustee_name}
-                        trustee_email={trustee.trustee_email}
+                        user_id={trustee.user_id}
+                        first_name={trustee.first_name}
+                        email={trustee.email}
                         updateDeleteTrustee={props.updateDeleteTrustee}
                     ></Trustee>
                 </li>
@@ -33,9 +33,9 @@ const TrusteeList = (props) => {
 TrusteeList.propTypes = {
     trustees: PropTypes.arrayOf(
         PropTypes.shape({
-            trustee_id: PropTypes.number,
-            trustee_name: PropTypes.string.isRequired,
-            trustee_email: PropTypes.string.isRequired
+            user_id: PropTypes.number,
+            first_name: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired
         })
     ).isRequired,
     updateDeleteTrustee: PropTypes.func,
