@@ -18,7 +18,7 @@ Message.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     // audio: PropTypes.string.isRequired,
-    recipientId: PropTypes.number.isRequired,
+    recipientEmail: PropTypes.string.isRequired, // this should be the email
     isSent: PropTypes.bool.isRequired
 };
 

@@ -52,3 +52,6 @@
     background-color: var(--secondary-color); /* Blue background color on hover */
   }
   
+  .invalid-email {
+    color: red
+  }

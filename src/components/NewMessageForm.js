@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import PropTypes from "prop-types";
+import { debounce } from "lodash";
+import axios from "axios"; 
 import "./NewMessageForm.css";
+
 
 
 //empty form data to reset form to
@@ -16,18 +19,68 @@ const NewMessageForm = ({ messages, addMessage }) => {
     
     const [messageFormData, setMessageFormData] = useState(INITIAL_FORM_DATA);
 
+
+
+    //Async validation function using debounce from Lodash
+    const validateEmail = debounce(async (email) => {
+        //when enter this funciton set validation status to validating
+        setEmailValidation({ isValidating: true, isValid: false});
+        console.log("entered validate email function and set:",emailValidation)
+        //make API call to route that validates email
+        try {
+            //const response = await axios.get(`/validateEmail?email=${email}`)//route for validating email
+            //this assumes that the reposnse we get is a json with key isValid and value of true or false
+            //const isValidEmail = response.data.isValid;
+                const isValidEmail = true
+            //set validation status accordingly
+            setEmailValidation({isValidating: false, isValid:isValidEmail});
+            console.log("email successfully validated by axios fake call", emailValidation)
+        
+        } catch (error) {
+            console.error("Error validating email:", error)
+            // set validation to false
+            setEmailValidation({isValidating: false, isValid: false});
+        }
+    }, 500); // this 500 adjust the debounce delay to every 500ms
+
     const updatePreview = (event) => {
         const newFormData = {
         ...messageFormData,
         [event.target.name]: event.target.value,
         };
         setMessageFormData(newFormData);
+
+        //perform email validation for recipientEmail field
+        if (event.target.name === "recipientEmail") {
+            const isValid = validateEmail(event.target.value);
+            setEmailValidation({isValidating: true, isValid: isValid})
+        }
     };
+
+    // email validation for repient email field
+    // useEffect(() => {
+    //     // Perform email validation for the recipientEmail field
+    //     const isValidEmail = validateEmail(messageFormData.recipientEmail);
+    //     setEmailValidation({
+    //       isValidating: false,
+    //       isValid: isValidEmail,
+    //     });
+    //   }, [messageFormData.recipientEmail]);
+
+    // state to tract the validation status of email input (prob needs to be raised to be used by trustee form)
+    const [emailValidation, setEmailValidation] = useState ({
+        isValidating: false,
+        isValid: false,
+    });
+
+
 
     //function to handle the submition of form and add new msg to initial data
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("we're in handleSubmit");
+
+
         //create object with data
         const newMessage = {
             id: messages.length + 1,
@@ -86,7 +139,12 @@ const NewMessageForm = ({ messages, addMessage }) => {
                     value={messageFormData.recipientEmail}
                     onChange={updatePreview}
                 /> 
-
+            {/* Email validation feedback */}
+            {emailValidation.isValidating && <p className="validating-email">Validating email...</p>}
+            {!emailValidation.isValid && (
+                <p className="invalid-email">Invalid email</p>
+            )}
+            {/* submit button */}
             <input type="submit" value="submit" onClick={handleSubmit} className="submit"/>
         </form>
         </section>
