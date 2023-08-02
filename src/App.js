@@ -3,14 +3,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import TrusteePage from './components/TrusteePage';
-import MessageList from './components/MessageList';
 import ReceivedMessageList from './components/ReceivedMessageList';
 import MessagePage from './components/MessagePage';
 
 function App() {
  //message hard-coded practice data
   const MESSAGE_DATA = [{
-  id: 1,
+  message_id: 1,
   userId: 1,
   title: "Letter For Susi",
   text: "Thank you for being there for me. I love you!",
@@ -19,8 +18,8 @@ function App() {
   isSent: false
 },
 {
-  id: 2,
-  userId: 1,
+  message_id: 2,
+  userId: 2,
   title: "Letter For Selene",
   text: "Thank you for being there for me. I love you!",
   // audio: 
@@ -28,8 +27,8 @@ function App() {
   isSent: false
 },
 {
-  id: 3,
-  userId: 1,
+  message_id: 3,
+  userId: 3,
   title: "Letter For Anna",
   text: "Thank you for being there for me. I love you!",
   // audio: 
@@ -38,61 +37,61 @@ function App() {
 }]
 
   const TRUSTEE_DATA = [{
-  trustee_id: 1,
-  trustee_name: "sancho",
-  trustee_email: "sancho@gmail.com"
+  user_id: 1,
+  first_name: "sancho",
+  email: "sancho@gmail.com"
 }, {
-  trustee_id: 2,
-  trustee_name: "kween",
-  trustee_email: "kween@gmail.com"
+  user_id: 2,
+  first_name: "kween",
+  email: "kween@gmail.com"
 }, {
-  trustee_id: 3,
-  trustee_name: "ruka",
-  trustee_email: "ruka@gmail.com"
+  user_id: 3,
+  first_name: "ruka",
+  email: "ruka@gmail.com"
 }]
 
   const RECEIVED_MESSAGE_DATA = [{
-  received_user_id: 4,
+  message_id: 4,
   userId: 1,
-  received_title: "Boo bish!",
-  received_text: "Ok, NOW you can play with the quija",
+  title: "Boo bish!",
+  text: "Ok, NOW you can play with the quija",
   // audio: 
-  received_recipient_id: 2, 
-  received_is_sent: false
+  recipientId: 2, 
+  isSent: false
 }, {
-  received_user_id: 3,
-  userId: 1,
-  received_title: "Hey I've transcended",
-  received_text: "It's wildin' up here... like being high but actually!",
+  message_id: 3,
+  userId: 2,
+  title: "Hey I've transcended",
+  text: "It's wildin' up here... like being high but actually!",
   // audio: 
-  received_recipient_id: 2, 
-  received_is_sent: false
+  recipientId: 2, 
+  isSent: false
 },
 {
-  received_user_id: 2,
-  userId: 1,
-  received_title: "I'm haunting you!",
-  received_text: "Do you notice me? Write down your dreams bish",
+  message_id: 2,
+  userId: 3,
+  title: "I'm haunting you!",
+  text: "Do you notice me? Write down your dreams bish",
   // audio: 
-  received_recipient_id: 2, 
-  received_is_sent: false
+  recipientId: 2, 
+  isSent: false
 },
 {
-  received_user_id: 1,
-  userId: 1,
-  received_title: "I'll visit ya!",
-  received_text: "On 1/2/2033 I'll visit you in the form of a animal",
+  message_id: 1,
+  userId: 4,
+  title: "I'll visit ya!",
+  text: "On 1/2/2033 I'll visit you in the form of a animal",
   // audio: 
-  received_recipient_id: 2, 
-  received_is_sent: false
+  recipientId: 2, 
+  isSent: false
 }]
 
   // States
   const [messages, setMessages] = useState(MESSAGE_DATA);
-  const [trustees, setTrustees] = useState(TRUSTEE_DATA)
-  const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA)
+  const [trustees, setTrustees] = useState(TRUSTEE_DATA);
+  const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
 
-  // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages?)
+  // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages)
   const [activeComponent, setActiveComponent] = useState(0);
 
   // Authentication state
@@ -103,31 +102,60 @@ function App() {
   setMessages([...messages, newMessage]);
 };
 
-// Function to add a new trustee to TRUSTEE_DATA
+// TRUSTEE functions
   const addTrustee = (newTrustee) => {
   setTrustees([...trustees, newTrustee]);
 };
 
   const updateDeleteTrustee = (trusteeId) => {
     const updatedTrustees = trustees.filter(function (trustees) {
-      return trustees.trustee_id !== trusteeId;
+      return trustees.user_id !== trusteeId;
     });
 
     setTrustees(updatedTrustees)
   };
 
+// RECEIVED MESSAGES functions
+
   const getReceivedMessages = (response) => {
-  const newMessages = response.map((message) => {
-    return {
-      'received_user_id': message.received_user_id,
-      'received_title': message.received_title,
-      'received_text': message.received_text,
-      'received_recipient_id': message.received_recipient_id,
-      'received_is_sent': message.received_is_sent
+    const newMessages = response.map((message) => {
+      return {
+        'message_id': message.message_id,
+        'userId': message.userId,
+        'title': message.title,
+        'text': message.text,
+        'recipientId': message.recipientId,
+        'isSent': message.isSent
+      };
+    });
+  setReceivedMessages(RECEIVED_MESSAGE_DATA);
+  };
+
+  const deleteMessage = (messageId, messageType) => {
+    let updatedMessages;
+
+    switch (messageType) {
+      
+      case 'receivedMessage':
+        updatedMessages = receivedMessages.filter(function (receivedMessages) {
+          return receivedMessages.message_id !== messageId;
+        });
+        setReceivedMessages(updatedMessages);
+        break;
+
+      case 'message':
+        console.log('in message switch')
+        updatedMessages = messages.filter(function (messages) {
+          return messages.message_id !== messageId;
+        });
+        setMessages(updatedMessages);
+        break;
+
+      default:
+        console.error('Invalid messageType', messageType);
+        break;
     }
-  })
-setReceivedMessages(RECEIVED_MESSAGE_DATA);
-};
+  };
 
   // Function to set active component
   const setActive = (componentIndex) => {
@@ -178,7 +206,10 @@ setReceivedMessages(RECEIVED_MESSAGE_DATA);
           <p>Welcome! This is the introductory text for the page.</p>
         )}
         {activeComponent === 1 && (
-          <MessagePage messages={messages} addMessage={addMessage} />
+          <MessagePage messages={messages} 
+          addMessage={addMessage} 
+          deleteMessage={deleteMessage}
+          />
         )}
         {activeComponent === 2 && (
           <TrusteePage 
@@ -191,6 +222,7 @@ setReceivedMessages(RECEIVED_MESSAGE_DATA);
           <ReceivedMessageList 
           receivedMessages={receivedMessages}
           getReceivedMessages={getReceivedMessages}
+          deleteMessage={deleteMessage}
           />
         )}
       </section>

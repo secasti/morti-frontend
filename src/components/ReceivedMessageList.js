@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import ReceivedMessage from "./ReceivedMessage";
-import './ReceivedMessage.css';
-
+import './ReceivedMessageList.css';
 
 const ReceivedMessageList = (props) =>{
 
@@ -11,21 +10,23 @@ const ReceivedMessageList = (props) =>{
     const getReceivedMessagesJSX = (receivedMessages) => {
         return receivedMessages.map((message) => {
             return (
-                <li key={message.received_user_id}>
+                <li key={message.userId}>
                     <ReceivedMessage
-                        received_user_id={message.received_user_id}
-                        received_title={message.received_title}
-                        received_text={message.received_text}
-                        received_recipient_id={message.received_recipient_id}
-                        received_is_sent={message.received_is_sent}
+                        message_id={message.message_id}
+                        userId={message.userId}
+                        title={message.title}
+                        text={message.text}
+                        recipientId={message.recipientId}
+                        isSent={message.isSent}
+                        deleteMessage={props.deleteMessage}
                     ></ReceivedMessage>
                 </li>
             );
         });
     };
-// class vs className?
+
     return (
-        <div class="messages">
+        <div className="messages">
             <ol>{getReceivedMessagesJSX(receivedMessages)}</ol>
         </div>
     );
@@ -36,16 +37,18 @@ ReceivedMessageList.propTypes = {
     // to be from anywhere?
     receivedMessages: PropTypes.arrayOf (
         PropTypes.shape({
-            received_user_id: PropTypes.number.isRequired,
-            received_title: PropTypes.string.isRequired,
-            received_text: PropTypes.string.isRequired,
+            message_id: PropTypes.number,
+            userId: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
             // audio: PropTypes.string.isRequired,
-            received_recipient_id: PropTypes.number.isRequired,
-            received_is_sent: PropTypes.bool.isRequired
+            recipientId: PropTypes.number.isRequired,
+            isSent: PropTypes.bool.isRequired
         })
         //add create new message function required
         //load messages function(api call)
-    )
-}
+    ).isRequired,
+    deleteMessage: PropTypes.func
+};
 
 export default ReceivedMessageList;

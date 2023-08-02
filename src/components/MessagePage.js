@@ -4,13 +4,16 @@ import NewMessageForm from './NewMessageForm';
 import './MessagePage.css';
 import MessageList from './MessageList';
 
-const MessagePage = ({messages, addMessage}) =>{
+const MessagePage = ({messages, addMessage, deleteMessage}) =>{
     console.log("MessagePage rendered");
     return (
         <section className="message__page">
             {/* render list of messages */}
             <div className="message-list">
-                <MessageList messages={ messages } />  
+                <MessageList 
+                messages={ messages }
+                deleteMessage={deleteMessage}
+                />  
             </div>
             {/* render form to create new message */}
             <div className="new-msg-form">
@@ -25,6 +28,7 @@ const MessagePage = ({messages, addMessage}) =>{
 MessagePage.propTypes = {
     messages: PropTypes.arrayOf(
         PropTypes.shape({
+            message_id: PropTypes.number,
             userId: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
@@ -34,6 +38,7 @@ MessagePage.propTypes = {
         })
     ).isRequired,
         addMessage: PropTypes.func.isRequired,
+        deleteMessage:PropTypes.func.isRequired
 };
 
 export default MessagePage;
