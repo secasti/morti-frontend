@@ -1,11 +1,9 @@
 
-
-// App.js
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import TrustedPersons from './components/TrustedPersons';
 import './App.css';
 import MessageList from './components/MessageList';
-import TrustedPerson from './components/TrustedPersons';
 
 function App() {
  //message hard-coded practice data
@@ -104,6 +102,7 @@ function App() {
       <footer className="app-footer">
         <p>© 2023 Your Company</p>
       </footer>
+
     </div>
   );
 }
