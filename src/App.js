@@ -131,6 +131,9 @@ function App() {
   setReceivedMessages(RECEIVED_MESSAGE_DATA);
   };
 
+  
+
+  //MESSAGES functions
   const deleteMessage = (messageId, messageType) => {
     let updatedMessages;
 
@@ -157,6 +160,10 @@ function App() {
     }
   };
 
+  const expandMessage = (Id) => {
+    console.log("inside expand Message")
+  };
+  
   // Function to set active component
   const setActive = (componentIndex) => {
     setActiveComponent(componentIndex);
@@ -207,8 +214,9 @@ function App() {
         )}
         {activeComponent === 1 && (
           <MessagePage messages={messages} 
-          addMessage={addMessage} 
-          deleteMessage={deleteMessage}
+          addMessage={ addMessage } 
+          deleteMessage={ deleteMessage }
+          expandMessage={ expandMessage }
           />
         )}
         {activeComponent === 2 && (
@@ -225,6 +233,7 @@ function App() {
           deleteMessage={deleteMessage}
           />
         )}
+
       </section>
 
       <footer className="app-footer">

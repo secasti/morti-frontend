@@ -13,6 +13,7 @@ const MessagePage = ({messages, addMessage, deleteMessage}) =>{
                 <MessageList 
                 messages={ messages }
                 deleteMessage={deleteMessage}
+                expandMessage={  expandMessage }
                 />  
             </div>
             {/* render form to create new message */}
@@ -38,7 +39,8 @@ MessagePage.propTypes = {
         })
     ).isRequired,
         addMessage: PropTypes.func.isRequired,
-        deleteMessage:PropTypes.func.isRequired
+        deleteMessage:PropTypes.func.isRequired,
+        expandMessage: PropTypes.func.isRequired
 };
 
 export default MessagePage;

@@ -13,6 +13,7 @@ const Message = (props) => {
             <h3 className='msg-title'> {props.title} </h3>
             <p className='msg-text'> {props.text} </p>
             <button onClick={toggleDelete}>🗑</button>
+            <button onClick={ expandMessage }>read more...</button>
         </div>
     );
 };
@@ -25,7 +26,8 @@ Message.propTypes = {
     // audio: PropTypes.string.isRequired,
     recipientId: PropTypes.number.isRequired,
     isSent: PropTypes.bool.isRequired,
-    deleteMessage: PropTypes.func.isRequired
+    deleteMessage: PropTypes.func.isRequired,
+    expandMessage: PropTypes.func.isRequired
 };
 
 export default Message;
