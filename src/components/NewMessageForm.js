@@ -41,7 +41,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
             // set validation to false
             setEmailValidation({isValidating: false, isValid: false});
         }
-    }, 500); // this 500 adjust the debounce delay to every 500ms
+    }, 1000); // this 1000 adjust the debounce delay to every 500ms
 
     const updatePreview = (event) => {
         const newFormData = {
@@ -57,6 +57,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
         }
     };
 
+    //unsure as to whether I will need this code below please do not erase. 
     // email validation for repient email field
     // useEffect(() => {
     //     // Perform email validation for the recipientEmail field
