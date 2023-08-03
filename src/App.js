@@ -92,7 +92,7 @@ function App() {
   const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
   const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
     const initialMsgExpandedState = {};
-    MESSAGE_DATA.forEach((message) => {
+    messages.forEach((message) => {
       initialMsgExpandedState[message.message_id] = false;
     });
     return initialMsgExpandedState;
