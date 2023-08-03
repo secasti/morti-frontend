@@ -4,18 +4,19 @@ import { debounce } from "lodash";
 import axios from "axios"; 
 import "./NewMessageForm.css";
 
+import AudioRecorder from "./AudioRecorder";
 
 
 //empty form data to reset form to
 const INITIAL_FORM_DATA = {
     title: "",
     text: "",
-    audio: "",
+    audio_message: "",
     recipientEmail: "",
     isSent: "false"
 };
 
-const NewMessageForm = ({ messages, addMessage }) => {
+const NewMessageForm = ({ messages, addDummyMessage, addMessageCallback }) => {
     
     const [messageFormData, setMessageFormData] = useState(INITIAL_FORM_DATA);
     const [isTypingEmail, setIsTypingEmail] = useState(false);
@@ -44,7 +45,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
         }
     }, 1000); // this 1000 adjust the debounce delay to every 500ms
 
-    const updatePreview = (event) => {
+    const handleChange = (event) => {
         const newFormData = {
         ...messageFormData,
         [event.target.name]: event.target.value,
@@ -67,7 +68,14 @@ const NewMessageForm = ({ messages, addMessage }) => {
         isValid: false,
     });
 
-
+    // function to save 64baseString to FormData
+    const handleAudioData = (base64String) => {
+        const updateFormData = {
+            ...messageFormData,
+            "audio_message": base64String
+        };
+        setMessageFormData(updateFormData)
+    }
 
     //function to handle the submition of form and add new msg to initial data
     const handleSubmit = (event) => {
@@ -76,9 +84,10 @@ const NewMessageForm = ({ messages, addMessage }) => {
 
 
         //create object with data
+        //comment this chunk out once backend is connected
         const newMessage = {
             id: messages.length + 1,
-            userId: 1, //this must come from log-in session perhaps a state?
+            userId: 6, //this must come from log-in session perhaps a state?
             title: messageFormData.title,
             text: messageFormData.text,
             audio: messageFormData.audio,
@@ -86,8 +95,9 @@ const NewMessageForm = ({ messages, addMessage }) => {
             recipientId: 2, // this will need to change from  the backend 
             isSent: false
         };
-        //add new message to MESSAGE_DATA in app
-        addMessage(newMessage)
+        //send messageform data to app for post request
+        addDummyMessage(newMessage)
+        addMessageCallback(messageFormData)
         //reset form data to blank
         setMessageFormData(INITIAL_FORM_DATA);
         };
@@ -103,7 +113,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
                     id="title"
                     name="title"
                     value={messageFormData.title}
-                    onChange={updatePreview}
+                    onChange={handleChange}
                 />
             </div>
             {/* text */}
@@ -113,17 +123,11 @@ const NewMessageForm = ({ messages, addMessage }) => {
                     id="text"
                     name="text"
                     value={messageFormData.text}
-                    onChange={updatePreview}
+                    onChange={handleChange}
                 />
             {/* audio */}
             <label htmlFor='audio'>Audio Recording:</label>
-                <input
-                    type="text"
-                    id="audio"
-                    name="audio"
-                    value={messageFormData.audio}
-                    onChange={updatePreview}
-                />
+            <AudioRecorder onAudioData={handleAudioData}/>
             {/* recipient email */}
             <label htmlFor='recipientEmail'>Recipient Email:</label>
                 <input
@@ -131,7 +135,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
                     id="recipientEmail"
                     name="recipientEmail"
                     value={messageFormData.recipientEmail}
-                    onChange={updatePreview}
+                    onChange={handleChange}
                 /> 
             {/* Email validation feedback */}
             {isTypingEmail && emailValidation.isValidating &&
@@ -148,7 +152,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
     };
 
     NewMessageForm.propTypes = {
-        addMessage: PropTypes.func.isRequired,
+        addMessageCallback: PropTypes.func.isRequired,
     };
 
     export default NewMessageForm;

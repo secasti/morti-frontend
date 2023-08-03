@@ -4,26 +4,46 @@ import Message from './Message';
 import './MessageList.css';
 
 const MessageList = (props) =>{
+    const {listOfMessages, dummyMessages, deleteMessage} = props;
+
+    const allMessages = listOfMessages.map((message)=> {
+        return (
+            < Message 
+                key={ message.message_id } 
+                message_id={message.message_id}
+                userId={ message.userId }
+                title= { message.title }
+                text = { message.text }
+                audio_message = {message.audio_message}
+                recipientId = { message.recipientId }
+                isSent = {message.isSent}
+                deleteMessage={props.deleteMessage}
+            />
+        )
+    })
+    //dummy data
+    const allDummyMessages = dummyMessages.map((message)=> {
+        return (
+            < Message 
+                key={ message.message_id } 
+                message_id={message.message_id}
+                userId={ message.userId }
+                title= { message.title }
+                text = { message.text }
+                // audio_message = {message.audio_message}
+                recipientId = { message.recipientId }
+                isSent = {message.isSent}
+                deleteMessage={props.deleteMessage}
+            />
+        )
+    })
     return (
         <section className="message__page">
             <div className="messages">
-                {
-                    props.messages.map((message) => (
-                        < Message 
-                            key={ message.message_id } 
-                            message_id={ message.message_id }
-                            userId={ message.userId }
-                            title= { message.title }
-                            text = { message.text }
-                            // audio = { message.audio }
-                            recipientId = { message.recipientId }
-                            isSent = { message.isSent }
-                            deleteMessage={ props.deleteMessage }
-                            expandMessage={ props.expandMessage }
-                            isMsgExpanded = { props.isMsgExpanded }
-                        />
-                    ))
-                }
+                { allMessages }
+            </div>
+            <div>
+                {allDummyMessages}
             </div>
         </section> 
     );

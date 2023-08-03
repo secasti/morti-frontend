@@ -16,6 +16,7 @@ const ReceivedMessageList = (props) =>{
                         userId={message.userId}
                         title={message.title}
                         text={message.text}
+                        audio_message={message.audio_message}
                         recipientId={message.recipientId}
                         isSent={message.isSent}
                         deleteMessage={props.deleteMessage}
@@ -41,7 +42,7 @@ ReceivedMessageList.propTypes = {
             userId: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
-            // audio: PropTypes.string.isRequired,
+            audio_message: PropTypes.string.isRequired,
             recipientId: PropTypes.number.isRequired,
             isSent: PropTypes.bool.isRequired
         })
