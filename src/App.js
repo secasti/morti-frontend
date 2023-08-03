@@ -138,11 +138,21 @@ useEffect(getMessages, [])
 const addMessage = (newMessageData) => {
   console.log("DEBUG addMessage called")
   console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
+
+  const requestData = {
+    id: newMessageData.message_id, // Rename 'message_id' to 'id'
+    id_recipient: newMessageData.userId, // Rename 'userId' to 'id_recipient'
+    title: newMessageData.title,
+    text_message: newMessageData.text, // Rename 'text' to 'text_message'
+    is_sent: newMessageData.isSent, // Rename 'isSent' to 'is_sent'
+    audio_message: newMessageData.audio_message
+  };
+
   
   if (newMessageData.audio_message != null && newMessageData.audio_message !== "") {
     console.log("DEBUG audio_message non empty")
     axios
-      .post('http://127.0.0.1:5000/messages', newMessageData)
+      .post('https://morti-back-end.onrender.com/farewell_messages', requestData)
       .then((response) => {
         console.log("response data: ", response)
       })

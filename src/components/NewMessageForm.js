@@ -16,7 +16,7 @@ const INITIAL_FORM_DATA = {
     isSent: "false"
 };
 
-const NewMessageForm = ({ messages, addDummyMessage, addMessageCallback }) => {
+const NewMessageForm = ({ messages, addMessage }) => {
     
     const [messageFormData, setMessageFormData] = useState(INITIAL_FORM_DATA);
     const [isTypingEmail, setIsTypingEmail] = useState(false);
@@ -81,12 +81,9 @@ const NewMessageForm = ({ messages, addDummyMessage, addMessageCallback }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("we're in handleSubmit");
-
-
         //create object with data
         //comment this chunk out once backend is connected
         const newMessage = {
-            id: messages.length + 1,
             userId: 6, //this must come from log-in session perhaps a state?
             title: messageFormData.title,
             text: messageFormData.text,
@@ -96,8 +93,8 @@ const NewMessageForm = ({ messages, addDummyMessage, addMessageCallback }) => {
             isSent: false
         };
         //send messageform data to app for post request
-        addDummyMessage(newMessage)
-        addMessageCallback(messageFormData)
+        addMessage(newMessage)
+        //addMessageCallback(messageFormData)
         //reset form data to blank
         setMessageFormData(INITIAL_FORM_DATA);
         };
