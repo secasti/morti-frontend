@@ -87,7 +87,7 @@ function App() {
 }]
 
   // States
-  const [messages, setMessages] = useState(MESSAGE_DATA);
+  const [dummyMessages, setMessages] = useState(MESSAGE_DATA);
   const [trustees, setTrustees] = useState(TRUSTEE_DATA);
   const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
 
@@ -99,7 +99,7 @@ function App() {
 
 // Function to add a new message to MESSAGE_DATA
   const addMessage = (newMessage) => {
-  setMessages([...messages, newMessage]);
+  setMessages([...dummyMessages, newMessage]);
 };
 
 // TRUSTEE functions
@@ -145,7 +145,7 @@ function App() {
 
       case 'message':
         console.log('in message switch')
-        updatedMessages = messages.filter(function (messages) {
+        updatedMessages = dummyMessages.filter(function (messages) {
           return messages.message_id !== messageId;
         });
         setMessages(updatedMessages);
@@ -206,7 +206,7 @@ function App() {
           <p>Welcome! This is the introductory text for the page.</p>
         )}
         {activeComponent === 1 && (
-          <MessagePage messages={messages} 
+          <MessagePage dummyMessages={dummyMessages} 
           addMessage={addMessage} 
           deleteMessage={deleteMessage}
           />

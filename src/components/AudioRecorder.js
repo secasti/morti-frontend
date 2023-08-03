@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-const AudioRecorderV2 = ({ onAudioData }) => {
+const AudioRecorder = ({ onAudioData }) => {
     const [permission, setPermission] = useState(false);
     const [stream, setStream] = useState(null);
 
@@ -77,4 +77,4 @@ const AudioRecorderV2 = ({ onAudioData }) => {
 
 };
 
-export default AudioRecorderV2;
+export default AudioRecorder;
