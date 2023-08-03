@@ -57,7 +57,7 @@ const MessagePage = ({dummyMessages, addDummyMessage, deleteMessage}) =>{
             <div className="new-msg-form">
                 <NewMessageForm 
                 addMessageCallback={ addMessage }
-                addMessage={addDummyMessage}
+                addDummyMessage={addDummyMessage}
                 messages={ messages } />
             </div>
         </section> 

@@ -207,7 +207,7 @@ function App() {
         )}
         {activeComponent === 1 && (
           <MessagePage dummyMessages={dummyMessages} 
-          addMessage={addMessage} 
+          addDummyMessage={addMessage} 
           deleteMessage={deleteMessage}
           />
         )}

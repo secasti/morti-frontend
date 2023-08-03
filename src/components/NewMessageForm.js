@@ -16,7 +16,7 @@ const INITIAL_FORM_DATA = {
     isSent: "false"
 };
 
-const NewMessageForm = ({ messages, addMessageCallback }) => {
+const NewMessageForm = ({ messages, addDummyMessage, addMessageCallback }) => {
     
     const [messageFormData, setMessageFormData] = useState(INITIAL_FORM_DATA);
 
@@ -94,7 +94,7 @@ const NewMessageForm = ({ messages, addMessageCallback }) => {
         //comment this chunk out once backend is connected
         const newMessage = {
             id: messages.length + 1,
-            userId: 1, //this must come from log-in session perhaps a state?
+            userId: 6, //this must come from log-in session perhaps a state?
             title: messageFormData.title,
             text: messageFormData.text,
             audio: messageFormData.audio,
@@ -103,6 +103,7 @@ const NewMessageForm = ({ messages, addMessageCallback }) => {
             isSent: false
         };
         //send messageform data to app for post request
+        addDummyMessage(newMessage)
         addMessageCallback(messageFormData)
         //reset form data to blank
         setMessageFormData(INITIAL_FORM_DATA);
