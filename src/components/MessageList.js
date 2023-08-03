@@ -20,6 +20,7 @@ const MessageList = (props) =>{
                             isSent = { message.isSent }
                             deleteMessage={ props.deleteMessage }
                             expandMessage={ props.expandMessage }
+                            isMsgExpanded = { props.isMsgExpanded }
                         />
                     ))
                 }
@@ -43,6 +44,7 @@ MessageList.propTypes = {
         //load messages function(api call)
     ).isRequired,
     deleteMessage: PropTypes.func,
+    isMsgExpanded: PropTypes.object.isRequired,
     expandMessage: PropTypes.func.isRequired
 };
 
