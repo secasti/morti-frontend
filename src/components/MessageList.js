@@ -11,14 +11,16 @@ const MessageList = (props) =>{
                     props.messages.map((message) => (
                         < Message 
                             key={ message.message_id } 
-                            message_id={message.message_id}
+                            message_id={ message.message_id }
                             userId={ message.userId }
                             title= { message.title }
                             text = { message.text }
                             // audio = { message.audio }
                             recipientId = { message.recipientId }
-                            isSent = {message.isSent}
-                            deleteMessage={props.deleteMessage}
+                            isSent = { message.isSent }
+                            deleteMessage={ props.deleteMessage }
+                            expandMessage={ props.expandMessage }
+                            isMsgExpanded = { props.isMsgExpanded }
                         />
                     ))
                 }
@@ -41,7 +43,9 @@ MessageList.propTypes = {
         //add create new message function required
         //load messages function(api call)
     ).isRequired,
-    deleteMessage: PropTypes.func
+    deleteMessage: PropTypes.func,
+    isMsgExpanded: PropTypes.object.isRequired,
+    expandMessage: PropTypes.func.isRequired
 };
 
 export default MessageList

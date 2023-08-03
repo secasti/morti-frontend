@@ -17,6 +17,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   /* Add max-width to prevent the text from overflowing */
   max-width: 300px; /* Adjust the value based on your design */
+  overflow: hidden; /* Hide overflow text when collapsed */
+  position: relative;
 }
 
 .msg-title {
@@ -34,4 +36,18 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+
+.read-more-btn {
+  background-color: transparent; /* Transparent background for the button */
+  color: var(--secondary-color); /* Blue color for the button text */
+  border: none; /* No border */
+  padding: 0; /* Remove padding to make the button compact */
+  cursor: pointer;
+  text-decoration: underline; /* Underline the button text */
+  font-weight: bold; /* Make the button text bolder */
+}
+/* Class to show the expanded state */
+.single-msg.expanded {
+  max-height: 100%;
 }

@@ -4,7 +4,7 @@ import NewMessageForm from './NewMessageForm';
 import './MessagePage.css';
 import MessageList from './MessageList';
 
-const MessagePage = ({messages, addMessage, deleteMessage}) =>{
+const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
     console.log("MessagePage rendered");
     return (
         <section className="message__page">
@@ -13,6 +13,8 @@ const MessagePage = ({messages, addMessage, deleteMessage}) =>{
                 <MessageList 
                 messages={ messages }
                 deleteMessage={deleteMessage}
+                expandMessage={  expandMessage }
+                isMsgExpanded = { isMsgExpanded }
                 />  
             </div>
             {/* render form to create new message */}
@@ -38,7 +40,9 @@ MessagePage.propTypes = {
         })
     ).isRequired,
         addMessage: PropTypes.func.isRequired,
-        deleteMessage:PropTypes.func.isRequired
+        deleteMessage:PropTypes.func.isRequired,
+        isMsgExpanded: PropTypes.object.isRequired,
+        expandMessage: PropTypes.func.isRequired
 };
 
 export default MessagePage;

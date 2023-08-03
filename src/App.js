@@ -12,7 +12,7 @@ function App() {
   message_id: 1,
   userId: 1,
   title: "Letter For Susi",
-  text: "Thank you for being there for me. I love you!",
+  text: "Thank you for being there for me. I love you! this is a really long letter to show the expand option for a message. I am making this so long you should really stop reading because there will not me anything of substance here. ",
   // audio: 
   recipientId: 2, 
   isSent: false
@@ -90,6 +90,13 @@ function App() {
   const [messages, setMessages] = useState(MESSAGE_DATA);
   const [trustees, setTrustees] = useState(TRUSTEE_DATA);
   const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
+  const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
+    const initialMsgExpandedState = {};
+    MESSAGE_DATA.forEach((message) => {
+      initialMsgExpandedState[message.message_id] = false;
+    });
+    return initialMsgExpandedState;
+  })
 
   // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages)
   const [activeComponent, setActiveComponent] = useState(0);
@@ -131,6 +138,9 @@ function App() {
   setReceivedMessages(RECEIVED_MESSAGE_DATA);
   };
 
+  
+
+  //MESSAGES functions
   const deleteMessage = (messageId, messageType) => {
     let updatedMessages;
 
@@ -157,6 +167,14 @@ function App() {
     }
   };
 
+  const expandMessage = (message_id) => {
+    console.log("inside expand Message")
+      setIsMsgExpanded((prevExpanded)=>({
+      ...prevExpanded,
+      [message_id]: !prevExpanded[message_id]
+      })); 
+  };
+  
   // Function to set active component
   const setActive = (componentIndex) => {
     setActiveComponent(componentIndex);
@@ -207,8 +225,10 @@ function App() {
         )}
         {activeComponent === 1 && (
           <MessagePage messages={messages} 
-          addMessage={addMessage} 
-          deleteMessage={deleteMessage}
+          addMessage={ addMessage } 
+          deleteMessage={ deleteMessage }
+          expandMessage={ expandMessage }
+          isMsgExpanded = { isMsgExpanded }
           />
         )}
         {activeComponent === 2 && (
@@ -225,6 +245,7 @@ function App() {
           deleteMessage={deleteMessage}
           />
         )}
+
       </section>
 
       <footer className="app-footer">
