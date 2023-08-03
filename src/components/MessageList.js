@@ -63,7 +63,9 @@ MessageList.propTypes = {
         //add create new message function required
         //load messages function(api call)
     ).isRequired,
-    deleteMessage: PropTypes.func
+    deleteMessage: PropTypes.func,
+    isMsgExpanded: PropTypes.object.isRequired,
+    expandMessage: PropTypes.func.isRequired
 };
 
 export default MessageList

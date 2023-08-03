@@ -5,9 +5,9 @@ import './MessagePage.css';
 import MessageList from './MessageList';
 import axios from 'axios';
 
-const MessagePage = ({dummyMessages, addDummyMessage, deleteMessage}) =>{
-
-  const [messages, setMessages] = useState([])
+const MessagePage = ({dummyMessages, addDummyMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
+    console.log("MessagePage rendered");
+    const [messages, setMessages] = useState([])
 
   const addMessage = (newMessageData) => {
     console.log("DEBUG addMessage called")
@@ -41,8 +41,6 @@ const MessagePage = ({dummyMessages, addDummyMessage, deleteMessage}) =>{
   }
   
   useEffect(getMessages, [])
-
-    console.log("MessagePage rendered");
     return (
         <section className="message__page">
             {/* render list of messages */}
@@ -51,6 +49,8 @@ const MessagePage = ({dummyMessages, addDummyMessage, deleteMessage}) =>{
                 listOfMessages={ messages }
                 dummyMessages={dummyMessages}
                 deleteMessage={deleteMessage}
+                expandMessage={  expandMessage }
+                isMsgExpanded = { isMsgExpanded }
                 />  
             </div>
             {/* render form to create new message */}
@@ -77,7 +77,9 @@ MessagePage.propTypes = {
         })
     ).isRequired,
         addMessage: PropTypes.func.isRequired,
-        deleteMessage:PropTypes.func.isRequired
+        deleteMessage:PropTypes.func.isRequired,
+        isMsgExpanded: PropTypes.object.isRequired,
+        expandMessage: PropTypes.func.isRequired
 };
 
 export default MessagePage;

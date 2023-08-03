@@ -19,12 +19,13 @@ const INITIAL_FORM_DATA = {
 const NewMessageForm = ({ messages, addDummyMessage, addMessageCallback }) => {
     
     const [messageFormData, setMessageFormData] = useState(INITIAL_FORM_DATA);
+    const [isTypingEmail, setIsTypingEmail] = useState(false);
 
 
 
     //Async validation function using debounce from Lodash
     const validateEmail = debounce(async (email) => {
-        //when enter this funciton set validation status to validating
+        //when enter this function set validation status to validating
         setEmailValidation({ isValidating: true, isValid: false});
         console.log("entered validate email function and set:",emailValidation)
         //make API call to route that validates email
@@ -51,23 +52,15 @@ const NewMessageForm = ({ messages, addDummyMessage, addMessageCallback }) => {
         };
         setMessageFormData(newFormData);
 
-        //perform email validation for recipientEmail field
+        //check if email field is being changed
         if (event.target.name === "recipientEmail") {
+            //set state to is typing in email 
+            setIsTypingEmail(true)
+            //perform email validation for recipient email fied. 
             const isValid = validateEmail(event.target.value);
             setEmailValidation({isValidating: true, isValid: isValid})
         }
     };
-
-    //unsure as to whether I will need this code below please do not erase. 
-    // email validation for repient email field
-    // useEffect(() => {
-    //     // Perform email validation for the recipientEmail field
-    //     const isValidEmail = validateEmail(messageFormData.recipientEmail);
-    //     setEmailValidation({
-    //       isValidating: false,
-    //       isValid: isValidEmail,
-    //     });
-    //   }, [messageFormData.recipientEmail]);
 
     // state to tract the validation status of email input (prob needs to be raised to be used by trustee form)
     const [emailValidation, setEmailValidation] = useState ({
@@ -145,8 +138,10 @@ const NewMessageForm = ({ messages, addDummyMessage, addMessageCallback }) => {
                     onChange={handleChange}
                 /> 
             {/* Email validation feedback */}
-            {emailValidation.isValidating && <p className="validating-email">Validating email...</p>}
-            {!emailValidation.isValid && (
+            {isTypingEmail && emailValidation.isValidating &&
+                <p className="validating-email">Validating email...</p>}
+
+            {isTypingEmail && !emailValidation.isValid && (
                 <p className="invalid-email">Invalid email</p>
             )}
             {/* submit button */}

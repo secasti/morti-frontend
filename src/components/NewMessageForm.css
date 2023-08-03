@@ -53,5 +53,9 @@
   }
   
   .invalid-email {
-    color: red
+    color: red;
+  }
+
+  .validating-email {
+    color: var(--primary-color);
   }
