@@ -8,9 +8,7 @@ import axios from 'axios';
 const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded, getMessages}) =>{
     console.log("MessagePage rendered");
 
-  
 
-  useEffect(getMessages, [])
     return (
         <section className="message__page">
             {/* render list of messages */}
@@ -37,7 +35,7 @@ MessagePage.propTypes = {
     messages: PropTypes.arrayOf(
         PropTypes.shape({
             message_id: PropTypes.number,
-            userId: PropTypes.number.isRequired,
+            userId: PropTypes.number,
             title: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
             // audio: PropTypes.string.isRequired,

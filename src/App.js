@@ -99,6 +99,32 @@ function App() {
     return initialMsgExpandedState;
   })
 
+  //API CALLS
+    //GET MESSAGE API CALL
+const getMessages = () => {
+  axios.get('https://morti-back-end.onrender.com/farewell_messages')
+    .then((response) => {
+      const messagesData = response.data.map((message) => {
+        return {
+          message_id: message.id, // Rename 'id' to 'message_id'
+          userId: message.id_recipient, // Rename 'id_recipient' to 'userId'
+          title: message.title,
+          text: message.text_message,
+          // audio: message.audio_message, // Uncomment this line if you have an 'audio' prop in your component
+          recipientId: message.id_recipient, // Rename 'id_recipient' to 'recipientId'
+          isSent: message.is_sent, // Rename 'is_sent' to 'isSent'
+        };
+      });
+      setMessages(messagesData);
+      console.log(messagesData);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+    })
+}
+useEffect(getMessages, [])
+
+
   // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages)
   const [activeComponent, setActiveComponent] = useState(0);
 
@@ -157,20 +183,6 @@ const addMessage = (newMessageData) => {
   setReceivedMessages(RECEIVED_MESSAGE_DATA);
   };
 
-  //GET MESSAGE API CALL
-const getMessages = () => {
-  axios.get('http://127.0.0.1:5000/messages')
-    .then((response) => {
-      const messagesData = [];
-      response.data.forEach((message) => {
-        messagesData.push(message);
-      });
-      setMessages(messagesData);
-    })
-    .catch((error) => {
-      console.log("error: ", error);
-    })
-}
 
   //MESSAGES functions
   const deleteMessage = (messageId, messageType) => {
