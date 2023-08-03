@@ -87,12 +87,13 @@ function App() {
 }]
 
   // States
-  const [dummyMessages, setMessages] = useState(MESSAGE_DATA);
+  const [messages, setMessages] = useState(MESSAGE_DATA);
   const [trustees, setTrustees] = useState(TRUSTEE_DATA);
   const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
   const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
+  // initial dictionary with each message id as key, and boolean value for if it is expanded. 
     const initialMsgExpandedState = {};
-    dummyMessages.forEach((message) => {
+    messages.forEach((message) => {
       initialMsgExpandedState[message.message_id] = false;
     });
     return initialMsgExpandedState;
@@ -105,9 +106,27 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
 // Function to add a new message to MESSAGE_DATA
-  const addMessage = (newMessage) => {
-  setMessages([...dummyMessages, newMessage]);
-};
+//   const addDummyMessage = (newMessage) => {
+//   setMessages([...messages, newMessage]);
+// };
+const addMessage = (newMessageData) => {
+  console.log("DEBUG addMessage called")
+  console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
+  
+  if (newMessageData.audio_message != null && newMessageData.audio_message !== "") {
+    console.log("DEBUG audio_message non empty")
+    axios
+      .post('http://127.0.0.1:5000/messages', newMessageData)
+      .then((response) => {
+        console.log("response data: ", response)
+      })
+      .catch((error)=> {
+        console.log("error: ", error)
+      })
+  } else {
+    console.log("DEBUG audio_message is empty, not POSTING")
+  }
+}
 
 // TRUSTEE functions
   const addTrustee = (newTrustee) => {
@@ -138,7 +157,20 @@ function App() {
   setReceivedMessages(RECEIVED_MESSAGE_DATA);
   };
 
-  
+  //GET MESSAGE API CALL
+const getMessages = () => {
+  axios.get('http://127.0.0.1:5000/messages')
+    .then((response) => {
+      const messagesData = [];
+      response.data.forEach((message) => {
+        messagesData.push(message);
+      });
+      setMessages(messagesData);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+    })
+}
 
   //MESSAGES functions
   const deleteMessage = (messageId, messageType) => {
@@ -155,7 +187,7 @@ function App() {
 
       case 'message':
         console.log('in message switch')
-        updatedMessages = dummyMessages.filter(function (messages) {
+        updatedMessages = messages.filter(function (messages) {
           return messages.message_id !== messageId;
         });
         setMessages(updatedMessages);
@@ -224,11 +256,12 @@ function App() {
           <p>Welcome! This is the introductory text for the page.</p>
         )}
         {activeComponent === 1 && (
-          <MessagePage dummyMessages={dummyMessages} 
-          addDummyMessage={addMessage} 
-          deleteMessage={deleteMessage}
+          <MessagePage messages = { messages} 
+          addMessage={ addMessage } 
+          deleteMessage={ deleteMessage }
           expandMessage={ expandMessage }
           isMsgExpanded = { isMsgExpanded }
+          getMessages = { getMessages }
           />
         )}
         {activeComponent === 2 && (

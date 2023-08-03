@@ -5,49 +5,18 @@ import './MessagePage.css';
 import MessageList from './MessageList';
 import axios from 'axios';
 
-const MessagePage = ({dummyMessages, addDummyMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
+const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded, getMessages}) =>{
     console.log("MessagePage rendered");
-    const [messages, setMessages] = useState([])
 
-  const addMessage = (newMessageData) => {
-    console.log("DEBUG addMessage called")
-    console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
-    if (newMessageData.audio_message != null && newMessageData.audio_message !== "") {
-      console.log("DEBUG audio_message non empty")
-      axios
-        .post('http://127.0.0.1:5000/messages', newMessageData)
-        .then((response) => {
-          console.log("response data: ", response)
-        })
-        .catch((error)=> {
-          console.log("error: ", error)
-        })
-    } else {
-      console.log("DEBUG audio_message is empty, not POSTING")
-    }
-  }
-  const getMessages = () => {
-    axios.get('http://127.0.0.1:5000/messages')
-      .then((response) => {
-        const messagesData = [];
-        response.data.forEach((message) => {
-          messagesData.push(message);
-        });
-        setMessages(messagesData);
-      })
-      .catch((error) => {
-        console.log("error: ", error);
-      })
-  }
   
+
   useEffect(getMessages, [])
     return (
         <section className="message__page">
             {/* render list of messages */}
             <div className="message-list">
                 <MessageList 
-                listOfMessages={ messages }
-                dummyMessages={dummyMessages}
+                messages ={ messages }
                 deleteMessage={deleteMessage}
                 expandMessage={  expandMessage }
                 isMsgExpanded = { isMsgExpanded }
@@ -57,7 +26,7 @@ const MessagePage = ({dummyMessages, addDummyMessage, deleteMessage, expandMessa
             <div className="new-msg-form">
                 <NewMessageForm 
                 addMessageCallback={ addMessage }
-                addDummyMessage={addDummyMessage}
+                addDummyMessage={addMessage}
                 messages={ messages } />
             </div>
         </section> 
@@ -74,8 +43,8 @@ MessagePage.propTypes = {
             // audio: PropTypes.string.isRequired,
             recipientId: PropTypes.number.isRequired,
             isSent: PropTypes.bool.isRequired,
-        })
-    ).isRequired,
+        }).isRequired
+    ),
         addMessage: PropTypes.func.isRequired,
         deleteMessage:PropTypes.func.isRequired,
         isMsgExpanded: PropTypes.object.isRequired,
