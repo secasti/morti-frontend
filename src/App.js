@@ -7,7 +7,7 @@ import ReceivedMessageList from './components/ReceivedMessageList';
 import MessagePage from './components/MessagePage';
 
 function App() {
- //message hard-coded practice data
+ // hard-coded practice data
   const MESSAGE_DATA = [{
   message_id: 1,
   userId: 1,
@@ -86,11 +86,15 @@ function App() {
   isSent: false
 }]
 
+// Global variables
+  const FAREWELL_MESSAGES_URL = 'https://morti-back-end.onrender.com/farewell_messages';
+
   // States
   const [messages, setMessages] = useState(MESSAGE_DATA);
   const [trustees, setTrustees] = useState(TRUSTEE_DATA);
   const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
   const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
+
   // initial dictionary with each message id as key, and boolean value for if it is expanded. 
     const initialMsgExpandedState = {};
     messages.forEach((message) => {
@@ -100,28 +104,28 @@ function App() {
   })
 
   //API CALLS
-    //GET MESSAGE API CALL
-const getMessages = () => {
-  axios.get('https://morti-back-end.onrender.com/farewell_messages')
-    .then((response) => {
-      const messagesData = response.data.map((message) => {
-        return {
-          message_id: message.id, // Rename 'id' to 'message_id'
-          userId: message.id_recipient, // Rename 'id_recipient' to 'userId'
-          title: message.title,
-          text: message.text_message,
-          // audio: message.audio_message, // Uncomment this line if you have an 'audio' prop in your component
-          recipientId: message.id_recipient, // Rename 'id_recipient' to 'recipientId'
-          isSent: message.is_sent, // Rename 'is_sent' to 'isSent'
-        };
-      });
-      setMessages(messagesData);
-      console.log(messagesData);
-    })
-    .catch((error) => {
-      console.log("error: ", error);
-    })
-}
+  //GET MESSAGE API CALL
+  const getMessages = () => {
+    axios.get('https://morti-back-end.onrender.com/farewell_messages')
+      .then((response) => {
+        const messagesData = response.data.map((message) => {
+          return {
+            message_id: message.id, // Rename 'id' to 'message_id'
+            userId: message.id_recipient, // Rename 'id_recipient' to 'userId'
+            title: message.title,
+            text: message.text_message,
+            // audio: message.audio_message, // Uncomment this line if you have an 'audio' prop in your component
+            recipientId: message.id_recipient, // Rename 'id_recipient' to 'recipientId'
+            isSent: message.is_sent, // Rename 'is_sent' to 'isSent'
+          };
+        });
+        setMessages(messagesData);
+        console.log(messagesData);
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      })
+  }
 useEffect(getMessages, [])
 
 
@@ -131,38 +135,38 @@ useEffect(getMessages, [])
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-// Function to add a new message to MESSAGE_DATA
-//   const addDummyMessage = (newMessage) => {
-//   setMessages([...messages, newMessage]);
-// };
-const addMessage = (newMessageData) => {
-  console.log("DEBUG addMessage called")
-  console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
+  const addMessage = (newMessageData) => {
+    console.log('PRECONVERT newMessageData:',newMessageData);
+    // console.log("DEBUG addMessage called")
+    // console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
 
-  const requestData = {
-    id: newMessageData.message_id, // Rename 'message_id' to 'id'
-    id_recipient: newMessageData.userId, // Rename 'userId' to 'id_recipient'
-    title: newMessageData.title,
-    text_message: newMessageData.text, // Rename 'text' to 'text_message'
-    is_sent: newMessageData.isSent, // Rename 'isSent' to 'is_sent'
-    audio_message: newMessageData.audio_message
-  };
+    // requestData converts attributes to match route attribute names
+    const requestData = {
+      // id: newMessageData.message_id, // Rename 'message_id' to 'id'
+      title: newMessageData.title,
+      text_message: newMessageData.text, // Rename 'text' to 'text_message'
+      audio_message: newMessageData.audio_message,
+      id_recipient: newMessageData.userId, // Rename 'userId' to 'id_recipient'
+      is_sent: newMessageData.isSent, // Rename 'isSent' to 'is_sent'
+      recipient_email: newMessageData.recipientEmail
+    };
 
   
-  if (newMessageData.audio_message != null && newMessageData.audio_message !== "") {
-    console.log("DEBUG audio_message non empty")
-    axios
-      .post('https://morti-back-end.onrender.com/farewell_messages', requestData)
-      .then((response) => {
-        console.log("response data: ", response)
-      })
-      .catch((error)=> {
-        console.log("error: ", error)
-      })
-  } else {
-    console.log("DEBUG audio_message is empty, not POSTING")
-  }
-}
+    if (requestData.audio_message != null && requestData.audio_message !== "") {
+      // console.log('DEBUG audio_message:', requestData.audio_message)
+      console.log('DEBUG POST request:', requestData)
+      axios
+        .post(`${FAREWELL_MESSAGES_URL}`, requestData)
+        .then((response) => {
+          console.log("response data: ", response)
+        })
+        .catch((error)=> {
+          console.log("error: ", error)
+        })
+    } else {
+      console.log("DEBUG audio_message is empty, not POSTING")
+    };
+  };
 
 // TRUSTEE functions
   const addTrustee = (newTrustee) => {

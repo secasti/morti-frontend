@@ -15,7 +15,7 @@ const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgE
             <div className="message-list">
                 <MessageList 
                 messages ={ messages }
-                deleteMessage={deleteMessage}
+                deleteMessage={ deleteMessage }
                 expandMessage={  expandMessage }
                 isMsgExpanded = { isMsgExpanded }
                 />  
@@ -23,7 +23,7 @@ const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgE
             {/* render form to create new message */}
             <div className="new-msg-form">
                 <NewMessageForm 
-                addMessage={addMessage}
+                addMessage={ addMessage }
                 messages={ messages } />
             </div>
         </section> 

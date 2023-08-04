@@ -70,10 +70,12 @@ const NewMessageForm = ({ messages, addMessage }) => {
 
     // function to save 64baseString to FormData
     const handleAudioData = (base64String) => {
+        console.log('inside handleAudioData:',base64String)
         const updateFormData = {
             ...messageFormData,
             "audio_message": base64String
         };
+        console.log('later inside handleAudioData: updateFormData:',updateFormData)
         setMessageFormData(updateFormData)
     }
 
@@ -87,12 +89,13 @@ const NewMessageForm = ({ messages, addMessage }) => {
             userId: 6, //this must come from log-in session perhaps a state?
             title: messageFormData.title,
             text: messageFormData.text,
-            audio: messageFormData.audio,
+            audio_message: messageFormData.audio_message,
             recipientEmail: messageFormData.recipientEmail,
             recipientId: 2, // this will need to change from  the backend 
             isSent: false
         };
         //send messageform data to app for post request
+        console.log('newMessage:', newMessage);
         addMessage(newMessage)
         //addMessageCallback(messageFormData)
         //reset form data to blank
@@ -124,7 +127,10 @@ const NewMessageForm = ({ messages, addMessage }) => {
                 />
             {/* audio */}
             <label htmlFor='audio'>Audio Recording:</label>
-            <AudioRecorder onAudioData={handleAudioData}/>
+            <AudioRecorder 
+                onAudioData={handleAudioData} 
+                value={messageFormData.audio}
+                />
             {/* recipient email */}
             <label htmlFor='recipientEmail'>Recipient Email:</label>
                 <input
@@ -149,7 +155,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
     };
 
     NewMessageForm.propTypes = {
-        addMessageCallback: PropTypes.func.isRequired,
+        addMessage: PropTypes.func.isRequired,
     };
 
     export default NewMessageForm;
