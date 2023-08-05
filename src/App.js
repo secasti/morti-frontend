@@ -199,6 +199,31 @@ useEffect(getMessages, [])
 
 
   //MESSAGES functions
+  // const deleteMessage = (messageId, messageType) => {
+  //   let updatedMessages;
+
+  //   switch (messageType) {
+      
+  //     case 'receivedMessage':
+  //       updatedMessages = receivedMessages.filter(function (receivedMessages) {
+  //         return receivedMessages.message_id !== messageId;
+  //       });
+  //       setReceivedMessages(updatedMessages);
+  //       break;
+
+  //     case 'message':
+  //       console.log('in message switch')
+  //       updatedMessages = messages.filter(function (messages) {
+  //         return messages.message_id !== messageId;
+  //       });
+  //       setMessages(updatedMessages);
+  //       break;
+
+  //     default:
+  //       console.error('Invalid messageType', messageType);
+  //       break;
+  //   }
+  // };
   const deleteMessage = (messageId, messageType) => {
     let updatedMessages;
 
@@ -212,11 +237,18 @@ useEffect(getMessages, [])
         break;
 
       case 'message':
-        console.log('in message switch')
-        updatedMessages = messages.filter(function (messages) {
-          return messages.message_id !== messageId;
+        axios.delete(`${FAREWELL_MESSAGES_URL}/${messageId}/delete`)
+        .then( (response) => {
+          updatedMessages = messages.filter(function (messages) {
+            return messages.message_id !== messageId;
+          });
+
+          console.log('success!', response.data);
+          setMessages(updatedMessages);
+        })
+        .catch( (error) => {
+          console.log('could not delete message', error, error.response)
         });
-        setMessages(updatedMessages);
         break;
 
       default:
