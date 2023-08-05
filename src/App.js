@@ -4,6 +4,7 @@ import axios from 'axios';
 import TrusteePage from './components/TrusteePage';
 import ReceivedMessageList from './components/ReceivedMessageList';
 import MessagePage from './components/MessagePage';
+import './index.css';
 
 function App() {
  // hard-coded practice data
@@ -135,9 +136,6 @@ useEffect(getMessages, [])
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const addMessage = (newMessageData) => {
-    console.log('PRECONVERT newMessageData:',newMessageData);
-    // console.log("DEBUG addMessage called")
-    // console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
 
     // requestData converts attributes to match route attribute names
     const requestData = {
@@ -152,7 +150,6 @@ useEffect(getMessages, [])
 
   
     if (requestData.audio_message != null && requestData.audio_message !== "") {
-      // console.log('DEBUG audio_message:', requestData.audio_message)
       console.log('DEBUG POST request:', requestData)
       axios
         .post(`${FAREWELL_MESSAGES_URL}`, requestData)
@@ -265,18 +262,18 @@ useEffect(getMessages, [])
 
   // If authenticated, show the main content based on the active component
   return (
-    <div className="App">
-      <header className="app-header">
+    <div >
+      <header >
         <h1>M O R T I</h1>
-        <nav>
+        <nav >
           <button onClick={() => setActive(1)}>Messages</button>
           <button onClick={() => setActive(2)}>Trusted Persons</button>
           <button onClick={() => setActive(3)}>Received Messages</button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Out</button>
+          <button >Sign Out</button>
         </nav>
       </header>
 
-      <section className="main-content">
+      <section >
         {activeComponent === 0 && (
           <p>Welcome! This is the introductory text for the page.</p>
         )}
@@ -306,7 +303,7 @@ useEffect(getMessages, [])
 
       </section>
 
-      <footer className="app-footer">
+      <footer >
         <p>© 2023 Your Company</p>
       </footer>
 
