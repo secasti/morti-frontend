@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';
 import TrusteePage from './components/TrusteePage';
 import ReceivedMessageList from './components/ReceivedMessageList';
 import MessagePage from './components/MessagePage';
@@ -273,7 +272,7 @@ useEffect(getMessages, [])
           <button onClick={() => setActive(1)}>Messages</button>
           <button onClick={() => setActive(2)}>Trusted Persons</button>
           <button onClick={() => setActive(3)}>Received Messages</button>
-          <button>Sign Out</button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Out</button>
         </nav>
       </header>
 
