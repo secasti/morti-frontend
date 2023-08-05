@@ -5,7 +5,7 @@ import './MessagePage.css';
 import MessageList from './MessageList';
 import axios from 'axios';
 
-const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded, getMessages}) =>{
+const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
     console.log("MessagePage rendered");
 
 

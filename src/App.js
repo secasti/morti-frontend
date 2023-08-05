@@ -87,7 +87,7 @@ function App() {
 }]
 
 // Global variables
-  const FAREWELL_MESSAGES_URL = 'https://morti-back-end.onrender.com/farewell_messages';
+  const FAREWELL_MESSAGES_URL = 'https://morti-back-end.onrender.com';
 
   // States
   const [messages, setMessages] = useState(MESSAGE_DATA);
@@ -106,7 +106,7 @@ function App() {
   //API CALLS
   //GET MESSAGE API CALL
   const getMessages = () => {
-    axios.get('https://morti-back-end.onrender.com/farewell_messages')
+    axios.get(`${FAREWELL_MESSAGES_URL}/farewell_messages`)
       .then((response) => {
         const messagesData = response.data.map((message) => {
           return {
@@ -156,7 +156,7 @@ useEffect(getMessages, [])
       // console.log('DEBUG audio_message:', requestData.audio_message)
       console.log('DEBUG POST request:', requestData)
       axios
-        .post(`${FAREWELL_MESSAGES_URL}`, requestData)
+        .post(`${FAREWELL_MESSAGES_URL}/farewell_messages`, requestData)
         .then((response) => {
           console.log("response data: ", response)
         })
@@ -169,16 +169,46 @@ useEffect(getMessages, [])
   };
 
 // TRUSTEE functions
+  const getTrustees = () => {
+    axios
+    .get(`${FAREWELL_MESSAGES_URL}/users`)
+    .then((response) => {
+      const trusteesData = response.data.map((trustee) => {
+        return {
+          email: trustee.email,
+          first_name: trustee.first_name,
+          last_name: trustee.last_name
+        };
+      });
+      setTrustees(trusteesData);
+    })
+    .catch((error) => {
+      console.log(error.response.status);
+      console.log(error.response.data)
+    });
+  };
+
+  useEffect(getTrustees, [])
+
   const addTrustee = (newTrustee) => {
   setTrustees([...trustees, newTrustee]);
 };
 
   const updateDeleteTrustee = (trusteeId) => {
-    const updatedTrustees = trustees.filter(function (trustees) {
-      return trustees.user_id !== trusteeId;
-    });
+    axios.delete(`${FAREWELL_MESSAGES_URL}/${trusteeId}/delete`)
 
-    setTrustees(updatedTrustees)
+    .then( (response) => {
+
+      const updatedTrustees = trustees.filter(function (trustees) {
+        return trustees.id !== trusteeId;
+      });
+
+      console.log('success!', response.data);
+      setTrustees(updatedTrustees);
+    })
+    .catch( (error) => {
+      console.log('could not delete trustee', error, error.response)
+    });
   };
 
 // RECEIVED MESSAGES functions
@@ -199,31 +229,6 @@ useEffect(getMessages, [])
 
 
   //MESSAGES functions
-  // const deleteMessage = (messageId, messageType) => {
-  //   let updatedMessages;
-
-  //   switch (messageType) {
-      
-  //     case 'receivedMessage':
-  //       updatedMessages = receivedMessages.filter(function (receivedMessages) {
-  //         return receivedMessages.message_id !== messageId;
-  //       });
-  //       setReceivedMessages(updatedMessages);
-  //       break;
-
-  //     case 'message':
-  //       console.log('in message switch')
-  //       updatedMessages = messages.filter(function (messages) {
-  //         return messages.message_id !== messageId;
-  //       });
-  //       setMessages(updatedMessages);
-  //       break;
-
-  //     default:
-  //       console.error('Invalid messageType', messageType);
-  //       break;
-  //   }
-  // };
   const deleteMessage = (messageId, messageType) => {
     let updatedMessages;
 
@@ -237,7 +242,7 @@ useEffect(getMessages, [])
         break;
 
       case 'message':
-        axios.delete(`${FAREWELL_MESSAGES_URL}/${messageId}/delete`)
+        axios.delete(`${FAREWELL_MESSAGES_URL}/farewell_messages/${messageId}/delete`)
         .then( (response) => {
           updatedMessages = messages.filter(function (messages) {
             return messages.message_id !== messageId;
@@ -325,6 +330,7 @@ useEffect(getMessages, [])
         {activeComponent === 2 && (
           <TrusteePage 
           trustees={trustees} 
+          getTrustees={getTrustees}
           addTrustee={addTrustee}
           updateDeleteTrustee={updateDeleteTrustee}
           />

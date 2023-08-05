@@ -4,12 +4,12 @@ import NewTrusteeForm from './NewTrusteeForm';
 import TrusteeList from './TrusteeList';
 import './TrusteePage.css';
 
-const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee}) => {
+const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee}) => {
     return (
         <section className='trustee__page'>
             <div className='trustee-list'>
                 <TrusteeList 
-                trustees={trustees} 
+                trustees={trustees}
                 updateDeleteTrustee={updateDeleteTrustee}
                 ></TrusteeList>
             </div>
