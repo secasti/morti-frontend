@@ -75,7 +75,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
             // "audio_message": base64String -- PUT THIS BACK IT'S THE ACTUAL AUDIO
             "audio_message": "thisIsLessThanFiveHundredCharacters"
         }));
-       console.log("Updated messageFormData:", messageFormData)
+    console.log("Updated messageFormData:", messageFormData)
     }
 
     //function to handle the submition of form and add new msg to initial data

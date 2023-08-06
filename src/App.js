@@ -154,10 +154,13 @@ const addMessage = (newMessageData) => {
       .post('https://morti-back-end.onrender.com/farewell_messages', requestData)
       .then((response) => {
         console.log("response data: ", response)
+        //re-render message page and make a get message axios call. 
+        getMessages()
       })
       .catch((error)=> {
         console.log("error: ", error)
       })
+
   } else {
     console.log("DEBUG audio_message is empty, not POSTING")
   }
