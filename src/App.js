@@ -140,12 +140,12 @@ const addMessage = (newMessageData) => {
   console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
 
   const requestData = {
-    id: newMessageData.message_id, // Rename 'message_id' to 'id'
-    id_recipient: newMessageData.userId, // Rename 'userId' to 'id_recipient'
     title: newMessageData.title,
     text_message: newMessageData.text, // Rename 'text' to 'text_message'
+    audio_message: newMessageData.audio_message,
+    id_recipient: newMessageData.recipientId, // Rename 'userId' to 'id_recipient'
     is_sent: newMessageData.isSent, // Rename 'isSent' to 'is_sent'
-    audio_message: newMessageData.audio_message
+    recipient_email: newMessageData.recipientEmail
   };
 
   
