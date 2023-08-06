@@ -1,33 +1,66 @@
-/* Dark mode styles */
-:root {
-    --dark-bg-color: #1a1a1a; /* Dark background color for dark mode */
-    --light-text-color: #f2f2f2; /* Light text color for dark mode */
-    --list-bg-color: #272727; /* Dark background color for the message list */
-    --form-bg-color: #272727; /* Dark background color for the message form */
-    --list-width: 50%; /* Width of the message list (adjust as needed) */
-}
+/* TrusteePage.css */
 
-.trustee__page {
+:root {
+    /* Colors */
+    --dark-bg-color: #1a1a1a;
+    --light-text-color: #f2f2f2;
+    --list-bg-color: #272727;
+    --form-bg-color: #272727;
+    --list-width: 50%;
+  }
+  
+  .trustee__page {
     display: flex;
     gap: 1%;
     padding: 5%;
-}
+  }
+  
+  .accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+  
+  .accordion-heading {
+    cursor: pointer;
+    margin: 0;
+    padding: 16px;
+    background-color: var(--list-bg-color);
+    color: var(--light-text-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .expanded {
+    max-height: 500px; /* Adjust the value based on your content height */
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden; /* Hide any overflow content */
+    overflow-y: auto; /* Enable vertical scrolling */
+    position: relative;
+    /* Hide the default scrollbar on WebKit browsers */
+    scrollbar-width: none; /* Firefox doesn't support this property, but it won't affect the arrows */
 
-.trustee-list {
+  /* Hide the default scrollbar on other browsers (like Chrome, Edge, etc.) */
+    &::-webkit-scrollbar {
+    display: none;
+    }
+    }
+
+  .trustee-list,
+  .trustee-for-list {
     background-color: var(--dark-bg-color);
     color: var(--light-text-color);
-    flex: 1;
     padding: 16px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: var(--list-width);
-}
-
-.new-trustee-form {
+  }
+  
+  .new-trustee-form {
     background-color: var(--form-bg-color);
     color: var(--light-text-color);
     flex: 1;
     padding: 16px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  }
