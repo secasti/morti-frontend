@@ -126,7 +126,10 @@ const NewMessageForm = ({ messages, addMessage }) => {
                 />
             {/* audio */}
             <label htmlFor='audio'>Audio Recording:</label>
-            <AudioRecorder onAudioData={handleAudioData}/>
+            <AudioRecorder 
+                onAudioData={handleAudioData} 
+                value={messageFormData.audio}
+                />
             {/* recipient email */}
             <label htmlFor='recipientEmail'>Recipient Email:</label>
                 <input

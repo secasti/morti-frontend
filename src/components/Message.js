@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import './Message.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Message = (props) => {
+
+    const [audio, setAudio] = useState(null)
+    
+    async function loadPlayer() {
+        let newAudioBinary = await fetch(props.audio_message)
+        let newAudioBlob = await newAudioBinary.blob()
+        const audioURL = URL.createObjectURL(newAudioBlob);
+        setAudio(audioURL)
+    }
+    useEffect(() => { loadPlayer();}, []);
 
     const toggleDelete = () => {
         props.deleteMessage(props.message_id, 'message')

@@ -8,7 +8,7 @@ import MessagePage from './components/MessagePage';
 import { get } from 'lodash';
 
 function App() {
- //message hard-coded practice data
+ // hard-coded practice data
   const MESSAGE_DATA = [{
   message_id: 1,
   userId: 1,
@@ -87,11 +87,15 @@ function App() {
   isSent: false
 }]
 
+// Global variables
+  const FAREWELL_MESSAGES_URL = 'https://morti-back-end.onrender.com';
+
   // States
   const [messages, setMessages] = useState(MESSAGE_DATA);
   const [trustees, setTrustees] = useState(TRUSTEE_DATA);
   const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
   const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
+
   // initial dictionary with each message id as key, and boolean value for if it is expanded. 
     const initialMsgExpandedState = {};
     messages.forEach((message) => {
@@ -101,27 +105,28 @@ function App() {
   })
 
   //API CALLS
-    //GET MESSAGE API CALL
-const getMessages = () => {
-  axios.get('https://morti-back-end.onrender.com/farewell_messages')
-    .then((response) => {
-      const messagesData = response.data.map((message) => {
-        return {
-          message_id: message.id, // Rename 'id' to 'message_id'
-          userId: message.id_recipient, // Rename 'id_recipient' to 'userId'
-          title: message.title,
-          text: message.text_message,
-          // audio: message.audio_message, // Uncomment this line if you have an 'audio' prop in your component
-          recipientId: message.id_recipient, // Rename 'id_recipient' to 'recipientId'
-          isSent: message.is_sent, // Rename 'is_sent' to 'isSent'
-        };
-      });
-      setMessages(messagesData);
-    })
-    .catch((error) => {
-      console.log("error: ", error);
-    })
-}
+  //GET MESSAGE API CALL
+  const getMessages = () => {
+    axios.get(`${FAREWELL_MESSAGES_URL}/farewell_messages`)
+      .then((response) => {
+        const messagesData = response.data.map((message) => {
+          return {
+            message_id: message.id, // Rename 'id' to 'message_id'
+            userId: message.id_recipient, // Rename 'id_recipient' to 'userId'
+            title: message.title,
+            text: message.text_message,
+            // audio: message.audio_message, // Uncomment this line if you have an 'audio' prop in your component
+            recipientId: message.id_recipient, // Rename 'id_recipient' to 'recipientId'
+            isSent: message.is_sent, // Rename 'is_sent' to 'isSent'
+          };
+        });
+        setMessages(messagesData);
+        console.log(messagesData);
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      })
+  }
 useEffect(getMessages, [])
 
 
@@ -136,48 +141,75 @@ useEffect(getMessages, [])
 //   setMessages([...messages, newMessage]);
 // };
 const addMessage = (newMessageData) => {
-  console.log("addMessage called")
+  console.log("DEBUG addMessage called")
+  console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
 
   const requestData = {
+    id: newMessageData.message_id, // Rename 'message_id' to 'id'
+    id_recipient: newMessageData.userId, // Rename 'userId' to 'id_recipient'
     title: newMessageData.title,
     text_message: newMessageData.text, // Rename 'text' to 'text_message'
-    audio_message: newMessageData.audio_message,
-    id_recipient: newMessageData.recipientId, // Rename 'userId' to 'id_recipient'
     is_sent: newMessageData.isSent, // Rename 'isSent' to 'is_sent'
-    recipient_email: newMessageData.recipientEmail
+    audio_message: newMessageData.audio_message
   };
 
-  console.log("request data:",requestData)
-
+  
   if (newMessageData.audio_message != null && newMessageData.audio_message !== "") {
     console.log("DEBUG audio_message non empty")
     axios
       .post('https://morti-back-end.onrender.com/farewell_messages', requestData)
       .then((response) => {
         console.log("response data: ", response)
-        //re-render message page and make a get message axios call. 
-        getMessages()
       })
       .catch((error)=> {
         console.log("error: ", error)
       })
-
   } else {
     console.log("DEBUG audio_message is empty, not POSTING")
   }
 }
 
 // TRUSTEE functions
+  const getTrustees = () => {
+    axios
+    .get(`${FAREWELL_MESSAGES_URL}/users`)
+    .then((response) => {
+      const trusteesData = response.data.map((trustee) => {
+        return {
+          email: trustee.email,
+          first_name: trustee.first_name,
+          last_name: trustee.last_name
+        };
+      });
+      setTrustees(trusteesData);
+    })
+    .catch((error) => {
+      console.log(error.response.status);
+      console.log(error.response.data)
+    });
+  };
+
+  useEffect(getTrustees, [])
+
   const addTrustee = (newTrustee) => {
   setTrustees([...trustees, newTrustee]);
 };
 
   const updateDeleteTrustee = (trusteeId) => {
-    const updatedTrustees = trustees.filter(function (trustees) {
-      return trustees.user_id !== trusteeId;
-    });
+    axios.delete(`${FAREWELL_MESSAGES_URL}/${trusteeId}/delete`)
 
-    setTrustees(updatedTrustees)
+    .then( (response) => {
+
+      const updatedTrustees = trustees.filter(function (trustees) {
+        return trustees.id !== trusteeId;
+      });
+
+      console.log('success!', response.data);
+      setTrustees(updatedTrustees);
+    })
+    .catch( (error) => {
+      console.log('could not delete trustee', error, error.response)
+    });
   };
 
 // RECEIVED MESSAGES functions
@@ -214,11 +246,18 @@ const addMessage = (newMessageData) => {
         break;
 
       case 'message':
-        console.log('in message switch')
-        updatedMessages = messages.filter(function (messages) {
-          return messages.message_id !== messageId;
+        axios.delete(`${FAREWELL_MESSAGES_URL}/farewell_messages/${messageId}/delete`)
+        .then( (response) => {
+          updatedMessages = messages.filter(function (messages) {
+            return messages.message_id !== messageId;
+          });
+
+          console.log('success!', response.data);
+          setMessages(updatedMessages);
+        })
+        .catch( (error) => {
+          console.log('could not delete message', error, error.response)
         });
-        setMessages(updatedMessages);
         break;
 
       default:
@@ -299,6 +338,7 @@ const addMessage = (newMessageData) => {
         {activeComponent === 2 && (
           <TrusteePage 
           trustees={trustees} 
+          getTrustees={getTrustees}
           addTrustee={addTrustee}
           updateDeleteTrustee={updateDeleteTrustee}
           />
