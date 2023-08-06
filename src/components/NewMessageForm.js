@@ -84,7 +84,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
         //create object with data
         //comment this chunk out once backend is connected
         const newMessage = {
-            userId: 6, //this must come from log-in session perhaps a state?
+            //userId: 6, //this must come from log-in session perhaps a state? this is not a field required in backend
             title: messageFormData.title,
             text: messageFormData.text,
             audio: messageFormData.audio,
@@ -149,7 +149,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
     };
 
     NewMessageForm.propTypes = {
-        addMessageCallback: PropTypes.func.isRequired,
+        addMessage: PropTypes.func.isRequired,
     };
 
     export default NewMessageForm;

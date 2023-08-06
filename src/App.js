@@ -116,7 +116,6 @@ const getMessages = () => {
         };
       });
       setMessages(messagesData);
-      console.log(messagesData);
     })
     .catch((error) => {
       console.log("error: ", error);
@@ -136,8 +135,7 @@ useEffect(getMessages, [])
 //   setMessages([...messages, newMessage]);
 // };
 const addMessage = (newMessageData) => {
-  console.log("DEBUG addMessage called")
-  console.log("DEBUG newMessageData: " + JSON.stringify(newMessageData))
+  console.log("addMessage called")
 
   const requestData = {
     title: newMessageData.title,
@@ -148,7 +146,8 @@ const addMessage = (newMessageData) => {
     recipient_email: newMessageData.recipientEmail
   };
 
-  
+  console.log("request data:",requestData)
+
   if (newMessageData.audio_message != null && newMessageData.audio_message !== "") {
     console.log("DEBUG audio_message non empty")
     axios
