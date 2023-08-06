@@ -72,7 +72,8 @@ const NewMessageForm = ({ messages, addMessage }) => {
         console.log("Audio data captured:", base64String)
         setMessageFormData((prevFormData)=> ({
             ...messageFormData,
-            "audio_message": base64String
+            // "audio_message": base64String -- PUT THIS BACK IT'S THE ACTUAL AUDIO
+            "audio_message": "thisIsLessThanFiveHundredCharacters"
         }));
        console.log("Updated messageFormData:", messageFormData)
     }
