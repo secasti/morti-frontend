@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Trustee.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Trustee = (props) => {
 
@@ -12,7 +14,9 @@ const Trustee = (props) => {
         <section className='single-msg'>
             <h3 className='msg-title'> {props.first_name} </h3>
             <p className='msg-text'> {props.email} </p>
-            <button onClick={toggleDelete}>🗑</button>
+            <button onClick={toggleDelete} className='delete-btn'>
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
         </section>
     );
 };

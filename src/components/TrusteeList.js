@@ -10,7 +10,7 @@ const TrusteeList = (props) => {
     const getTrusteesJSX = (trustees) => {
         return trustees.map((trustee) => {
             return (
-                <li key={trustee.user_id}>
+                <li key={trustee.user_id} className="trustee-item">
                     <Trustee
                         user_id={trustee.user_id}
                         first_name={trustee.first_name}
@@ -24,7 +24,6 @@ const TrusteeList = (props) => {
 
     return (
         <section>
-            <h2>Trusted Persons </h2>
             <ol>{getTrusteesJSX(trustees)}</ol>
         </section>
     );
