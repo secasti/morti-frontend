@@ -15,3 +15,21 @@
     color: red; /* Change the color on hover */
     /* Add more styles here if desired */
   }
+
+  .skull-btn {
+    background-color: transparent; /* Transparent background for the button */
+    color: var(--primary-color); /* Blue color for the button text */
+    border: none; /* No border */
+    padding: 0; /* Remove padding to make the button compact */
+    cursor: pointer;
+    font-size: 18px;
+    position: absolute;
+    bottom: 8px;
+    left: 8px; /* Set the button to the bottom left corner */
+  }
+  
+  .skull-btn:hover {
+    color: red; /* Change the color on hover */
+    /* Add more styles here if desired */
+  }
+  

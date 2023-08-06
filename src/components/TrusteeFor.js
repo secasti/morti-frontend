@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TrusteeFor.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faSkull } from '@fortawesome/free-solid-svg-icons';
 
 const TrusteeFor = (props) => {
 
@@ -10,16 +10,21 @@ const TrusteeFor = (props) => {
         props.deleteTrusteeFor(props.user_id)
     }
 
-    const markDeceased = (user_id) => {
-        //send patch request to back end that takes user_id, sets all messages that user created "is_sent" to True
-        console.log("user:", user_id, "dead and now messages should be sent")
-
-    }
+    const markDeceased = (user_id, firstName, email) => {
+        const isConfirmed = window.confirm(`Are you sure you want to mark ${firstName}, ${email}, as deceased?`);
+        if (isConfirmed) {
+          // Send patch request to backend that takes user_id, sets all messages that the user created "is_sent" to True
+          console.log("User:", user_id, "is deceased and now messages should be sent");
+        }
+      };
+      
     return (
         <section className='single-msg'>
             <h3 className='msg-title'> {props.first_name} </h3>
             <p className='msg-text'> {props.email} </p>
-            <button onClick={markDeceased}> </button>
+            <button onClick={markDeceased} className='skull-btn'> 
+                <FontAwesomeIcon icon={faSkull} />
+            </button>
             <button onClick={toggleDelete} className='delete-btn'>
                 <FontAwesomeIcon icon={faTrash} />
             </button>
