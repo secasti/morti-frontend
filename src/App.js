@@ -5,6 +5,7 @@ import './App.css';
 import TrusteePage from './components/TrusteePage';
 import ReceivedMessageList from './components/ReceivedMessageList';
 import MessagePage from './components/MessagePage';
+import { get } from 'lodash';
 
 function App() {
  //message hard-coded practice data
@@ -199,6 +200,9 @@ const addMessage = (newMessageData) => {
   //MESSAGES functions
   const deleteMessage = (messageId, messageType) => {
     let updatedMessages;
+    
+    axios.delete(`https://morti-back-end.onrender.com/farewell_messages/${messageId}/delete`)
+    .then((response) => {
 
     switch (messageType) {
       
@@ -221,7 +225,11 @@ const addMessage = (newMessageData) => {
         console.error('Invalid messageType', messageType);
         break;
     }
-  };
+  }).catch((error) => {
+    console.log("error: ", error);
+  })
+  
+};
 
   const expandMessage = (message_id) => {
     console.log("inside expand Message")
