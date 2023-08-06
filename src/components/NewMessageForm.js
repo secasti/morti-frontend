@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { debounce } from "lodash";
 import axios from "axios"; 
 import "./NewMessageForm.css";
-
 import AudioRecorder from "./AudioRecorder";
 
 
@@ -70,11 +69,12 @@ const NewMessageForm = ({ messages, addMessage }) => {
 
     // function to save 64baseString to FormData
     const handleAudioData = (base64String) => {
-        const updateFormData = {
+        console.log("Audio data captured:", base64String)
+        setMessageFormData((prevFormData)=> ({
             ...messageFormData,
             "audio_message": base64String
-        };
-        setMessageFormData(updateFormData)
+        }));
+       console.log("Updated messageFormData:", messageFormData)
     }
 
     //function to handle the submition of form and add new msg to initial data
@@ -87,7 +87,7 @@ const NewMessageForm = ({ messages, addMessage }) => {
             //userId: 6, //this must come from log-in session perhaps a state? this is not a field required in backend
             title: messageFormData.title,
             text: messageFormData.text,
-            audio_message: messageFormData.audio,
+            audio_message: messageFormData.audio_message,
             recipientEmail: messageFormData.recipientEmail,
             recipientId: 2, // this will need to change from  the backend 
             isSent: false
