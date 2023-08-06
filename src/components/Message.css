@@ -29,6 +29,8 @@
 
 .msg-text {
   margin-top: 8px;
+  padding-bottom: 8%;
+
 }
 
 /* Add a subtle transition effect when hovering over the cards */
@@ -51,3 +53,33 @@
 .single-msg.expanded {
   max-height: 100%;
 }
+
+.delete-btn {
+  background-color: transparent; /* Transparent background for the button */
+  color: var(--primary-color); /* Blue color for the button text */
+  border: none; /* No border */
+  padding: 0; /* Remove padding to make the button compact */
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+
+.delete-btn:hover{
+  color: red; /* Change the color on hover */
+  /* Add more styles here if desired */
+}
+
+/* Styling for the delete button icon */
+.delete-btn svg{
+  /* Adjust the icon size */
+  width: 18px;
+  height: 18px;
+  /* Adjust the icon color */
+    fill: var(--primary-color); /* Use your desired color variable */
+ 
+}
+
+

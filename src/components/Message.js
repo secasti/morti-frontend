@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Message.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Message = (props) => {
 
@@ -28,7 +30,9 @@ const Message = (props) => {
                 </button>
             )}
             {/* delete a msg button */}
-            <button onClick={toggleDelete}>🗑</button>
+            <button onClick={toggleDelete} className='delete-btn'>
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
         </div>
     );
 };
