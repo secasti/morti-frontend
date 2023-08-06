@@ -24,7 +24,7 @@ const TrusteeList = (props) => {
 
     return (
         <section>
-            <h2>Trusted Persons </h2>
+            <h2>My Chosen Trustees</h2>
             <ol>{getTrusteesJSX(trustees)}</ol>
         </section>
     );

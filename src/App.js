@@ -87,9 +87,24 @@ function App() {
   isSent: false
 }]
 
+const TRUSTEE_FOR_DATA = [{
+  user_id: 1,
+  first_name: "susi",
+  email: "susi@gmail.com"
+}, {
+  user_id: 2,
+  first_name: "ana",
+  email: "ana@gmail.com"
+}, {
+  user_id: 3,
+  first_name: "anna",
+  email: "anna@gmail.com"
+}]
+
   // States
   const [messages, setMessages] = useState(MESSAGE_DATA);
   const [trustees, setTrustees] = useState(TRUSTEE_DATA);
+  const [trusteeFor, setTrusteeFor] = useState(TRUSTEE_FOR_DATA);
   const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
   const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
   // initial dictionary with each message id as key, and boolean value for if it is expanded. 
@@ -100,8 +115,7 @@ function App() {
     return initialMsgExpandedState;
   })
 
-  //API CALLS
-    //GET MESSAGE API CALL
+//GET MESSAGE API CALL
 const getMessages = () => {
   axios.get('https://morti-back-end.onrender.com/farewell_messages')
     .then((response) => {
@@ -180,8 +194,17 @@ const addMessage = (newMessageData) => {
     setTrustees(updatedTrustees)
   };
 
-// RECEIVED MESSAGES functions
+// TRUSTEE FOR functions
+  const deleteTrusteeFor = (trusteeId) => {
+    const updatedTrustees = trusteeFor.filter(function (trusteeFor) {
+      return trusteeFor.user_id !== trusteeId;
+    });
 
+    setTrusteeFor(updatedTrustees)
+  };
+
+
+// RECEIVED MESSAGES functions
   const getReceivedMessages = (response) => {
     const newMessages = response.map((message) => {
       return {
@@ -195,7 +218,6 @@ const addMessage = (newMessageData) => {
     });
   setReceivedMessages(RECEIVED_MESSAGE_DATA);
   };
-
 
   //MESSAGES functions
   const deleteMessage = (messageId, messageType) => {
@@ -301,6 +323,8 @@ const addMessage = (newMessageData) => {
           trustees={trustees} 
           addTrustee={addTrustee}
           updateDeleteTrustee={updateDeleteTrustee}
+          trusteeFor = {trusteeFor}
+          deleteTrusteeFor = {deleteTrusteeFor}
           />
         )}
         {activeComponent === 3 && (
