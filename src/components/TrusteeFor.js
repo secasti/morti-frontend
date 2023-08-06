@@ -14,10 +14,10 @@ const TrusteeFor = (props) => {
         const isConfirmed = window.confirm(`Are you sure you want to mark ${firstName}, ${email}, as deceased?`);
         if (isConfirmed) {
           // Send patch request to backend that takes user_id, sets all messages that the user created "is_sent" to True
-          console.log("User:", user_id, "is deceased and now messages should be sent");
+        console.log("User:", user_id, "is deceased and now messages should be sent");
         }
-      };
-      
+    };
+
     return (
         <section className='single-msg'>
             <h3 className='msg-title'> {props.first_name} </h3>
