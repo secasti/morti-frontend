@@ -87,12 +87,13 @@ const NewMessageForm = ({ messages, addMessage }) => {
             //userId: 6, //this must come from log-in session perhaps a state? this is not a field required in backend
             title: messageFormData.title,
             text: messageFormData.text,
-            audio: messageFormData.audio,
+            audio_message: messageFormData.audio,
             recipientEmail: messageFormData.recipientEmail,
             recipientId: 2, // this will need to change from  the backend 
             isSent: false
         };
         //send messageform data to app for post request
+        console.log("new message in HS getting sent to 'add message':", newMessage)
         addMessage(newMessage)
         //addMessageCallback(messageFormData)
         //reset form data to blank
