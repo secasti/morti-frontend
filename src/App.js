@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import jwt_decode from "jwt-decode";
 import './App.css';
 import TrusteePage from './components/TrusteePage';
 import ReceivedMessageList from './components/ReceivedMessageList';
@@ -8,6 +9,8 @@ import MessagePage from './components/MessagePage';
 import { get } from 'lodash';
 
 function App() {
+  const[ user, setUser ] = useState ({});
+
  //message hard-coded practice data
   const MESSAGE_DATA = [{
   message_id: 1,
@@ -115,6 +118,63 @@ const TRUSTEE_FOR_DATA = [{
     return initialMsgExpandedState;
   })
 
+const setupGoogleSso = () => {
+  /*global google */
+  window.google.accounts.id.initialize({
+    client_id: "444393723578-hqvu6heuhrubn9putumbq943iredeh73.apps.googleusercontent.com",
+    callback: handleCallbackResponse
+  });
+  
+  window.google.accounts.id.renderButton(
+    document.getElementById("signInDiv"),
+    {theme: "outline", size: "large"}
+  );
+
+  window.google.accounts.id.prompt();
+}
+
+function handleCallbackResponse(response) {
+  const jwt = response.credential;
+  console.log("Encoded JWT ID token: " + response.credential);
+  var userObject = jwt_decode(response.credential);
+  console.log(userObject);
+  setUser(userObject);
+
+  // Send the Google ID token to the backend
+  const token = { email: userObject.email,
+    first_name: userObject.family_name, 
+    last_name: userObject.given_name}; // The Google ID token obtained during sign-in
+  
+  console.log(token)
+
+  axios.post("http://localhost:5000/session", { jwt })
+    .then((response) => {
+      // Handle the response from the backend (if needed)
+      console.log("Backend response:", response.data);
+      const data = response.data;
+    
+      // Check if login was successful
+      if (data.success) {
+        // Login successful, redirect the user to protected area
+        window.location.href = "/dashboard"; // Change to URL for protected area
+      } else {
+        console.error("Login failed:", data.error);
+        // show pop-up or alert
+      }
+    })
+    .catch((error) => {
+      // Handle any errors that occurred during the resquest
+      console.error("Error sending token to the backend:", error);
+    });
+
+  document.getElementById("signInDiv").hidden = true;
+}
+
+function handleSignOut(event) {
+  setUser({});
+  document.getElementById("signInDiv").hidden = false;
+}
+
 //GET MESSAGE API CALL
 const getMessages = () => {
   axios.get('https://morti-back-end.onrender.com/farewell_messages')
@@ -136,8 +196,12 @@ const getMessages = () => {
       console.log("error: ", error);
     })
 }
-useEffect(getMessages, [])
-
+useEffect(() => {
+  getMessages();
+  if (window.google) {
+    setupGoogleSso();
+  }
+}, []);
 
   // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages)
   const [activeComponent, setActiveComponent] = useState(0);
@@ -298,6 +362,7 @@ const addMessage = (newMessageData) => {
       <header className="app-header">
         <h1>M O R T I</h1>
         <nav>
+          <div id="signInDiv"></div>  
           <button onClick={() => setActive(1)}>Messages</button>
           <button onClick={() => setActive(2)}>Trusted Persons</button>
           <button onClick={() => setActive(3)}>Received Messages</button>
