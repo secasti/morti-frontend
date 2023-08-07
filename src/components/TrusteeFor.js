@@ -22,7 +22,7 @@ const TrusteeFor = (props) => {
         <section className='single-msg'>
             <h3 className='msg-title'> {props.first_name} </h3>
             <p className='msg-text'> {props.email} </p>
-            <button onClick={markDeceased} className='skull-btn'> 
+            <button onClick={markDeceased(props.user_id,  props.first_name, props.email)} className='skull-btn'> 
                 <FontAwesomeIcon icon={faSkull} />
             </button>
             <button onClick={toggleDelete} className='delete-btn'>
