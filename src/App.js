@@ -147,7 +147,7 @@ function handleCallbackResponse(response) {
   
   console.log(token)
 
-  axios.post("http://localhost:5000/session", { jwt })
+  axios.post("http://localhost:5000/google_callback", { token })
     .then((response) => {
       // Handle the response from the backend (if needed)
       console.log("Backend response:", response.data);
