@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import './App.css';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Link} from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute';
@@ -11,7 +11,7 @@ import { set } from 'lodash';
 function App() {
 
   // Authentication state
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   
   // Function to handle successful authentication
   const handleAuthentication = () => {
@@ -23,27 +23,40 @@ function App() {
   const handleLogout = () => {
     set(false);
   };
- 
+
+  const Navigation = () => (
+    <nav>
+      <Link to="/login">
+        <button>LOGIN</button>
+      </Link>
+      <Link to="/register">
+        <button>SIGN UP</button>
+      </Link>
+    </nav>
+  )
 
   // If authenticated, show the main content based on the active component
   return (
+    <>
+    <h1>M O R T I</h1>
+    <p>Welcome to the saddest site made by Latines of course.</p>
+    
+    <Navigation />
+
     <Routes>
-
-        {/* login page route */}
-        <Route exact path="/Login" element={<Login onLogin={handleAuthentication} />} />
-
-        {/* if authentication passes, there is a protected route that allows dashboard to be acessed */}
+        <Route 
+        exact path="/Login" 
+        element={<Login onLogin={handleAuthentication} />} 
+        />
         <Route
-        path="/dashboard"
+        exact path="/dashboard"
         element={<ProtectedRoute component={Dashboard} isAuthenticated={isAuthenticated} />}
         />
-
-       {/* redirect to dashboard or login depending on auth */}
         {/* <Route path="*">
           {isAuthenticated ? <Dashboard/> : <Login />}
         </Route> */}
-
     </Routes>
+    </>
   );
 };
 

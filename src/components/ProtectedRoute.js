@@ -1,15 +1,13 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Dashboard, isAuthenticated, ...rest}) => {
-    return (
-        <Route
-        {...rest}
-        render={(props) =>
-        isAuthenticated ? <Dashboard {...props} /> : <Navigate to="/login" />
-    } 
-        />
-    );
+const ProtectedRoute = ({ component: Dashboard, isAuthenticated}) => {
+
+    if (isAuthenticated) {
+        return <Dashboard to="/dashboard" replace />;
+    }
+
+    return <Navigate to="/login" replace />
 };
 
 export default ProtectedRoute;
