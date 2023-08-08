@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import TrusteePage from './TrusteePage';
 import ReceivedMessageList from './ReceivedMessageList';
 import MessagePage from './MessagePage';
