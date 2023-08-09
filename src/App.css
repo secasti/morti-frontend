@@ -68,3 +68,8 @@ nav button:hover {
   background-color: var(--bg-color); /* Dark background color for the footer */
   color: var(--text-color); /* Light text color for the footer */
 }
+
+
+.logOut:hover {
+  background-color: red;
+}
