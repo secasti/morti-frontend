@@ -1,38 +1,75 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({setToken}) => {
+  
+//VALID USERS
+const VALID_USERS = [
+    {email:"x" , password: "123", access_token: 123}
+]
+  
+const [loginForm, setloginForm] = useState({
+        email: "",
+        password: ""
+        })
 
-  const handleLogin = () => {
-    // Simulate authentication logic
-    if (username === 'user' && password === 'password') {
-      onLogin();
-    } else {
-      alert('Invalid username or password');
-    }
-  };
+const navigate = useNavigate()
+
+const handleLogin = (loginForm) => {
+  console.log("inside HandleLogin");
+  
+  // Check if the submitted form matches any valid user credentials
+  const validUser = VALID_USERS.find(
+    user => user.email === loginForm.email && user.password === loginForm.password
+  );
+  
+  if (validUser) {
+    setToken(validUser.access_token);
+    alert("Successful Login");
+    localStorage.setItem('email', loginForm.email);
+    navigate('/dashboard');
+  } else {
+    alert('Invalid username or password');
+  }
+
+  // Clear the login form fields
+  setloginForm({
+    email: "",
+    password: ""
+  });
+};
+
+  function handleChange(event) {
+    const {value, name} = event.target
+    console.log("inside handle change")
+    console.log("before setloginForm", loginForm)
+    setloginForm(prevNote => ({
+        ...prevNote,
+        [name]:value })
+    )
+    console.log("after setloginForm:", loginForm)
+  }
 
   return (
     <div>
       <h2>Login</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-      <button onClick={handleLogin}>Login</button>
+      <input onChange={handleChange} 
+          type="email"
+          //text={loginForm.email} 
+          name="email" 
+          placeholder="Email" 
+          value={loginForm.email} />
+                        
+      <input onChange={handleChange} 
+          type="password"
+          //text={loginForm.password} 
+          name="password" 
+          placeholder="Password" 
+          value={loginForm.password} />
+      <button onClick={() => handleLogin(loginForm)}>Login</button>
     </div>
   );
 };
+
 
 export default Login;
