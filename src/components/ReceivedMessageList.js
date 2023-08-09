@@ -2,14 +2,12 @@ import React from "react";
 import PropTypes from 'prop-types';
 import ReceivedMessage from "./ReceivedMessage";
 import './ReceivedMessageList.css';
-import {useNavigate} from "react-router-dom";
-import LogOut from "./LogOut";
+
+
 
 const ReceivedMessageList = (props) =>{
 
     const receivedMessages = props.receivedMessages;
-
-    const navigate = useNavigate()
 
     const getReceivedMessagesJSX = (receivedMessages) => {
         return receivedMessages.map((message) => {
@@ -32,15 +30,7 @@ const ReceivedMessageList = (props) =>{
     };
 
     return (
-        <div className="logged-menu-container">
-                    <header className="logged-nav-menu">
-                        <nav>
-                        <button onClick={() => navigate('/messages')}>Messages</button>
-                        <button onClick={() => navigate('/trustees')}>Trusted Persons</button>
-                        <button onClick={() => navigate('/messages/received-messages')}>Received Messages</button>
-                        <LogOut removeToken = { props.removeToken } handleLogout={ props.handleLogout } />
-                        </nav>
-                    </header>
+        <div className="received-msg-page-container">
                     <div className="messages">
                         <ol>{getReceivedMessagesJSX(receivedMessages)}</ol>
                     </div>
