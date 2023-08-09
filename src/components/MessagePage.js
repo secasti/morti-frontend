@@ -4,13 +4,29 @@ import NewMessageForm from './NewMessageForm';
 import './MessagePage.css';
 import MessageList from './MessageList';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
+import LogOut from "./LogOut";
 
-const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
+
+const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded, removeToken, handleLogout}) =>{
     console.log("MessagePage rendered");
+    //set up navigate from browserRouter
+    const navigate = useNavigate()
 
 
     return (
-        <section className="message__page">
+        <div>
+            <div className="logged-menu-container">
+                <header className="logged-nav-menu">
+                    <nav>
+                    <button onClick={() => navigate('/messages')}>Messages</button>
+                    <button onClick={() => navigate('/trustees')}>Trusted Persons</button>
+                    <button onClick={() => navigate('/messages/received-messages')}>Received Messages</button>
+                    <LogOut removeToken = { removeToken } handleLogout={ handleLogout } />
+                    </nav>
+                </header>
+            </div>
+            <section className="message__page">
             {/* render list of messages */}
             <div className="message-list">
                 <MessageList 
@@ -27,6 +43,8 @@ const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgE
                 messages={ messages } />
             </div>
         </section> 
+        </div>
+        
     );
 };
 

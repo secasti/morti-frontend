@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './ReceivedMessage.css';
 
+
 const ReceivedMessage = (props) => {
     
     const [audio, setAudio] = useState(null)
+
+
+
     
     async function loadPlayer() {
         let newAudioBinary = await fetch(props.audio_message)
@@ -19,11 +23,13 @@ const ReceivedMessage = (props) => {
     };
 
     return (
-        <div className='single-msg'>
-            <h3 className='msg-title'>{props.title} </h3>
-            <p className='msg-text'> {props.text} </p>
-            <audio src={audio} controls></audio>
-            <button onClick={toggleDelete}>🗑</button>
+        <div className='received-msg-page-container'>
+            <div className='single-msg'>
+                <h3 className='msg-title'>{props.title} </h3>
+                <p className='msg-text'> {props.text} </p>
+                <audio src={audio} controls></audio>
+                <button onClick={toggleDelete}>🗑</button>
+            </div>
         </div>
     )
 };

@@ -310,13 +310,17 @@ function App() {
              <Route
               exact path="*"
               element={
-                  <Login setToken={ setToken } handleAuthentication={ handleAuthentication } />
+                  <Login 
+                    setToken={ setToken } 
+                    handleAuthentication={ handleAuthentication } />
                 }
               />
             <Route
               exact path="/login"
               element={
-                  <Login setToken={ setToken } handleAuthentication={ handleAuthentication } />
+                  <Login 
+                  setToken={ setToken } 
+                  handleAuthentication={ handleAuthentication } />
                 }
               />
             <Route
@@ -339,6 +343,8 @@ function App() {
                 expandMessage={ expandMessage }
                 isMsgExpanded = { isMsgExpanded }
                 getMessages = { getMessages }
+                removeToken = { removeToken } 
+                handleLogout={ handleLogout }
                 />
                 }
             />
@@ -351,6 +357,8 @@ function App() {
                 updateDeleteTrustee={updateDeleteTrustee}
                 trusteeFor = {trusteeFor}
                 deleteTrusteeFor = {deleteTrusteeFor}
+                removeToken = { removeToken } 
+                handleLogout={ handleLogout }
                 />
                 }
             />
@@ -361,6 +369,8 @@ function App() {
                 receivedMessages={receivedMessages}
                 getReceivedMessages={getReceivedMessages}
                 deleteMessage={deleteMessage}
+                removeToken = { removeToken } 
+                handleLogout={ handleLogout }
                 />
                 }
             />
