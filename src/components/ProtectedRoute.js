@@ -1,13 +1,14 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import Dashboard from './Dashboard';
 
-const ProtectedRoute = ({ component: Dashboard, isAuthenticated}) => {
-
-    if (isAuthenticated) {
-        return <Dashboard to="/dashboard" replace />;
+const ProtectedRoute = ({isAuthenticated, chilren}) => {
+    console.log("inside PR")
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
     }
 
-    return <Navigate to="/login" replace />
+    return children;
 };
 
 export default ProtectedRoute;

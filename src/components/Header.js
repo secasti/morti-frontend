@@ -14,7 +14,7 @@ function Header(props) {
         return(
             <header className="App-header">
                 <button onClick={logMeOut}> 
-                    Logout
+                    Logout from header
                 </button>
             </header>
         )

@@ -5,6 +5,7 @@ import ReceivedMessageList from './ReceivedMessageList';
 import MessagePage from './MessagePage';
 
 const Dashboard = () => {
+  console.log("inside dashboard")
  //message hard-coded practice data
  const MESSAGE_DATA = [{
     message_id: 1,

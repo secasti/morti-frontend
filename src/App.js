@@ -66,10 +66,14 @@ function App() {
               exact path="/Login" 
               element={<Login  setToken={ setToken }  />} 
             />
-            {/* <Route
-              exact path="/dashboard"
-              element={<ProtectedRoute component={Dashboard} isAuthenticated={isAuthenticated} />}
-            /> */}
+            <Route
+              exact path="/login"
+              element={
+              <ProtectedRoute isAuthenticated={isAuthenticated} >
+                <Dashboard />
+              </ProtectedRoute>
+            }
+            />
             {/* <Route path="*">
               {isAuthenticated ? <Dashboard/> : <Login />}
             </Route> */}

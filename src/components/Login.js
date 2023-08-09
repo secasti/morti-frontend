@@ -41,13 +41,13 @@ const handleLogin = (loginForm) => {
 
   function handleChange(event) {
     const {value, name} = event.target
-    console.log("inside handle change")
-    console.log("before setloginForm", loginForm)
+    // console.log("inside handle change")
+    // console.log("before setloginForm", loginForm)
     setloginForm(prevNote => ({
         ...prevNote,
         [name]:value })
     )
-    console.log("after setloginForm:", loginForm)
+    // console.log("after setloginForm:", loginForm)
   }
 
   return (
