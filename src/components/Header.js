@@ -8,15 +8,15 @@ function Header(props) {
 
     function logMeOut() { 
         navigate('/login');
+        props.removeToken();
+        props.handleLogout();
      }
-        const logged = localStorage.getItem('email');
+        // const logged = localStorage.getItem('email');
 
         return(
-            <header className="App-header">
                 <button onClick={logMeOut}> 
-                    Logout from header
+                    Logout
                 </button>
-            </header>
         )
     }
 

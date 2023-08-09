@@ -3,8 +3,9 @@ import axios from 'axios';
 import TrusteePage from './TrusteePage';
 import ReceivedMessageList from './ReceivedMessageList';
 import MessagePage from './MessagePage';
+import Header from './Header';
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   console.log("inside dashboard")
  //message hard-coded practice data
  const MESSAGE_DATA = [{
@@ -264,20 +265,20 @@ const Dashboard = () => {
     };
   
     return (
-        <div className="App">
-          <header className="app-header">
-            <h1>M O R T I</h1>
+        <div className="dashboard">
+
+          <header className="dashboard-header">
             <nav>
               <button onClick={() => setActive(1)}>Messages</button>
               <button onClick={() => setActive(2)}>Trusted Persons</button>
               <button onClick={() => setActive(3)}>Received Messages</button>
-              <button>Sign Out</button>
+              <Header removeToken = { props.removeToken } handleLogout={ props.handleLogout } />
             </nav>
           </header>
     
-          <section className="main-content">
+          <section className="dashboard-main-content">
             {activeComponent === 0 && (
-              <p>Welcome! This is the introductory text for the page.</p>
+              <p>Welcome {props.isAuthenticated}! This is your profile. </p>
             )}
             {activeComponent === 1 && (
               <MessagePage messages = { messages} 
@@ -306,10 +307,6 @@ const Dashboard = () => {
             )}
     
           </section>
-    
-          <footer className="app-footer">
-            <p>© 2023 Your Company</p>
-          </footer>
     
         </div>
       );

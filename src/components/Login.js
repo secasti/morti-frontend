@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({setToken}) => {
+const Login = ({setToken, handleAuthentication}) => {
   
 //VALID USERS
 const VALID_USERS = [
@@ -26,7 +26,8 @@ const handleLogin = (loginForm) => {
   if (validUser) {
     setToken(validUser.access_token);
     alert("Successful Login");
-    localStorage.setItem('email', loginForm.email);
+    handleAuthentication(loginForm.email)
+    localStorage.setItem('email', loginForm.email); //ask ana what this does?
     navigate('/dashboard');
   } else {
     alert('Invalid username or password');
@@ -41,32 +42,34 @@ const handleLogin = (loginForm) => {
 
   function handleChange(event) {
     const {value, name} = event.target
-    // console.log("inside handle change")
-    // console.log("before setloginForm", loginForm)
     setloginForm(prevNote => ({
         ...prevNote,
         [name]:value })
     )
-    // console.log("after setloginForm:", loginForm)
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      <input onChange={handleChange} 
-          type="email"
-          //text={loginForm.email} 
-          name="email" 
-          placeholder="Email" 
-          value={loginForm.email} />
-                        
-      <input onChange={handleChange} 
-          type="password"
-          //text={loginForm.password} 
-          name="password" 
-          placeholder="Password" 
-          value={loginForm.password} />
-      <button onClick={() => handleLogin(loginForm)}>Login</button>
+    <div className="login-page">
+      <p>This is an intro paragraph of what morti is</p>
+      <div className = "login-form--container">
+        <h2>Login</h2>
+        <form className="login-form">
+        <input onChange={handleChange} 
+            type="email"
+            text={loginForm.email} 
+            name="email" 
+            placeholder="Email" 
+            value={loginForm.email} />
+                          
+        <input onChange={handleChange} 
+            type="password"
+            text={loginForm.password} 
+            name="password" 
+            placeholder="Password" 
+            value={loginForm.password} />
+        <button onClick={() => handleLogin(loginForm)}>Login</button>
+        </form>
+      </div>
     </div>
   );
 };

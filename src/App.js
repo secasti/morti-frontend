@@ -3,9 +3,7 @@ import { useState } from 'react';
 import './App.css';
 import { Route, Routes, Link} from 'react-router-dom';
 import Login from './components/Login';
-import Header from './components/Header';
 import Dashboard from './components/Dashboard'
-import ProtectedRoute from './components/ProtectedRoute';
 import useToken from './components/useToken';
 
 
@@ -22,8 +20,8 @@ function App() {
 
   
   // Function to handle successful authentication
-  const handleAuthentication = () => {
-    setIsAuthenticated(true);
+  const handleAuthentication = (email) => {
+    setIsAuthenticated(email);
   };
 
   //handle logout
@@ -31,55 +29,49 @@ function App() {
     setIsAuthenticated(false);
   };
 
-  const Navigation = () => (
-    <nav>
-      <Link to="/login">
-        <button>LOGIN</button>
-      </Link>
-      <Link to="/register">
-        <button>SIGN UP</button>
-      </Link>
-      <Link to="/dashboard">Dashboard</Link>
-    </nav>
-  )
+  // const Navigation = () => (
+  //   <nav>
+  //     <Link to="/login">
+  //       <button>LOGIN</button>
+  //     </Link>
+  //     <Link to="/register">
+  //       <button>SIGN UP</button>
+  //     </Link>
+  //     <Link to="/dashboard">Dashboard</Link>
+  //   </nav>
+  // )
 
   // If authenticated, show the main content based on the active component
   return (
-    <div>
+    <div className="website-title">
     <h1>M O R T I</h1>
-    
-    {/* <Navigation /> */}
-
-    {/* {isAuthenticated ? (
-      <button onClick={handleLogout}>Actually Signout</button>
-    ) : (
-      <button onClick={handleAuthentication}>Actually Login</button>
-    )} */}
     <div>
-      <Header token = {removeToken}/>
+      {/* <Header token = { removeToken } handleLogout={ handleLogout } /> */}
         {!token && token!=="" && token!== undefined ? 
-        <Login setToken={setToken} /> :
+        <Login setToken={ setToken } handleAuthentication={ handleAuthentication } /> :
         (
           <Routes>
-            {/* <Route index element={<Dashboard />}></Route> */}
-            <Route 
-              exact path="/Login" 
-              element={<Login  setToken={ setToken }  />} 
-            />
             <Route
               exact path="/login"
               element={
-              <ProtectedRoute isAuthenticated={isAuthenticated} >
-                <Dashboard />
-              </ProtectedRoute>
-            }
+                  <Login setToken={ setToken } handleAuthentication={ handleAuthentication } />
+                }
+              />
+            <Route
+              exact path="/dashboard"
+              element={
+                  <Dashboard token ={ token } isAuthenticated={isAuthenticated} removeToken = { removeToken } handleLogout={ handleLogout }/>
+                }
             />
-            {/* <Route path="*">
-              {isAuthenticated ? <Dashboard/> : <Login />}
-            </Route> */}
           </Routes>
         )}
     </div>
+    
+
+      <footer className="app-footer">
+      <p>© 2023 Your Company</p>
+      </footer>
+
     </div>
   );
 };
