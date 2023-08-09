@@ -12,12 +12,6 @@ const Dashboard = ({removeToken, handleLogout}) => {
   console.log("inside profile")
 
   const navigate = useNavigate()
- //message hard-coded practice data
-
-    // // Function to set active component
-    // const setActive = (componentIndex) => {
-    //   setActiveComponent(componentIndex);
-    // };
   
     return (
         <div className="logged-menu-container">
