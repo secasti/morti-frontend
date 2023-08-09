@@ -14,7 +14,7 @@ function LogOut(props) {
         // const logged = localStorage.getItem('email');
 
         return(
-                <button onClick={logMeOut}> 
+                <button onClick={logMeOut} className="logOut"> 
                     Logout
                 </button>
         )

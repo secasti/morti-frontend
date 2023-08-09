@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 
 
 const NavigationMenu = ({removeToken, handleLogout}) => {
-  console.log("inside profile")
 
   const navigate = useNavigate()
   
