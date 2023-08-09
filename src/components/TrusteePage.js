@@ -30,7 +30,7 @@ const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, tr
 
     return (
         <section className='trustee__page'>
-             <header className="logged-nav-menu">
+            <header className="logged-nav-menu">
                     <nav>
                     <button onClick={() => navigate('/messages')}>Messages</button>
                     <button onClick={() => navigate('/trustees')}>Trusted Persons</button>
