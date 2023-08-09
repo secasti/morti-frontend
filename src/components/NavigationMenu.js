@@ -4,12 +4,12 @@ import {useNavigate} from "react-router-dom";
 import "./NavigationMenu.css"
 
 
-const NavigationMenu = ({removeToken, handleLogout}) => {
+const NavigationMenu = ({removeToken, handleLogout, isAuthenticated}) => {
 
   const navigate = useNavigate()
   
     return (
-        <div className="logged-menu-container">
+        <div className={!isAuthenticated?  "invisible-menu": "logged-menu-container"}>
           
           <header className="logged-nav-menu">
             <nav>

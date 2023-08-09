@@ -27,3 +27,7 @@ nav button:hover {
     align-items: center;
     justify-content: flex-end;
 }
+
+.invisible-menu {
+    display: none;
+  }
