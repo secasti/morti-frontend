@@ -374,7 +374,7 @@ function App() {
       
 
         <footer className="app-footer">
-        <p>© 2023 Your Company</p>
+        <p>© 2023 MORTI </p>
         </footer>
 
     </div>
