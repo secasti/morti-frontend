@@ -154,7 +154,7 @@ const Dashboard = (props) => {
       title: newMessageData.title,
       text_message: newMessageData.text, // Rename 'text' to 'text_message'
       audio_message: newMessageData.audio_message,
-      id_recipient: newMessageData.recipientId, // Rename 'userId' to 'id_recipient'
+      recipient_id: newMessageData.recipientId, // Rename 'recipientId' to 'recipient_id'
       is_sent: newMessageData.isSent, // Rename 'isSent' to 'is_sent'
       recipient_email: newMessageData.recipientEmail
     };
