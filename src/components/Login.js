@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Login.css'
 
 const Login = ({setToken, handleAuthentication}) => {
   
@@ -50,7 +51,7 @@ const handleLogin = (loginForm) => {
 
   return (
     <div className="login-page">
-      <p>This is an intro paragraph of what morti is</p>
+      <p className="morti-intro">Welcome to Morti, a compassionate platform designed to help you leave a lasting legacy for your loved ones. Life is uncertain, and Morti is here to empower you to prepare meaningful farewell messages in advance. With Morti, you can craft heartfelt messages to be delivered to your cherished friends and family after you're gone. Our secure trustee system ensures your intentions are carried out, allowing designated trustees to confirm your passing and send out your messages with ease. Additionally, Morti provides a space for you to receive messages from those you hold dear, creating a space of connection and remembrance. Embrace the opportunity to leave behind a legacy of love and care with Morti.</p>
       <div className = "login-form--container">
         <h2>Login</h2>
         <form className="login-form">

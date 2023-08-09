@@ -1,6 +1,7 @@
 import React from 'react';
 import LogOut from './LogOut';
 import {useNavigate} from "react-router-dom";
+import "./NavigationMenu.css"
 
 
 const NavigationMenu = ({removeToken, handleLogout}) => {
