@@ -18,6 +18,10 @@
   color: var(--light-text-color); /* Use light text color */
 }
 
+.form-title{
+  text-align: center;
+}
+
 .morti-intro {
   flex: 1;
   padding: 16px;
@@ -35,18 +39,19 @@
 }
 
 .login-form input {
-  padding: 8px;
-  border: none;
+  padding: 10px;
+  border: 1px solid var(--secondary-color);
   border-radius: 4px;
 }
 
 .login-form button {
-  padding: 8px 16px;
-  border: none;
+  padding: 10px 20px;
   background-color: var(--primary-color);
   color: var(--text-color);
-  border-radius: 4px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .login-form button:hover {
