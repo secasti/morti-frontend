@@ -47,10 +47,19 @@ function App() {
     <h1>M O R T I</h1>
     <div>
       {/* <Header token = { removeToken } handleLogout={ handleLogout } /> */}
-        {!token && token!=="" && token!== undefined ? <div>
-        <Register></Register>
-        <Login setToken={ setToken } handleAuthentication={ handleAuthentication } /></div> :
-        (
+        {!token && token!=="" && token!== undefined ? 
+        <div>
+          <Link to="/register">
+            <button>Register Here!</button>
+          </Link>
+          <Routes>
+            <Route
+            exact path="/register"
+            element={<Register></Register>}>
+            </Route>
+          </Routes>
+        <Login setToken={ setToken } handleAuthentication={ handleAuthentication } />
+        </div> : (
           <Routes>
             <Route
               exact path="/login"
