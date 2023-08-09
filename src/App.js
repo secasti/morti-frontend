@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import './App.css';
 import { Route, Routes, Link} from 'react-router-dom';
 import Login from './components/Login';
+import Register from './components/Register';
 import Dashboard from './components/Dashboard'
 import useToken from './components/useToken';
 
@@ -47,8 +47,9 @@ function App() {
     <h1>M O R T I</h1>
     <div>
       {/* <Header token = { removeToken } handleLogout={ handleLogout } /> */}
-        {!token && token!=="" && token!== undefined ? 
-        <Login setToken={ setToken } handleAuthentication={ handleAuthentication } /> :
+        {!token && token!=="" && token!== undefined ? <div>
+        <Register></Register>
+        <Login setToken={ setToken } handleAuthentication={ handleAuthentication } /></div> :
         (
           <Routes>
             <Route
