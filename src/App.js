@@ -305,6 +305,8 @@ function App() {
 
         <h1>M O R T I</h1>
 
+        <NavigationMenu className={isAuthenticated?  "" : "invisible-menu"} />
+
       </div>
 
       <div className='defining-routes'>
@@ -349,8 +351,7 @@ function App() {
                   expandMessage={ expandMessage }
                   isMsgExpanded = { isMsgExpanded }
                   getMessages = { getMessages }
-                  removeToken = { removeToken } 
-                  handleLogout={ handleLogout }
+             
                   />
                   }
               />
@@ -363,8 +364,6 @@ function App() {
                   updateDeleteTrustee={updateDeleteTrustee}
                   trusteeFor = {trusteeFor}
                   deleteTrusteeFor = {deleteTrusteeFor}
-                  removeToken = { removeToken } 
-                  handleLogout={ handleLogout }
                   />
                   }
               />
@@ -375,8 +374,6 @@ function App() {
                   receivedMessages={receivedMessages}
                   getReceivedMessages={getReceivedMessages}
                   deleteMessage={deleteMessage}
-                  removeToken = { removeToken } 
-                  handleLogout={ handleLogout }
                   />
                   }
               />

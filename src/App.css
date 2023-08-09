@@ -27,7 +27,7 @@ body {
 .logged-menu-container {
   display: flex;
   position: absolute;
-  top: 0;
+  top: 20px;
   right: 0;
 }
 
@@ -37,7 +37,9 @@ body {
   align-items: center;
   justify-content: flex-end;
 }
-
+.invisible-menu {
+  display: none;
+}
 nav button {
   padding: 8px 16px;
   border: none;

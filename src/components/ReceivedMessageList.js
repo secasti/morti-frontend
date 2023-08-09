@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import ReceivedMessage from "./ReceivedMessage";
 import './ReceivedMessageList.css';
-import NavigationMenu from "./NavigationMenu";
+
 
 
 const ReceivedMessageList = (props) =>{
@@ -31,11 +31,6 @@ const ReceivedMessageList = (props) =>{
 
     return (
         <div className="received-msg-page-container">
-                <div className="logged-menu-container">
-                    <header className="logged-nav-menu">
-                        <NavigationMenu removeToken={props.removeToken} handleLogout={props.handleLogout} />
-                    </header>
-                </div>
                     <div className="messages">
                         <ol>{getReceivedMessagesJSX(receivedMessages)}</ol>
                     </div>

@@ -2,19 +2,16 @@ import PropTypes from 'prop-types';
 import NewMessageForm from './NewMessageForm';
 import './MessagePage.css';
 import MessageList from './MessageList';
-import NavigationMenu from './NavigationMenu';
 
 
-const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded, removeToken, handleLogout}) =>{
+
+const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
     console.log("MessagePage rendered");
     //set up navigate from browserRouter
 
 
     return (
         <div>
-            <div className="logged-menu-container">
-                <NavigationMenu removeToken={removeToken} handleLogout={handleLogout} />
-            </div>
             <section className="message__page">
             {/* render list of messages */}
             <div className="message-list">

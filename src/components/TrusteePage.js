@@ -4,7 +4,6 @@ import NewTrusteeForm from './NewTrusteeForm';
 import TrusteeList from './TrusteeList';
 import './TrusteePage.css';
 import TrusteeForList from './TrusteeForList'
-import NavigationMenu from './NavigationMenu';
 
 
 const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor, removeToken, handleLogout}) => {
@@ -26,9 +25,7 @@ const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, tr
 
     return (
         <section className='trustee__page'>
-            <header className="logged-nav-menu">
-                <NavigationMenu removeToken={removeToken} handleLogout={handleLogout} />
-            </header>
+    
             <div className="accordion--container">
                  {/* Trustee List */}
             <div className={`trustee-list ${isTrusteeListExpanded ? 'expanded' : ''}`}>
