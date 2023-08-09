@@ -28,7 +28,7 @@ const handleLogin = (loginForm) => {
     alert("Successful Login");
     handleAuthentication(loginForm.email)
     localStorage.setItem('email', loginForm.email); //ask ana what this does?
-    navigate('/dashboard');
+    navigate('/profile');
   } else {
     alert('Invalid username or password');
   }

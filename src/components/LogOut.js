@@ -3,7 +3,7 @@
 import {useNavigate} from "react-router-dom";
 
 
-function Header(props) {
+function LogOut(props) {
     const navigate = useNavigate();
 
     function logMeOut() { 
@@ -20,4 +20,4 @@ function Header(props) {
         )
     }
 
-export default Header;
+export default LogOut;

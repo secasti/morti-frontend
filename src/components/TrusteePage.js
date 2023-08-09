@@ -4,9 +4,15 @@ import NewTrusteeForm from './NewTrusteeForm';
 import TrusteeList from './TrusteeList';
 import './TrusteePage.css';
 import TrusteeForList from './TrusteeForList'
+import {useNavigate} from "react-router-dom";
+import LogOut from "./LogOut";
 
 
-const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor}) => {
+const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor, removeToken, handleLogout}) => {
+    
+    //set up navigate from browserRouter
+    const navigate = useNavigate()
+
     //set up states to create an accordion menu that shows trustee for and trustee list. 
     const [isTrusteeListExpanded, setIsTrusteeListExpanded] = useState(false);
     const [isTrusteeForListExpanded, setIsTrusteeForListExpanded] = useState(false);
@@ -24,6 +30,14 @@ const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, tr
 
     return (
         <section className='trustee__page'>
+            <header className="logged-nav-menu">
+                    <nav>
+                    <button onClick={() => navigate('/messages')}>Messages</button>
+                    <button onClick={() => navigate('/trustees')}>Trusted Persons</button>
+                    <button onClick={() => navigate('/messages/received-messages')}>Received Messages</button>
+                    <LogOut removeToken = { removeToken } handleLogout={ handleLogout } />
+                    </nav>
+                </header>
             <div className="accordion--container">
                  {/* Trustee List */}
             <div className={`trustee-list ${isTrusteeListExpanded ? 'expanded' : ''}`}>
