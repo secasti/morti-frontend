@@ -1,30 +1,19 @@
-import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import NewMessageForm from './NewMessageForm';
 import './MessagePage.css';
 import MessageList from './MessageList';
-import axios from 'axios';
-import {useNavigate} from "react-router-dom";
-import LogOut from "./LogOut";
+import NavigationMenu from './NavigationMenu';
 
 
 const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded, removeToken, handleLogout}) =>{
     console.log("MessagePage rendered");
     //set up navigate from browserRouter
-    const navigate = useNavigate()
 
 
     return (
         <div>
             <div className="logged-menu-container">
-                <header className="logged-nav-menu">
-                    <nav>
-                    <button onClick={() => navigate('/messages')}>Messages</button>
-                    <button onClick={() => navigate('/trustees')}>Trusted Persons</button>
-                    <button onClick={() => navigate('/messages/received-messages')}>Received Messages</button>
-                    <LogOut removeToken = { removeToken } handleLogout={ handleLogout } />
-                    </nav>
-                </header>
+                <NavigationMenu removeToken={removeToken} handleLogout={handleLogout} />
             </div>
             <section className="message__page">
             {/* render list of messages */}

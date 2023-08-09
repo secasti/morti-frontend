@@ -1,0 +1,33 @@
+.logged-menu-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.logged-nav-menu {
+  background-color: var(--bg-color);
+  padding: 16px;
+  list-style: none; /* Remove default list styles */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.logged-nav-menu li {
+  margin: 0;
+}
+
+.logged-nav-menu button {
+  padding: 8px 16px;
+  border: none;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logged-nav-menu button:hover {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}

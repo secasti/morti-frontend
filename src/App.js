@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Routes} from 'react-router-dom';
 import Login from './components/Login';
-import Dashboard from './components/Dashboard'
+import NavigationMenu from './components/NavigationMenu'
 import useToken from './components/useToken';
 import MessagePage from './components/MessagePage';
 import TrusteePage from './components/TrusteePage';
@@ -300,88 +300,94 @@ function App() {
 
   // If authenticated, show the main content based on the active component
   return (
-    <div className="website-title">
-    <h1>M O R T I</h1>
-    <div>
-        {!token && token!=="" && token!== undefined ? 
-        <Login setToken={ setToken } handleAuthentication={ handleAuthentication } /> :
-        (
-          <Routes>
-             <Route
-              exact path="*"
-              element={
-                  <Login 
+    <div className="website-container">
+      <div className='app-page-container'>
+
+        <h1>M O R T I</h1>
+
+      </div>
+
+      <div className='defining-routes'>
+
+          {!token && token!=="" && token!== undefined ? 
+          <Login setToken={ setToken } handleAuthentication={ handleAuthentication } /> :
+          (
+            <Routes>
+              <Route
+                exact path="*"
+                element={
+                    <Login 
+                      setToken={ setToken } 
+                      handleAuthentication={ handleAuthentication } />
+                  }
+                />
+              <Route
+                exact path="/login"
+                element={
+                    <Login 
                     setToken={ setToken } 
                     handleAuthentication={ handleAuthentication } />
-                }
+                  }
+                />
+              <Route
+                exact path="/profile"
+                element={
+                    <NavigationMenu 
+                      token ={ token } 
+                      isAuthenticated={isAuthenticated} 
+                      removeToken = { removeToken } 
+                      handleLogout={ handleLogout } />
+                  }
               />
-            <Route
-              exact path="/login"
-              element={
-                  <Login 
-                  setToken={ setToken } 
-                  handleAuthentication={ handleAuthentication } />
-                }
+
+              <Route
+                exact path="/messages"
+                element={
+                  <MessagePage messages = { messages} 
+                  addMessage={ addMessage } 
+                  deleteMessage={ deleteMessage }
+                  expandMessage={ expandMessage }
+                  isMsgExpanded = { isMsgExpanded }
+                  getMessages = { getMessages }
+                  removeToken = { removeToken } 
+                  handleLogout={ handleLogout }
+                  />
+                  }
               />
-            <Route
-              exact path="/profile"
-              element={
-                  <Dashboard 
-                    token ={ token } 
-                    isAuthenticated={isAuthenticated} 
-                    removeToken = { removeToken } 
-                    handleLogout={ handleLogout } />
-                }
-            />
+              <Route
+                exact path="/trustees"
+                element={
+                  <TrusteePage 
+                  trustees={trustees} 
+                  addTrustee={addTrustee}
+                  updateDeleteTrustee={updateDeleteTrustee}
+                  trusteeFor = {trusteeFor}
+                  deleteTrusteeFor = {deleteTrusteeFor}
+                  removeToken = { removeToken } 
+                  handleLogout={ handleLogout }
+                  />
+                  }
+              />
+              <Route
+                exact path="/messages/received-messages"
+                element={
+                  <ReceivedMessageList 
+                  receivedMessages={receivedMessages}
+                  getReceivedMessages={getReceivedMessages}
+                  deleteMessage={deleteMessage}
+                  removeToken = { removeToken } 
+                  handleLogout={ handleLogout }
+                  />
+                  }
+              />
+            </Routes>
+          )}
+      </div>
+      
 
-            <Route
-              exact path="/messages"
-              element={
-                <MessagePage messages = { messages} 
-                addMessage={ addMessage } 
-                deleteMessage={ deleteMessage }
-                expandMessage={ expandMessage }
-                isMsgExpanded = { isMsgExpanded }
-                getMessages = { getMessages }
-                removeToken = { removeToken } 
-                handleLogout={ handleLogout }
-                />
-                }
-            />
-            <Route
-              exact path="/trustees"
-              element={
-                <TrusteePage 
-                trustees={trustees} 
-                addTrustee={addTrustee}
-                updateDeleteTrustee={updateDeleteTrustee}
-                trusteeFor = {trusteeFor}
-                deleteTrusteeFor = {deleteTrusteeFor}
-                removeToken = { removeToken } 
-                handleLogout={ handleLogout }
-                />
-                }
-            />
-            <Route
-              exact path="/messages/received-messages"
-              element={
-                <ReceivedMessageList 
-                receivedMessages={receivedMessages}
-                getReceivedMessages={getReceivedMessages}
-                deleteMessage={deleteMessage}
-                removeToken = { removeToken } 
-                handleLogout={ handleLogout }
-                />
-                }
-            />
-          </Routes>
-        )}
-    </div>
-    
-
-      <footer className="app-footer">
-      <p>© 2023 Your Company</p>
-      </footer>
+        <footer className="app-footer">
+        <p>© 2023 Your Company</p>
+        </footer>
 
     </div>
   );

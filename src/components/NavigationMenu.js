@@ -1,14 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import TrusteePage from './TrusteePage';
-import ReceivedMessageList from './ReceivedMessageList';
-import MessagePage from './MessagePage';
+import React from 'react';
 import LogOut from './LogOut';
-import {Route, Routes} from 'react-router-dom'
 import {useNavigate} from "react-router-dom";
 
 
-const Dashboard = ({removeToken, handleLogout}) => {
+const NavigationMenu = ({removeToken, handleLogout}) => {
   console.log("inside profile")
 
   const navigate = useNavigate()
@@ -17,7 +12,6 @@ const Dashboard = ({removeToken, handleLogout}) => {
         <div className="logged-menu-container">
           
           <header className="logged-nav-menu">
-          
             <nav>
               <button onClick={() => navigate('/messages')}>Messages</button>
               <button onClick={() => navigate('/trustees')}>Trusted Persons</button>
@@ -30,4 +24,4 @@ const Dashboard = ({removeToken, handleLogout}) => {
       );
 };
 
-export default Dashboard;
+export default NavigationMenu;
