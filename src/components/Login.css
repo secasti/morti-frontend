@@ -1,40 +1,76 @@
-
 /* Login.css */
 
-/* Styles for the login page layout */
-.login__page {
-    display: flex;
-    gap: 1%;
-    padding: 5%;
-  }
-  
-  .login__form--container {
-    flex: 1;
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: var(--list-width);
-    background-color: var(--dark-bg-color);
-    color: var(--light-text-color);
-  }
-  
-  .login__form {
-    padding: 16px;
-  }
-  
-  .login__form input,
-  .login__form button {
-    margin-bottom: 10px;
-  }
-  
-  .login__form label {
-    margin-right: 10px;
-  }
-  
-  .login__register-link {
-    margin-top: 10px;
-    color: var(--light-text-color);
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  
+.login-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.login-form--container {
+  flex: 1;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--form-bg-color); /* Use dark background color for form */
+  color: var(--light-text-color); /* Use light text color */
+}
+
+.form-title{
+  text-align: center;
+}
+
+.morti-intro {
+  flex: 2;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin-right: 5%;
+  font-size: 18px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-form input {
+  padding: 10px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+}
+
+.login-form button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: var(--secondary-color);
+}
+
+.not-a-member {
+  font-size: 14px;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 16px;
+}
+
+.not-a-member a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.not-a-member a:hover {
+  text-decoration: underline;
+}

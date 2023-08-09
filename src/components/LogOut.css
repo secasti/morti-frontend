@@ -5,3 +5,6 @@
     --secondary-color: #2196F3; /* Blue for buttons and links */
   }
 
+  .logOut:hover {
+    background-color: red;
+  }

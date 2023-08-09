@@ -297,7 +297,7 @@ function App() {
 
         <h1>M O R T I</h1>
 
-        <NavigationMenu className={isAuthenticated?  "" : "invisible-menu"} removeToken={removeToken} />
+        <NavigationMenu className={!isAuthenticated?  "invisible-menu": ""} removeToken={removeToken} handleLogout={handleLogout} isAuthenticated={isAuthenticated}/>
 
       </div>
 
@@ -374,7 +374,7 @@ function App() {
       
 
         <footer className="app-footer">
-        <p>© 2023 Your Company</p>
+        <p>© 2023 MORTI </p>
         </footer>
 
     </div>
