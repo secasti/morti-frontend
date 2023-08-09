@@ -9,6 +9,7 @@ import MessagePage from './components/MessagePage';
 import TrusteePage from './components/TrusteePage';
 import ReceivedMessageList from './components/ReceivedMessageList';
 import axios from 'axios';
+import Profile from './components/Profile'
 
 
 
@@ -26,7 +27,7 @@ function App() {
   
   // Function to handle successful authentication
   const handleAuthentication = (email) => {
-    setIsAuthenticated(email);
+    setIsAuthenticated({email:email, name: "Susi"});
   };
 
   //handle logout
@@ -164,15 +165,6 @@ function App() {
   useEffect(getMessages, [])
   
   
-    // // Active component state (0 for Intro, 1 for MessageList, 2 for TrustedPersons, 3 for ReceivedMessages)
-    // const [activeComponent, setActiveComponent] = useState(0);
-  
-  
-  
-  // Function to add a new message to MESSAGE_DATA
-  //   const addDummyMessage = (newMessage) => {
-  //   setMessages([...messages, newMessage]);
-  // };
   const addMessage = (newMessageData) => {
     console.log("addMessage called")
   
@@ -305,7 +297,7 @@ function App() {
 
         <h1>M O R T I</h1>
 
-        <NavigationMenu className={isAuthenticated?  "" : "invisible-menu"} />
+        <NavigationMenu className={isAuthenticated?  "" : "invisible-menu"} removeToken={removeToken} />
 
       </div>
 
@@ -334,11 +326,10 @@ function App() {
               <Route
                 exact path="/profile"
                 element={
-                    <NavigationMenu 
+                    <Profile 
                       token ={ token } 
                       isAuthenticated={isAuthenticated} 
-                      removeToken = { removeToken } 
-                      handleLogout={ handleLogout } />
+                    />
                   }
               />
 
