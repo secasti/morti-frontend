@@ -1,0 +1,10 @@
+:root {
+    --bg-color: #1a1a1a; /* Dark background color for the main content */
+    --text-color: #f2f2f2; /* Light text color for dark mode */
+    --primary-color: #4CAF50; /* Green for accent elements */
+    --secondary-color: #2196F3; /* Blue for buttons and links */
+  }
+
+  .logOut:hover {
+    background-color: red;
+  }

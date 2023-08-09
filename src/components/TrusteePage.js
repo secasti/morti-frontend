@@ -6,7 +6,8 @@ import './TrusteePage.css';
 import TrusteeForList from './TrusteeForList'
 
 
-const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor}) => {
+const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor, removeToken, handleLogout}) => {
+    
     //set up states to create an accordion menu that shows trustee for and trustee list. 
     const [isTrusteeListExpanded, setIsTrusteeListExpanded] = useState(false);
     const [isTrusteeForListExpanded, setIsTrusteeForListExpanded] = useState(false);
@@ -24,6 +25,7 @@ const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, tr
 
     return (
         <section className='trustee__page'>
+    
             <div className="accordion--container">
                  {/* Trustee List */}
             <div className={`trustee-list ${isTrusteeListExpanded ? 'expanded' : ''}`}>

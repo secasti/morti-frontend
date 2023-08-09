@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import NewMessageForm from './NewMessageForm';
 import './MessagePage.css';
 import MessageList from './MessageList';
-import axios from 'axios';
+
+
 
 const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
     console.log("MessagePage rendered");
+    //set up navigate from browserRouter
 
 
     return (
-        <section className="message__page">
+        <div>
+            <section className="message__page">
             {/* render list of messages */}
             <div className="message-list">
                 <MessageList 
@@ -27,6 +29,8 @@ const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgE
                 messages={ messages } />
             </div>
         </section> 
+        </div>
+        
     );
 };
 

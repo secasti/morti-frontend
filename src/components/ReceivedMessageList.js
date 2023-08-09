@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ReceivedMessage from "./ReceivedMessage";
 import './ReceivedMessageList.css';
 
+
+
 const ReceivedMessageList = (props) =>{
 
     const receivedMessages = props.receivedMessages;
@@ -10,25 +12,28 @@ const ReceivedMessageList = (props) =>{
     const getReceivedMessagesJSX = (receivedMessages) => {
         return receivedMessages.map((message) => {
             return (
-                <li key={message.userId}>
-                    <ReceivedMessage
-                        message_id={message.message_id}
-                        userId={message.userId}
-                        title={message.title}
-                        text={message.text}
-                        audio_message={message.audio_message}
-                        recipientId={message.recipientId}
-                        isSent={message.isSent}
-                        deleteMessage={props.deleteMessage}
-                    ></ReceivedMessage>
-                </li>
+                    <li key={message.userId}>
+                        <ReceivedMessage
+                            message_id={message.message_id}
+                            userId={message.userId}
+                            title={message.title}
+                            text={message.text}
+                            audio_message={message.audio_message}
+                            recipientId={message.recipientId}
+                            isSent={message.isSent}
+                            deleteMessage={props.deleteMessage}
+                        ></ReceivedMessage>
+                    </li>
+            
             );
         });
     };
 
     return (
-        <div className="messages">
-            <ol>{getReceivedMessagesJSX(receivedMessages)}</ol>
+        <div className="received-msg-page-container">
+                    <div className="messages">
+                        <ol>{getReceivedMessagesJSX(receivedMessages)}</ol>
+                    </div>
         </div>
     );
 };

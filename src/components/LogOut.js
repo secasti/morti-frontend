@@ -1,9 +1,10 @@
 
 //import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import './LogOut.css'
 
 
-function Header(props) {
+function LogOut(props) {
     const navigate = useNavigate();
 
     function logMeOut() { 
@@ -14,10 +15,10 @@ function Header(props) {
         // const logged = localStorage.getItem('email');
 
         return(
-                <button onClick={logMeOut}> 
+                <button onClick={logMeOut} className="logOut"> 
                     Logout
                 </button>
         )
     }
 
-export default Header;
+export default LogOut;

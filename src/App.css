@@ -15,27 +15,18 @@ body {
   color: var(--text-color); /* Light text color for dark mode */
 }
 
-.app-header {
+
+.app-page-container {
   display: flex;
   justify-content: space-between;
-  align-items: right;
+  align-items: center; /* Vertically align contents */
   padding: 16px;
-  background-color: var(--bg-color); /* Dark background color for the header */
-  color: var(--text-color); /* Light text color for the header */
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-nav button {
-  padding: 8px 16px;
-  border: none;
-  background-color: var(--bg-color); /* Dark background color for buttons in the header */
-  color: var(--text-color); /* Light text color for buttons in the header */
-  border-radius: 4px;
-  cursor: pointer;
-  align-items: right;
-}
-
-nav button:hover {
-  background-color: var(--primary-color); /* Blue background color on hover */
+.invisible-menu {
+  display: none;
 }
 
 .main-content {
@@ -48,3 +39,4 @@ nav button:hover {
   background-color: var(--bg-color); /* Dark background color for the footer */
   color: var(--text-color); /* Light text color for the footer */
 }
+
