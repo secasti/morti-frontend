@@ -1,4 +1,4 @@
-/* App.css */
+
 
 /* Dark Mode color palette */
 :root {
@@ -18,7 +18,7 @@ body {
 .app-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: right;
   padding: 16px;
   background-color: var(--bg-color); /* Dark background color for the header */
   color: var(--text-color); /* Light text color for the header */
@@ -31,6 +31,7 @@ nav button {
   color: var(--text-color); /* Light text color for buttons in the header */
   border-radius: 4px;
   cursor: pointer;
+  align-items: right;
 }
 
 nav button:hover {

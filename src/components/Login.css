@@ -1,0 +1,40 @@
+
+/* Login.css */
+
+/* Styles for the login page layout */
+.login__page {
+    display: flex;
+    gap: 1%;
+    padding: 5%;
+  }
+  
+  .login__form--container {
+    flex: 1;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: var(--list-width);
+    background-color: var(--dark-bg-color);
+    color: var(--light-text-color);
+  }
+  
+  .login__form {
+    padding: 16px;
+  }
+  
+  .login__form input,
+  .login__form button {
+    margin-bottom: 10px;
+  }
+  
+  .login__form label {
+    margin-right: 10px;
+  }
+  
+  .login__register-link {
+    margin-top: 10px;
+    color: var(--light-text-color);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
