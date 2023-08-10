@@ -6,10 +6,10 @@ import "./NewMessageForm.css"
 import { useNavigate } from 'react-router-dom';
 
 const INITIAL_FORM_DATA = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: ""
+    first_name: "c",
+    last_name: "c",
+    email: "c",
+    password: "c"
 };
 
 const INITIAL_EMAIL_DATA = {
@@ -24,7 +24,7 @@ const Register = ({ registerNewUser }) => {
     const [isTypingEmail, setIsTypingEmail] = useState(false);
     const [emailValidation, setEmailValidation] = useState ({INITIAL_EMAIL_DATA});
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const validateEmail = debounce(async (email) => {
         //when enter this function set validation status to validating
@@ -73,6 +73,8 @@ const Register = ({ registerNewUser }) => {
             password: registerForm.password
         };
 
+        console.log(newRegister)
+
         registerNewUser(newRegister)
 
         setRegisterForm(INITIAL_FORM_DATA);
@@ -100,6 +102,7 @@ const Register = ({ registerNewUser }) => {
                         type="text"
                         id="email"
                         value={registerForm.email}
+                        onChange={handleChange}
                     ></input>
                 <label htmlFor='password'>Password:</label>
                     <input

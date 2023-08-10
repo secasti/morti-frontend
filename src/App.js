@@ -141,6 +141,11 @@ function App() {
     });
     return initialMsgExpandedState;
     })
+
+  //REGISTER NEW USER
+  const registerNewUser = (newUser) => {
+    console.log("newUser info:", newUser)
+  };
   
   //GET MESSAGE API CALL
   const getMessages = () => {
@@ -310,7 +315,7 @@ function App() {
           <Routes>
             <Route
             exact path="/register"
-            element={<Register></Register>}>
+            element={<Register registerNewUser={registerNewUser}></Register>}>
             </Route>
           </Routes>
           </div> : (
