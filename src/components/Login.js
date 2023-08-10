@@ -78,7 +78,7 @@ const Login = ({setToken, handleAuthentication, registerNewUser, VALID_USERS}) =
                             name="password" 
                             placeholder="Password" 
                             value={loginForm.password} />
-            <button onClick={() => handleLogin(loginForm)}> 
+            <button className="form-submit-button" onClick={() => handleLogin(loginForm)}> 
               {isRegisterFormVisible ? 'REGISTER' : 'LOGIN'}
             </button>
             <p className="not-a-member">
@@ -96,7 +96,7 @@ const Login = ({setToken, handleAuthentication, registerNewUser, VALID_USERS}) =
                     className="link-button"
                     onClick={() => setIsRegisterFormVisible(true)}
                   >
-                    Sign Up
+                    Sign Up.
                   </button>
                 </>
               )}

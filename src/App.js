@@ -15,7 +15,7 @@ function App() {
 
   //VALID USERS
   const VALID_USERS = [
-      {email:"x" , password: "123", access_token: 123}
+      {email:"x" , password: "123", access_token: 123, firstName: "Susi", lastName: "Franco"}
   ]
   
   //user data state
@@ -40,6 +40,7 @@ function App() {
     console.log("newUser info:", newUser)
     //add new user to valid users
     setUsers([...users, newUser]);
+    console.log("all users now:", users)
     //give access using login 
     //
 

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
-import axios from "axios"; 
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
-import Login from './Login';
 
 const INITIAL_FORM_DATA = {
     first_name: "c",
@@ -88,16 +86,14 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
         setRegisterForm(INITIAL_FORM_DATA);
         };
     return (
-        <section className="cardform__container">
-            <form onSubmit={handleSubmit} className='cardform'>
-                <div className='message'>
+        <section className="register-form--container">
+            <form onSubmit={handleSubmit} className='register-form'>
                 <label htmlFor='firstName'>First name:</label>
                     <input
                         type="text"
                         id="firstName"
                         value={registerForm.first_name}
                     ></input>
-                </div>
                 <label htmlFor='lastName'>Last name:</label>
                     <input
                         type="text"
@@ -124,15 +120,15 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
             {isTypingEmail && !emailValidation.isValid && (
                 <p className="invalid-email">Invalid email</p>
             )}
-            <button> 
+            <button className='form-submit-button'> 
                 {isRegisterFormVisible ? 'SIGN UP' : 'LOGIN'}
             </button>
             <p className="not-a-member">
             {isRegisterFormVisible ? (
                 <>
                 Already have an account?{' '}
-                <button onClick={backToLogin}>
-                 Log in
+                <button onClick={backToLogin}  className="link-button">
+                Log in.
                 </button>
                 </>
             ) : (
