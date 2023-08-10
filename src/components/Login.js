@@ -71,7 +71,10 @@ const handleLogin = (loginForm) => {
               value={loginForm.password} />
           <button onClick={() => handleLogin(loginForm)}>LOGIN</button>
           <p className="not-a-member">
-            Not a member? <Link to="/register">Register</Link>.
+            Not a member? 
+            <Link to="/register">
+              <button>Sign Up</button>
+            </Link>.
           </p>
         </form>
       </div>

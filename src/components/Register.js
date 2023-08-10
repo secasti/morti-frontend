@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
 import axios from "axios"; 
-import "./Register.css";
+import "./NewMessageForm.css"
 import { useNavigate } from 'react-router-dom';
 
 const INITIAL_FORM_DATA = {
@@ -79,7 +79,43 @@ const Register = ({ registerNewUser }) => {
         };
     return (
         <section className="cardform__container">
-            <h3 className="create-card-title">Register with us!</h3>
+            <h3 className="create-card-title">Sign Up</h3>
+            <form onSubmit={handleSubmit} className='cardform'>
+                <div className='message'>
+                <label htmlFor='firstName'>First name:</label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        value={registerForm.first_name}
+                    ></input>
+                </div>
+                <label htmlFor='lastName'>Last name:</label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        value={registerForm.last_name}
+                    ></input>
+                <label htmlFor='email'>Email:</label>
+                    <input
+                        type="text"
+                        id="email"
+                        value={registerForm.email}
+                    ></input>
+                <label htmlFor='password'>Password:</label>
+                    <input
+                        type="text"
+                        id="password"
+                        value={registerForm.password}
+                    ></input>
+            {/* Email validation feedback */}
+            {isTypingEmail && emailValidation.isValidating &&
+                <p className="validating-email">Validating email...</p>}
+
+            {isTypingEmail && !emailValidation.isValid && (
+                <p className="invalid-email">Invalid email</p>
+            )}
+            <input type="submit" value="Submit" onClick={handleSubmit} className="sumbit"></input>
+            </form>
         </section>
     )
     };
