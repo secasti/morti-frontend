@@ -267,10 +267,12 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
             registerNewUser={registerNewUser}
             VALID_USERS={users}
           />
+          <Routes>
           <Route
             path="/register"
             element={<Register registerNewUser={registerNewUser} />}
           />
+          </Routes>
         </div>
       );
     } else if (isAuthenticated) {
@@ -317,6 +319,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
       );
     } else {
       return (
+        <Routes>
         <Route
           path="*"
           element={
@@ -326,6 +329,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
             />
           }
         />
+        </Routes>
       );
     }
   }
