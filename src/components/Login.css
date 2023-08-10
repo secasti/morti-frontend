@@ -66,11 +66,14 @@
   margin-top: 16px;
 }
 
-.not-a-member a {
+.link-button {
+  background: none;
+  border: none;
   color: var(--primary-color);
-  text-decoration: none;
+  cursor: pointer;
 }
 
-.not-a-member a:hover {
+
+.link-button a:hover {
   text-decoration: underline;
 }

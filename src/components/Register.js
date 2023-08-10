@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
 import axios from "axios"; 
-import "./NewMessageForm.css"
 import { useNavigate } from 'react-router-dom';
+import './Register.css';
+import Login from './Login';
 
 const INITIAL_FORM_DATA = {
     first_name: "c",
@@ -17,7 +18,9 @@ const INITIAL_EMAIL_DATA = {
     isValid: false,
 }
 
-const Register = ({ registerNewUser }) => {
+const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVisible }) => {
+    
+    const navigate = useNavigate()
 
     console.log('inside register')
     const [registerForm, setRegisterForm] = useState({INITIAL_FORM_DATA});
@@ -62,6 +65,11 @@ const Register = ({ registerNewUser }) => {
                 setEmailValidation({isValidating: true, isValid: isValid})
             }
         };
+    
+    const backToLogin = () => {
+        navigate('/login');
+        setIsRegisterFormVisible(false);
+    }
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -81,7 +89,6 @@ const Register = ({ registerNewUser }) => {
         };
     return (
         <section className="cardform__container">
-            <h3 className="create-card-title">Sign Up</h3>
             <form onSubmit={handleSubmit} className='cardform'>
                 <div className='message'>
                 <label htmlFor='firstName'>First name:</label>
@@ -117,7 +124,29 @@ const Register = ({ registerNewUser }) => {
             {isTypingEmail && !emailValidation.isValid && (
                 <p className="invalid-email">Invalid email</p>
             )}
-            <input type="submit" value="Submit" onClick={handleSubmit} className="sumbit"></input>
+            <button> 
+                {isRegisterFormVisible ? 'SIGN UP' : 'LOGIN'}
+            </button>
+            <p className="not-a-member">
+            {isRegisterFormVisible ? (
+                <>
+                Already have an account?{' '}
+                <button onClick={backToLogin}>
+                 Log in
+                </button>
+                </>
+            ) : (
+                <>
+                Not a member?{' '}
+                <button
+                    className="link-button"
+                    onClick={() => setIsRegisterFormVisible(false)}
+                >
+                    Sign Up
+                </button>
+                </>
+            )}
+            </p>
             </form>
         </section>
     )
