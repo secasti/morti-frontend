@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import './App.css';
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes, Link} from 'react-router-dom';
 import Login from './components/Login';
 import NavigationMenu from './components/NavigationMenu'
 import useToken from './components/useToken';
@@ -10,6 +10,7 @@ import TrusteePage from './components/TrusteePage';
 import ReceivedMessageList from './components/ReceivedMessageList';
 import axios from 'axios';
 import Profile from './components/Profile'
+import Register from './components/Register';
 
 
 
@@ -140,6 +141,11 @@ function App() {
     });
     return initialMsgExpandedState;
     })
+
+  //REGISTER NEW USER
+  const registerNewUser = (newUser) => {
+    console.log("newUser info:", newUser)
+  };
   
   //GET MESSAGE API CALL
   const getMessages = () => {
@@ -304,8 +310,15 @@ function App() {
       <div className='defining-routes'>
 
           {!token && token!=="" && token!== undefined ? 
-          <Login setToken={ setToken } handleAuthentication={ handleAuthentication } /> :
-          (
+          <div>
+          <Login setToken={ setToken } handleAuthentication={ handleAuthentication } /> 
+          <Routes>
+            <Route
+            exact path="/register"
+            element={<Register registerNewUser={registerNewUser}></Register>}>
+            </Route>
+          </Routes>
+          </div> : (
             <Routes>
               <Route
                 exact path="*"
