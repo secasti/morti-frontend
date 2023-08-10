@@ -45,7 +45,7 @@
   border-radius: 4px;
 }
 
-.login-form button {
+.form-submit-button {
   padding: 10px 20px;
   background-color: var(--primary-color);
   color: var(--text-color);
@@ -55,7 +55,7 @@
   transition: background-color 0.3s ease;
 }
 
-.login-form button:hover {
+.form-submit-button:hover {
   background-color: var(--secondary-color);
 }
 
@@ -67,13 +67,14 @@
 }
 
 .link-button {
-  background: none;
+  background: transparent;
   border: none;
   color: var(--primary-color);
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 
-.link-button a:hover {
+.link-button:hover {
   text-decoration: underline;
 }

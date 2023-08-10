@@ -1,0 +1,72 @@
+/* Login.css */
+
+.login-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5%;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  .login-form--container {
+    flex: 1;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--form-bg-color); /* Use dark background color for form */
+    color: var(--light-text-color); /* Use light text color */
+  }
+  
+  .form-title{
+    text-align: center;
+  }
+  
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .register-form input {
+    padding: 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+  }
+  
+  .form-submit-button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-submit-button:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  
+  .not-a-member {
+    font-size: 14px;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 16px;
+  }
+  
+  .link-button {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  
+  .link-button:hover {
+    text-decoration: underline;
+  }
+  

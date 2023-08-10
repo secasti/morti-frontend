@@ -15,7 +15,7 @@ function App() {
 
   //VALID USERS
   const VALID_USERS = [
-      {email:"x" , password: "123", access_token: 123}
+      {email:"x" , password: "123", access_token: 123, firstName: "Susi", lastName: "Franco"}
   ]
   
   //user data state
