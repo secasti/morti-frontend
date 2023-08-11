@@ -160,4 +160,8 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
     )
     };
 
+    Register.propTypes = {
+        registerNewUser: PropTypes.func
+    };
+
 export default Register;
