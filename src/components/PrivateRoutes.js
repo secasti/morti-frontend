@@ -118,6 +118,8 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     return initialMsgExpandedState;
     })
     
+
+
     //REGISTER NEW USER
     const registerNewUser = (newUser) => {
       console.log("newUser info:", newUser)
@@ -127,7 +129,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
 
   //GET MESSAGE API CALL
     const getMessages = () => {
-        axios.get('https://morti-back-end.onrender.com/farewell_messages')
+        axios.get('https://morti-back-end.onrender.com/messages')
         .then((response) => {
             const messagesData = response.data.map((message) => {
             return {

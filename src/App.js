@@ -14,12 +14,12 @@ import PrivateRoutes from './components/PrivateRoutes'
 function App() {
 
   //VALID USERS
-  const VALID_USERS = [
-      {email:"x" , password: "123", access_token: 123, firstName: "Susi", lastName: "Franco"}
-  ]
+  // const VALID_USERS = [
+  //     {email:"x" , password: "123", access_token: 123, firstName: "Susi", lastName: "Franco"}
+  // ]
   
   //user data state
-  const [users, setUsers] = useState(VALID_USERS)
+  // const [users, setUsers] = useState(VALID_USERS)
 
   //token for authenticating users
   const { token, removeToken, setToken } = useToken();
@@ -28,9 +28,9 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Function to handle successful authentication
-  const handleAuthentication = (email) => {
-    setIsAuthenticated({email:email, name: "Susi"});
-  };
+  // const handleAuthentication = (email) => {
+  //   setIsAuthenticated({email:email, name: "Susi"});
+  // };
 
   //handle logout
   const handleLogout = () => {
@@ -55,9 +55,9 @@ function App() {
           element={
             <Login
               setToken={setToken}
-              handleAuthentication={handleAuthentication}
+              // handleAuthentication={handleAuthentication}
               // registerNewUser={registerNewUser}
-              users={users}
+              // users={users}
             />
           }
         />
@@ -66,9 +66,9 @@ function App() {
           element={
             <Login
               setToken={setToken}
-              handleAuthentication={handleAuthentication}
+              // handleAuthentication={handleAuthentication}
               // registerNewUser={registerNewUser}
-              users={users}
+              // users={users}
             />
           }
         />
@@ -82,11 +82,11 @@ function App() {
             isAuthenticated={isAuthenticated}
             token={token}
             setToken={setToken}
-            handleAuthentication={handleAuthentication}
+            // handleAuthentication={handleAuthentication}
             // registerNewUser={registerNewUser}
             setIsAuthenticated={setIsAuthenticated}
-            users={users}
-            setUsers={setUsers}
+            // users={users}
+            // setUsers={setUsers}
           />
       )
       
