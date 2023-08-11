@@ -21,9 +21,9 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
     const navigate = useNavigate()
 
     console.log('inside register')
-    const [registerForm, setRegisterForm] = useState({INITIAL_FORM_DATA});
+    const [registerForm, setRegisterForm] = useState(INITIAL_FORM_DATA);
     const [isTypingEmail, setIsTypingEmail] = useState(false);
-    const [emailValidation, setEmailValidation] = useState ({INITIAL_EMAIL_DATA});
+    const [emailValidation, setEmailValidation] = useState (INITIAL_EMAIL_DATA);
 
     // const navigate = useNavigate()
 
