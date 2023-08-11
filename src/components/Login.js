@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Login.css'
 import Register from './Register';
 
-const Login = ({setToken, handleAuthentication, registerNewUser, VALID_USERS}) => {
+const Login = ({setToken, handleAuthentication, registerNewUser, users}) => {
   
 
   //login form initial data
@@ -18,9 +18,10 @@ const Login = ({setToken, handleAuthentication, registerNewUser, VALID_USERS}) =
   //what happens upon login
   const handleLogin = (loginForm) => {
     console.log("inside HandleLogin");
+    console.log("users:", users[0])
     
     // Check if the submitted form matches any valid user credentials
-    const validUser = VALID_USERS.find(
+    const validUser = users.find(
       user => user.email === loginForm.email && user.password === loginForm.password
     );
     
@@ -43,6 +44,7 @@ const Login = ({setToken, handleAuthentication, registerNewUser, VALID_USERS}) =
 
   //what happens if there is any typing in the login form
     function handleChange(event) {
+      console.log(users)
       const {value, name} = event.target
       setloginForm(prevNote => ({
           ...prevNote,

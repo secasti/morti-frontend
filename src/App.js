@@ -57,7 +57,7 @@ function App() {
               setToken={setToken}
               handleAuthentication={handleAuthentication}
               // registerNewUser={registerNewUser}
-              VALID_USERS={users}
+              users={users}
             />
           }
         />
@@ -68,7 +68,7 @@ function App() {
               setToken={setToken}
               handleAuthentication={handleAuthentication}
               // registerNewUser={registerNewUser}
-              VALID_USERS={users}
+              users={users}
             />
           }
         />
