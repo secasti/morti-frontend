@@ -5,7 +5,7 @@ import MessageList from './MessageList';
 
 
 
-const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
+const MessagePage = ({token, messages, addMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
     console.log("MessagePage rendered");
     //set up navigate from browserRouter
 
@@ -15,7 +15,8 @@ const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgE
             <section className="message__page">
             {/* render list of messages */}
             <div className="message-list">
-                <MessageList 
+                <MessageList
+                token={token} 
                 messages ={ messages }
                 deleteMessage={ deleteMessage }
                 expandMessage={  expandMessage }
@@ -25,6 +26,7 @@ const MessagePage = ({messages, addMessage, deleteMessage, expandMessage, isMsgE
             {/* render form to create new message */}
             <div className="new-msg-form">
                 <NewMessageForm 
+                token={token}
                 addMessage={ addMessage }
                 messages={ messages } />
             </div>

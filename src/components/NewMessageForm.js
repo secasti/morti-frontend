@@ -9,13 +9,12 @@ import AudioRecorder from "./AudioRecorder";
 //empty form data to reset form to
 const INITIAL_FORM_DATA = {
     title: "",
-    text: "",
+    text_message: "",
     audio_message: "",
-    recipientEmail: "",
-    isSent: "false"
+    recipient_email: ""
 };
 
-const NewMessageForm = ({ messages, addMessage }) => {
+const NewMessageForm = ({ token, addMessage }) => {
     
     const [messageFormData, setMessageFormData] = useState(INITIAL_FORM_DATA);
     const [isTypingEmail, setIsTypingEmail] = useState(false);
@@ -72,32 +71,17 @@ const NewMessageForm = ({ messages, addMessage }) => {
         console.log("Audio data captured:", base64String)
         setMessageFormData((prevFormData)=> ({
             ...messageFormData,
-            // "audio_message": base64String -- PUT THIS BACK IT'S THE ACTUAL AUDIO
-            "audio_message": "thisIsLessThanFiveHundredCharacters"
+            "audio_message": base64String
         }));
     console.log("Updated messageFormData:", messageFormData)
     }
 
     //function to handle the submition of form and add new msg to initial data
     const handleSubmit = (event) => {
+
         event.preventDefault();
         console.log("we're in handleSubmit");
-        //create object with data
-        //comment this chunk out once backend is connected
-        const newMessage = {
-            //userId: 6, //this must come from log-in session perhaps a state? this is not a field required in backend
-            title: messageFormData.title,
-            text: messageFormData.text,
-            audio_message: messageFormData.audio_message,
-            recipientEmail: messageFormData.recipientEmail,
-            recipientId: 2, // this will need to change from  the backend 
-            isSent: false
-        };
-        //send messageform data to app for post request
-        console.log("new message in HS getting sent to 'add message':", newMessage)
-        addMessage(newMessage)
-        //addMessageCallback(messageFormData)
-        //reset form data to blank
+        addMessage(messageFormData)
         setMessageFormData(INITIAL_FORM_DATA);
         };
     return (
@@ -116,27 +100,27 @@ const NewMessageForm = ({ messages, addMessage }) => {
                 />
             </div>
             {/* text */}
-            <label htmlFor='text'>Message:</label>
+            <label htmlFor='text_message'>Message:</label>
                 <input
                     type="text"
-                    id="text"
-                    name="text"
-                    value={messageFormData.text}
+                    id="text_message"
+                    name="text_message"
+                    value={messageFormData.text_message}
                     onChange={handleChange}
                 />
             {/* audio */}
-            <label htmlFor='audio'>Audio Recording:</label>
+            <label htmlFor='audio_message'>Audio Recording:</label>
             <AudioRecorder 
                 onAudioData={handleAudioData} 
-                value={messageFormData.audio}
+                value={messageFormData.audio_message}
                 />
             {/* recipient email */}
-            <label htmlFor='recipientEmail'>Recipient Email:</label>
+            <label htmlFor='recipient_email'>Recipient Email:</label>
                 <input
                     type="text"
-                    id="recipientEmail"
-                    name="recipientEmail"
-                    value={messageFormData.recipientEmail}
+                    id="recipient_email"
+                    name="recipient_email"
+                    value={messageFormData.recipient_email}
                     onChange={handleChange}
                 /> 
             {/* Email validation feedback */}
