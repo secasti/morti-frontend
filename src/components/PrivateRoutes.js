@@ -9,7 +9,7 @@ import axios from 'axios';
 import Profile from './Profile'
 import Register from './Register';
 
-function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication, registerNewUser, users }) {
+function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication, users, setUsers }) {
 
     const MESSAGE_DATA = [{
         message_id: 1,
@@ -119,8 +119,16 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     return initialMsgExpandedState;
     })
     
+    //REGISTER NEW USER
+    const registerNewUser = (newUser) => {
+      console.log("newUser info:", newUser)
+      //add new user to valid users
+      setUsers([...users, newUser]);
+      console.log("all users now:", users)
+      //give access using login 
+      //
 
-
+    };
 
   //GET MESSAGE API CALL
     const getMessages = () => {
@@ -267,10 +275,12 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
             registerNewUser={registerNewUser}
             VALID_USERS={users}
           />
+          <Routes>
           <Route
             path="/register"
             element={<Register registerNewUser={registerNewUser} />}
           />
+          </Routes>
         </div>
       );
     } else if (isAuthenticated) {
@@ -317,15 +327,18 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
       );
     } else {
       return (
+        <Routes>
         <Route
           path="*"
           element={
             <Login
               setToken={setToken}
               handleAuthentication={handleAuthentication}
+              registerNewUser={registerNewUser}
             />
           }
         />
+        </Routes>
       );
     }
   }
