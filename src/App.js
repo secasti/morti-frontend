@@ -37,6 +37,17 @@ function App() {
   setIsAuthenticated(false);
   };
 
+  //REGISTER NEW USER
+  const registerNewUser = (newUser) => {
+    console.log("newUser info:", newUser)
+    //add new user to valid users
+    setUsers([...users, newUser]);
+    console.log("updated users data after new register:", users)
+    //give access using login 
+    //
+
+  };
+
   return (
     <div className="website-container">
       <div className='app-page-container'>
@@ -56,7 +67,7 @@ function App() {
             <Login
               setToken={setToken}
               handleAuthentication={handleAuthentication}
-              // registerNewUser={registerNewUser}
+              registerNewUser={registerNewUser}
               users={users}
             />
           }
@@ -67,7 +78,7 @@ function App() {
             <Login
               setToken={setToken}
               handleAuthentication={handleAuthentication}
-              // registerNewUser={registerNewUser}
+              registerNewUser={registerNewUser}
               users={users}
             />
           }
