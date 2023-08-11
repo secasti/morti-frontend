@@ -10,7 +10,7 @@
 
 body {
   margin: 5%;
-  font-family: Arial, sans-serif;
+  font-family: 'Kavivanar', cursive;
   background-color: var(--bg-color); /* Dark background color for dark mode */
   color: var(--text-color); /* Light text color for dark mode */
 }
