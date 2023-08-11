@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
 const INITIAL_FORM_DATA = {
-    first_name: "c",
-    last_name: "c",
-    email: "c",
-    password: "c"
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: ""
 };
 
 const INITIAL_EMAIL_DATA = {
@@ -49,11 +49,11 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
     }, 1000); // this 1000 adjust the debounce delay to every 500ms
 
     const handleChange = (evt) => {
-        const newFormData = {
+        const newUserFormData = {
             ...registerForm,
             [evt.target.name]: evt.target.value,
             };
-            setRegisterForm(newFormData);
+            setRegisterForm(newUserFormData);
             //check if email field is being changed
             if (evt.target.name === "recipientEmail") {
                 //set state to is typing in email 
@@ -91,27 +91,34 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
                 <label htmlFor='firstName'>First name:</label>
                     <input
                         type="text"
-                        id="firstName"
+                        id="first_name"
+                        name="first_name"
                         value={registerForm.first_name}
+                        onChange={handleChange}
                     ></input>
                 <label htmlFor='lastName'>Last name:</label>
                     <input
                         type="text"
-                        id="lastName"
+                        id="last_name"
+                        name="last_name"
                         value={registerForm.last_name}
+                        onChange={handleChange}
                     ></input>
                 <label htmlFor='email'>Email:</label>
                     <input
                         type="text"
                         id="email"
+                        name="email"
                         value={registerForm.email}
                         onChange={handleChange}
                     ></input>
                 <label htmlFor='password'>Password:</label>
                     <input
-                        type="text"
+                        type="password"
                         id="password"
+                        name="password"
                         value={registerForm.password}
+                        onChange={handleChange}
                     ></input>
             {/* Email validation feedback */}
             {isTypingEmail && emailValidation.isValidating &&

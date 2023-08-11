@@ -24,26 +24,12 @@ function App() {
   //token for authenticating users
   const { token, removeToken, setToken } = useToken();
 
-
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-
-  
   // Function to handle successful authentication
   const handleAuthentication = (email) => {
     setIsAuthenticated({email:email, name: "Susi"});
-  };
-
-  //REGISTER NEW USER
-  const registerNewUser = (newUser) => {
-    console.log("newUser info:", newUser)
-    //add new user to valid users
-    setUsers([...users, newUser]);
-    console.log("all users now:", users)
-    //give access using login 
-    //
-
   };
 
   //handle logout
@@ -70,7 +56,7 @@ function App() {
             <Login
               setToken={setToken}
               handleAuthentication={handleAuthentication}
-              registerNewUser={registerNewUser}
+              // registerNewUser={registerNewUser}
               VALID_USERS={users}
             />
           }
@@ -81,14 +67,14 @@ function App() {
             <Login
               setToken={setToken}
               handleAuthentication={handleAuthentication}
-              registerNewUser={registerNewUser}
+              // registerNewUser={registerNewUser}
               VALID_USERS={users}
             />
           }
         />
         <Route
           path="/register"
-          element={<Register registerNewUser={registerNewUser} />}
+          element={<Register />}
         />
               </Routes>
       ) : (
@@ -97,9 +83,10 @@ function App() {
             token={token}
             setToken={setToken}
             handleAuthentication={handleAuthentication}
-            registerNewUser={registerNewUser}
+            // registerNewUser={registerNewUser}
             setIsAuthenticated={setIsAuthenticated}
             users={users}
+            setUsers={setUsers}
           />
       )
       
