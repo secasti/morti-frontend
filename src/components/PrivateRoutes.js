@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Route, Routes} from 'react-router-dom';
 import Login from './Login';
@@ -122,12 +121,8 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     //REGISTER NEW USER
     const registerNewUser = (newUser) => {
       console.log("newUser info:", newUser)
-      //add new user to valid users
       setUsers([...users, newUser]);
       console.log("all users now:", users)
-      //give access using login 
-      //
-
     };
 
   //GET MESSAGE API CALL
@@ -273,7 +268,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
             setToken={setToken}
             handleAuthentication={handleAuthentication}
             registerNewUser={registerNewUser}
-            VALID_USERS={users}
+            users={users}
           />
           <Routes>
           <Route
@@ -335,6 +330,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
               setToken={setToken}
               handleAuthentication={handleAuthentication}
               registerNewUser={registerNewUser}
+              users={users}
             />
           }
         />
