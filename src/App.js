@@ -13,23 +13,11 @@ import PrivateRoutes from './components/PrivateRoutes'
 
 function App() {
 
-  //VALID USERS
-  // const VALID_USERS = [
-  //     {email:"x" , password: "123", access_token: 123, firstName: "Susi", lastName: "Franco"}
-  // ]
-  
-  //user data state
-  // const [users, setUsers] = useState(VALID_USERS)
-const CURRENT_USER = [{
-  token:"",
-first_name:""
-}]
   //token for authenticating users
   const { token, removeToken, setToken } = useToken();
 
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState(CURRENT_USER)
 
   // Function to handle successful authentication
   // const handleAuthentication = (email) => {
@@ -44,12 +32,6 @@ first_name:""
   //REGISTER NEW USER
   const registerNewUser = (newUser) => {
     console.log("newUser info:", newUser)
-    //add new user to valid users
-    setUsers([...users, newUser]);
-    console.log("updated users data after new register:", users)
-    //give access using login 
-    //
-
   };
 
   return (
@@ -71,8 +53,6 @@ first_name:""
             <Login
               setToken={setToken}
               token={token}
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
               // handleAuthentication={handleAuthentication}
               registerNewUser={registerNewUser}
               // users={users}
@@ -85,8 +65,6 @@ first_name:""
             <Login
               setToken={setToken}
               token={token}
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
               // handleAuthentication={handleAuthentication}
               registerNewUser={registerNewUser}
               // users={users}
@@ -103,13 +81,9 @@ first_name:""
             isAuthenticated={isAuthenticated}
             token={token}
             setToken={setToken}
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
             // handleAuthentication={handleAuthentication}
             // registerNewUser={registerNewUser}
             setIsAuthenticated={setIsAuthenticated}
-            // users={users}
-            // setUsers={setUsers}
           />
       )
       

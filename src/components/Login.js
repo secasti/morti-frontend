@@ -4,7 +4,7 @@ import './Login.css'
 import Register from './Register';
 import axios from 'axios';
 
-const Login = ({token, setToken, currentUser, setCurrentUser, handleAuthentication, registerNewUser}) => {
+const Login = ({token, setToken, handleAuthentication, registerNewUser}) => {
   
 
   //login form initial data
@@ -18,9 +18,8 @@ const Login = ({token, setToken, currentUser, setCurrentUser, handleAuthenticati
 
   //what happens upon login
   const handleLogin = (event) => {
-    console.log("token:", token)
     console.log("inside HandleLogin");
-    // console.log("users:", users[0])
+    console.log("event:", event)
 
     axios({
       method: "POST",
@@ -31,7 +30,7 @@ const Login = ({token, setToken, currentUser, setCurrentUser, handleAuthenticati
       }
     })
     .then((response) => {
-      setCurrentUser(response.data.first_name)
+      console.log("token:",response.data.access_token)
       setToken(response.data.access_token)
       alert("Successful Login")
       localStorage.setItem('email', loginForm.email)

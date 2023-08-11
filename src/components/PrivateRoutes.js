@@ -8,7 +8,7 @@ import axios from 'axios';
 import Profile from './Profile'
 import Register from './Register';
 
-function PrivateRoutes({ isAuthenticated, token, setToken, currentUser, setCurrentUser, handleAuthentication, users, setUsers }) {
+function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication, users, setUsers }) {
 
     const MESSAGE_DATA = [{
         message_id: 1,
@@ -272,8 +272,6 @@ function PrivateRoutes({ isAuthenticated, token, setToken, currentUser, setCurre
             handleAuthentication={handleAuthentication}
             registerNewUser={registerNewUser}
             users={users}
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
           />
           <Routes>
           <Route
@@ -286,7 +284,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, currentUser, setCurre
     } else if (token) {
       return (
         <Routes>
-          <Route path="/profile" element={<Profile token={token} currentUser={currentUser} setCurrentUser={setCurrentUser} isAuthenticated={isAuthenticated} />} />
+          <Route path="/profile" element={<Profile token={token} isAuthenticated={isAuthenticated} />} />
           <Route
             path="/messages"
             element={
