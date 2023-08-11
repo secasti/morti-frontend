@@ -41,7 +41,7 @@ function App() {
     <div className="website-container">
       <div className='app-page-container'>
 
-        <h1>M O R T I</h1>
+        <h1 className='title'>Morti</h1>
 
         <NavigationMenu className={!isAuthenticated?  "invisible-menu": ""} removeToken={removeToken} handleLogout={handleLogout} isAuthenticated={isAuthenticated}/>
 

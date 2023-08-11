@@ -15,6 +15,9 @@ body {
   color: var(--text-color); /* Light text color for dark mode */
 }
 
+.title {
+  font-family: 'Cinzel Decorative', cursive;
+}
 
 .app-page-container {
   display: flex;
