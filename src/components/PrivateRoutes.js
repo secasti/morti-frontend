@@ -10,15 +10,7 @@ import Register from './Register';
 
 function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication, users, setUsers }) {
 
-    const MESSAGE_DATA = [{
-        message_id: 1,
-        userId: 1,
-        title: "Letter For Susi",
-        text: "Thank you for being there for me. I love you! this is a really long letter to show the expand option for a message. I am making this so long you should really stop reading because there will not me anything of substance here. ",
-        // audio: 
-        recipientId: 2, 
-        isSent: false
-    },
+    const MESSAGE_DATA = [
     {
         message_id: 2,
         userId: 2,
@@ -111,6 +103,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     const [receivedMessages, setReceivedMessages] = useState(RECEIVED_MESSAGE_DATA);
     const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
     // initial dictionary with each message id as key, and boolean value for if it is expanded. 
+    
     const initialMsgExpandedState = {};
     messages.forEach((message) => {
         initialMsgExpandedState[message.message_id] = false;
@@ -150,28 +143,27 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     }
     useEffect(getMessages, [])
 
+    const webToken = localStorage.getItem('token');
+
     const addMessage = (newMessageData) => {
         console.log("addMessage called")
   
-    const requestData = {
-      title: newMessageData.title,
-      text_message: newMessageData.text, // Rename 'text' to 'text_message'
-      audio_message: newMessageData.audio_message,
-      id_recipient: newMessageData.recipientId, // Rename 'userId' to 'id_recipient'
-      is_sent: newMessageData.isSent, // Rename 'isSent' to 'is_sent'
-      recipient_email: newMessageData.recipientEmail
-    };
-  
-    console.log("request data:",requestData)
+    console.log("request data:",newMessageData)
   
     if (newMessageData.audio_message != null && newMessageData.audio_message !== "") {
       console.log("DEBUG audio_message non empty")
-      axios
-        .post('https://morti-back-end.onrender.com/messages', requestData)
-        .then((response) => {
+      axios({
+        method: "POST",
+        url:'https://morti-back-end.onrender.com/messages',
+        headers: {
+          Authorization: "Bearer " + token
+        },
+        data: newMessageData 
+      })
+      .then((response) => {
           console.log("response data: ", response)
           //re-render message page and make a get message axios call. 
-          getMessages()
+          // getMessages()
         })
         .catch((error)=> {
           console.log("error: ", error)
@@ -289,6 +281,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
             path="/messages"
             element={
               <MessagePage
+                token={token}
                 messages={messages}
                 addMessage={addMessage}
                 deleteMessage={deleteMessage}
