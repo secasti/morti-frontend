@@ -84,6 +84,11 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
         registerNewUser(newRegister)
 
         setRegisterForm(INITIAL_FORM_DATA);
+
+        alert('Registration successful! Please proceed to login.');
+
+        backToLogin()
+        
         };
     return (
         <section className="register-form--container">
