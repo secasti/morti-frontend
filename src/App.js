@@ -20,12 +20,16 @@ function App() {
   
   //user data state
   // const [users, setUsers] = useState(VALID_USERS)
-
+const CURRENT_USER = [{
+  token:"",
+first_name:""
+}]
   //token for authenticating users
   const { token, removeToken, setToken } = useToken();
 
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(CURRENT_USER)
 
   // Function to handle successful authentication
   // const handleAuthentication = (email) => {
@@ -43,7 +47,7 @@ function App() {
 
         <h1>M O R T I</h1>
 
-        <NavigationMenu className={!isAuthenticated?  "invisible-menu": ""} removeToken={removeToken} handleLogout={handleLogout} isAuthenticated={isAuthenticated}/>
+        <NavigationMenu className={!token?  "invisible-menu": ""} token={token} setToken={setToken} removeToken={removeToken} handleLogout={handleLogout} isAuthenticated={isAuthenticated} token={token}/>
 
       </div>
 
@@ -55,6 +59,9 @@ function App() {
           element={
             <Login
               setToken={setToken}
+              token={token}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
               // handleAuthentication={handleAuthentication}
               // registerNewUser={registerNewUser}
               // users={users}
@@ -66,6 +73,9 @@ function App() {
           element={
             <Login
               setToken={setToken}
+              token={token}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
               // handleAuthentication={handleAuthentication}
               // registerNewUser={registerNewUser}
               // users={users}
@@ -82,6 +92,8 @@ function App() {
             isAuthenticated={isAuthenticated}
             token={token}
             setToken={setToken}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
             // handleAuthentication={handleAuthentication}
             // registerNewUser={registerNewUser}
             setIsAuthenticated={setIsAuthenticated}

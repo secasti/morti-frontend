@@ -4,7 +4,7 @@ import './Login.css'
 import Register from './Register';
 import axios from 'axios';
 
-const Login = ({setToken, handleAuthentication, registerNewUser}) => {
+const Login = ({token, setToken, currentUser, setCurrentUser, handleAuthentication, registerNewUser}) => {
   
 
   //login form initial data
@@ -18,7 +18,7 @@ const Login = ({setToken, handleAuthentication, registerNewUser}) => {
 
   //what happens upon login
   const handleLogin = (event) => {
-
+    console.log("token:", token)
     console.log("inside HandleLogin");
     // console.log("users:", users[0])
 
@@ -31,6 +31,7 @@ const Login = ({setToken, handleAuthentication, registerNewUser}) => {
       }
     })
     .then((response) => {
+      setCurrentUser(response.data.first_name)
       setToken(response.data.access_token)
       alert("Successful Login")
       localStorage.setItem('email', loginForm.email)

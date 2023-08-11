@@ -8,7 +8,7 @@ import axios from 'axios';
 import Profile from './Profile'
 import Register from './Register';
 
-function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication, users, setUsers }) {
+function PrivateRoutes({ isAuthenticated, token, setToken, currentUser, setCurrentUser, handleAuthentication, users, setUsers }) {
 
     const MESSAGE_DATA = [{
         message_id: 1,
@@ -167,7 +167,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     if (newMessageData.audio_message != null && newMessageData.audio_message !== "") {
       console.log("DEBUG audio_message non empty")
       axios
-        .post('https://morti-back-end.onrender.com/farewell_messages', requestData)
+        .post('https://morti-back-end.onrender.com/messages', requestData)
         .then((response) => {
           console.log("response data: ", response)
           //re-render message page and make a get message axios call. 
@@ -224,7 +224,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     const deleteMessage = (messageId, messageType) => {
       let updatedMessages;
       
-      axios.delete(`https://morti-back-end.onrender.com/farewell_messages/${messageId}/delete`)
+      axios.delete(`https://morti-back-end.onrender.com/messages/${messageId}/delete`)
       .then((response) => {
   
       switch (messageType) {
@@ -267,10 +267,13 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
       return (
         <div>
           <Login
+            token={token}
             setToken={setToken}
             handleAuthentication={handleAuthentication}
             registerNewUser={registerNewUser}
             users={users}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
           />
           <Routes>
           <Route
@@ -280,10 +283,10 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
           </Routes>
         </div>
       );
-    } else if (isAuthenticated) {
+    } else if (token) {
       return (
         <Routes>
-          <Route path="/profile" element={<Profile token={token} isAuthenticated={isAuthenticated} />} />
+          <Route path="/profile" element={<Profile token={token} currentUser={currentUser} setCurrentUser={setCurrentUser} isAuthenticated={isAuthenticated} />} />
           <Route
             path="/messages"
             element={
@@ -329,6 +332,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
           path="*"
           element={
             <Login
+              token={token}
               setToken={setToken}
               handleAuthentication={handleAuthentication}
               registerNewUser={registerNewUser}

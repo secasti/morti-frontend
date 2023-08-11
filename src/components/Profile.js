@@ -2,12 +2,13 @@ import React from 'react';
 import './Profile.css'
 
 
-const Profile = ({isAuthenticated}) => {
+const Profile = ({isAuthenticated, currentUser, setCurrentUser}) => {
   console.log("inside profile")
+  console.log("name:", currentUser.first_name)
   
     return (
         <div className="welcome-container">
-            <h2>Welcome, {isAuthenticated.name}!</h2>
+            <h2>Welcome, {currentUser.first_name}!</h2>
             <p>We hope that with our app you can record meaningful messages for your loved ones, set new trustees to manage your messages, and view messages you've received from loved ones.</p>
             <p className="started">To get started:</p>
             <ul>
