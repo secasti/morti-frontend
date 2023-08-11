@@ -41,6 +41,17 @@ first_name:""
   setIsAuthenticated(false);
   };
 
+  //REGISTER NEW USER
+  const registerNewUser = (newUser) => {
+    console.log("newUser info:", newUser)
+    //add new user to valid users
+    setUsers([...users, newUser]);
+    console.log("updated users data after new register:", users)
+    //give access using login 
+    //
+
+  };
+
   return (
     <div className="website-container">
       <div className='app-page-container'>
@@ -63,7 +74,7 @@ first_name:""
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
               // handleAuthentication={handleAuthentication}
-              // registerNewUser={registerNewUser}
+              registerNewUser={registerNewUser}
               // users={users}
             />
           }
@@ -77,7 +88,7 @@ first_name:""
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
               // handleAuthentication={handleAuthentication}
-              // registerNewUser={registerNewUser}
+              registerNewUser={registerNewUser}
               // users={users}
             />
           }
