@@ -4,16 +4,18 @@ import Trustee from './Trustee';
 import './TrusteeList.css';
 
 const TrusteeList = (props) => {
+    console.log("inside TList")
 
     const trustees = props.trustees;
-
+    console.log("trustees",props.trustees)
     const getTrusteesJSX = (trustees) => {
         return trustees.map((trustee) => {
             return (
-                <li key={trustee.user_id} className="trustee-item">
+                <li key={trustee.id} className="trustee-item">
                     <Trustee
-                        user_id={trustee.user_id}
+                        user_id={trustee.id}
                         first_name={trustee.first_name}
+                        last_name={trustee.last_name}
                         email={trustee.email}
                         updateDeleteTrustee={props.updateDeleteTrustee}
                     ></Trustee>
@@ -32,7 +34,7 @@ const TrusteeList = (props) => {
 TrusteeList.propTypes = {
     trustees: PropTypes.arrayOf(
         PropTypes.shape({
-            user_id: PropTypes.number,
+            id: PropTypes.number,
             first_name: PropTypes.string.isRequired,
             email: PropTypes.string.isRequired
         })

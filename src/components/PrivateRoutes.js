@@ -88,6 +88,32 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
   }
   
   // TRUSTEE functions
+
+  const getTrustees = () => {
+    console.log("inside getTrustees")
+    axios({
+      method: "GET",
+      url:'https://morti-back-end.onrender.com/trust/trustees',
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+    .then((response) => {
+      console.log("inside .then")
+      console.log(response.data)
+      const trusteesData = [];
+      response.data.forEach((trustee) => {
+        trusteesData.push(trustee);
+      });
+      setTrustees(trusteesData)
+    })
+    .catch((error) => {
+        console.log("error: ", error.response);
+        alert(error.response)
+    })
+};
+useEffect(getTrustees, [token])
+
     const addTrustee = (newTrustee) => {
     setTrustees([...trustees, newTrustee]);
   };
@@ -234,6 +260,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
             path="/trustees"
             element={
               <TrusteePage
+                token={token}
                 trustees={trustees}
                 addTrustee={addTrustee}
                 updateDeleteTrustee={updateDeleteTrustee}

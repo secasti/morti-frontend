@@ -7,7 +7,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 const Trustee = (props) => {
 
     const toggleDelete = () => {
-        props.updateDeleteTrustee(props.user_id)
+        props.updateDeleteTrustee(props.id)
     }
 
     return (
@@ -22,7 +22,7 @@ const Trustee = (props) => {
 };
 
 Trustee.propTypes = {
-    user_id: PropTypes.number,
+    id: PropTypes.number,
     first_name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     updateDeleteTrustee: PropTypes.func.isRequired
