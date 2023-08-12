@@ -111,19 +111,27 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
   
   
   // RECEIVED MESSAGES functions
-    // const getReceivedMessages = (response) => {
-    //   const newMessages = response.map((message) => {
-    //     return {
-    //       'message_id': message.message_id,
-    //       'userId': message.userId,
-    //       'title': message.title,
-    //       'text': message.text,
-    //       'recipientId': message.recipientId,
-    //       'isSent': message.isSent
-    //     };
-    //   });
-    // setReceivedMessages(RECEIVED_MESSAGE_DATA);
-    // };
+    const getReceivedMessages = () => {
+      axios({
+        method: "GET",
+        url:'https://morti-back-end.onrender.com/messages/received',
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      .then((response) => {
+        const messagesData = [];
+        response.data.forEach((message) => {
+          messagesData.push(message);
+        });
+        setReceivedMessages(messagesData)
+      })
+      .catch((error) => {
+          console.log("error: ", error.response);
+          alert(error.response)
+      })
+  }
+  useEffect(getReceivedMessages, [])
   
     //MESSAGES functions
 
@@ -238,8 +246,9 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
             path="/messages/received-messages"
             element={
               <ReceivedMessageList
+                token={token}
                 receivedMessages={receivedMessages}
-                // getReceivedMessages={getReceivedMessages}
+                getReceivedMessages={getReceivedMessages}
                 deleteMessage={deleteMessage}
               />
             }

@@ -8,7 +8,7 @@ const ReceivedMessage = (props) => {
     const [audio, setAudio] = useState(null)
 
     async function loadPlayer() {
-        let newAudioBinary = await fetch(props.audio_message)
+        let newAudioBinary = await fetch(props.audio)
         let newAudioBlob = await newAudioBinary.blob()
         const audioURL = URL.createObjectURL(newAudioBlob);
         setAudio(audioURL)
@@ -36,7 +36,7 @@ ReceivedMessage.propTypes = {
     userId: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    audio_message: PropTypes.string.isRequired,
+    audio: PropTypes.string.isRequired,
     recipientId: PropTypes.number.isRequired,
     isSent: PropTypes.bool.isRequired,
     deleteMessage: PropTypes.func.isRequired
