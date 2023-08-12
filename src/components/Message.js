@@ -9,7 +9,7 @@ const Message = (props) => {
     const [audio, setAudio] = useState(null)
     
     async function loadPlayer() {
-        let newAudioBinary = await fetch(props.audio_message)
+        let newAudioBinary = await fetch(props.audio)
         let newAudioBlob = await newAudioBinary.blob()
         const audioURL = URL.createObjectURL(newAudioBlob);
         setAudio(audioURL)
@@ -17,25 +17,26 @@ const Message = (props) => {
     useEffect(() => { loadPlayer();}, []);
 
     const toggleDelete = () => {
-        props.deleteMessage(props.message_id, 'message')
+        props.deleteMessage(props.messageId, 'message')
     };
 
     return (
-        <div className={`single-msg ${props.isMsgExpanded[props.message_id] ? 'expanded' : ''}`}>
+        <div className={`single-msg ${props.isMsgExpanded[props.messageId] ? 'expanded' : ''}`}>
             <h3 className='msg-title'> {props.title} </h3>
             <p className='msg-text'> 
                 {/* if isMsgExpanded state is false, show only 30 char, if its true show it all */}
-                {props.isMsgExpanded[props.message_id] ? props.text : props.text.slice (0, 40)}
+                {props.isMsgExpanded[props.messageId] ? props.text : props.text.slice (0, 40)}
                 {/* if isMsgExpanded is false and text is > 50 char, show a read more button that on click runs expand msg func*/}
-                {!props.isMsgExpanded[props.message_id] && props.text.length > 10 && (
-                    <button onClick={() => props.expandMessage(props.message_id)} className='read-more-btn'>
+                {!props.isMsgExpanded[props.messageId] && props.text.length > 10 && (
+                    <button onClick={() => props.expandMessage(props.messageId)} className='read-more-btn'>
                         Read More
                     </button>
                 )}
             </p>
+            <audio src={audio} controls></audio>
             {/* if  isMsgExpanded is true, show button that says show less and runs expand msg func */}
-            {props.isMsgExpanded[props.message_id] && (
-                <button onClick={() => props.expandMessage(props.message_id)} className='read-more-btn'>
+            {props.isMsgExpanded[props.messageId] && (
+                <button onClick={() => props.expandMessage(props.messageId)} className='read-more-btn'>
                 Show Less
                 </button>
             )}
@@ -48,11 +49,11 @@ const Message = (props) => {
 };
 
 Message.propTypes = {
-    message_id: PropTypes.number,
+    messageId: PropTypes.number,
     userId: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    // audio: PropTypes.string.isRequired,
+    audio: PropTypes.string.isRequired,
     recipientId: PropTypes.number.isRequired,
     isSent: PropTypes.bool.isRequired,
     deleteMessage: PropTypes.func.isRequired,

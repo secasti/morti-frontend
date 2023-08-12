@@ -7,9 +7,6 @@ const ReceivedMessage = (props) => {
     
     const [audio, setAudio] = useState(null)
 
-
-
-    
     async function loadPlayer() {
         let newAudioBinary = await fetch(props.audio_message)
         let newAudioBlob = await newAudioBinary.blob()

@@ -37,21 +37,11 @@ const MessagePage = ({token, messages, addMessage, deleteMessage, expandMessage,
 };
 
 MessagePage.propTypes = {
-    messages: PropTypes.arrayOf(
-        PropTypes.shape({
-            message_id: PropTypes.number,
-            userId: PropTypes.number,
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string.isRequired,
-            // audio: PropTypes.string.isRequired,
-            recipientId: PropTypes.number.isRequired,
-            isSent: PropTypes.bool.isRequired,
-        }).isRequired
-    ),
-        addMessage: PropTypes.func.isRequired,
-        deleteMessage:PropTypes.func.isRequired,
-        isMsgExpanded: PropTypes.object.isRequired,
-        expandMessage: PropTypes.func.isRequired
+    messages: PropTypes.array.isRequired,
+    addMessage: PropTypes.func.isRequired,
+    deleteMessage:PropTypes.func.isRequired,
+    isMsgExpanded: PropTypes.object.isRequired,
+    expandMessage: PropTypes.func.isRequired
 };
 
 export default MessagePage;
