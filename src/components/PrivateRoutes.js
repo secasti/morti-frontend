@@ -114,9 +114,28 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
 };
 useEffect(getTrustees, [token])
 
-    const addTrustee = (newTrustee) => {
-    setTrustees([...trustees, newTrustee]);
-  };
+// ADD TRUSTEE FUNCTION
+    const addTrustee = (trusteeEmail) => {
+      console.log("addTrustee called")
+  
+      console.log("request data:",trusteeEmail)
+    
+      axios({
+          method: "POST",
+          url:'https://morti-back-end.onrender.com/trust',
+          headers: {
+            Authorization: "Bearer " + token
+          },
+          data: trusteeEmail 
+        })
+        .then((response) => {
+            console.log("response data: ", response)
+            getTrustees()
+          })
+          .catch((error)=> {
+            console.log("error: ", error)
+          })
+    };
   
     const updateDeleteTrustee = (trusteeId) => {
       const updatedTrustees = trustees.filter(function (trustees) {
