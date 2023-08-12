@@ -138,22 +138,28 @@ useEffect(getTrustees, [token])
     };
   
     const updateDeleteTrustee = (trusteeId) => {
-      const updatedTrustees = trustees.filter(function (trustees) {
-        return trustees.user_id !== trusteeId;
-      });
-  
-      setTrustees(updatedTrustees)
-    };
+      console.log("inside updateDeleteTrustee, trusteeId:", trusteeId)
+      axios({
+        method: "DELETE",
+        url: `https://morti-back-end.onrender.com/trust/${trusteeId}`,
+        headers: {
+          Authorization: "Bearer " + token
+        },
+      })
+      .then((response) => {
+          console.log("response data: ", response)
+          getTrustees()
+        })
+        .catch((error)=> {
+          console.log("error: ", error)
+          alert(error)
+        })
+    }
   
   // TRUSTEE FOR functions
-    const deleteTrusteeFor = (trusteeId) => {
-      const updatedTrustees = trusteeFor.filter(function (trusteeFor) {
-        return trusteeFor.user_id !== trusteeId;
-      });
-  
-      setTrusteeFor(updatedTrustees)
-    };
-  
+  const deleteTrusteeFor = () => {
+    console.log("in delete trustee for")
+  }
   
   // RECEIVED MESSAGES functions
     const getReceivedMessages = () => {
