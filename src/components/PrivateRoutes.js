@@ -157,10 +157,54 @@ useEffect(getTrustees, [token])
     }
   
   // TRUSTEE FOR functions
+  // NO ROUTE ON BACK END TO DELETE A TRUSTED BY USER
   const deleteTrusteeFor = () => {
     console.log("in delete trustee for")
   }
-  
+  const getTrustedBy = () => {
+    console.log("inside getTrusteeBy")
+    axios({
+      method: "GET",
+      url:'https://morti-back-end.onrender.com/trust/trusted_by',
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+    .then((response) => {
+      console.log("inside .then")
+      console.log(response.data)
+      const trustedByData = [];
+      response.data.forEach((trustedBy) => {
+        trustedByData.push(trustedBy);
+      });
+      setTrusteeFor(trustedByData)
+    })
+    .catch((error) => {
+        console.log("error: ", error.response);
+        alert(error.response)
+    })
+};
+useEffect(getTrustedBy, [token])
+
+const updateExpired = (trustedById) => {
+  console.log("inside updateExpired, trustedById:", trustedById)
+  axios({
+    method: "PUT",
+    url: `https://morti-back-end.onrender.com/trust/expired/${trustedById}`,
+    headers: {
+      Authorization: "Bearer " + token
+    },
+  })
+  .then((response) => {
+      console.log("response data: ", response)
+      getTrustedBy()
+    })
+    .catch((error)=> {
+      console.log("error: ", error)
+      alert(error)
+    })
+  }
+
   // RECEIVED MESSAGES functions
     const getReceivedMessages = () => {
       axios({
@@ -291,6 +335,7 @@ useEffect(getTrustees, [token])
                 updateDeleteTrustee={updateDeleteTrustee}
                 trusteeFor={trusteeFor}
                 deleteTrusteeFor={deleteTrusteeFor}
+                updateExpired={updateExpired}
               />
             }
           />

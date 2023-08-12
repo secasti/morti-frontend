@@ -7,22 +7,24 @@ import { faTrash, faSkull } from '@fortawesome/free-solid-svg-icons';
 const TrusteeFor = (props) => {
 
     const toggleDelete = () => {
-        props.deleteTrusteeFor(props.user_id)
+        props.deleteTrusteeFor(props.userId)
     }
 
-    const markDeceased = (user_id, firstName, email) => {
-        const isConfirmed = window.confirm(`Are you sure you want to mark ${firstName}, ${email}, as deceased?`);
+    const markDeceasedClick = () => {
+        console.log("inside markDeceasedClick, userId:", props.userId)
+        const isConfirmed = window.confirm(`Are you sure you want to mark ${props.firstName}, ${props.email}, ${props.userId}, as deceased?`);
         if (isConfirmed) {
           // Send patch request to backend that takes user_id, sets all messages that the user created "is_sent" to True
-        console.log("User:", user_id, "is deceased and now messages should be sent");
+        console.log("User:", props.userId, "is deceased and now messages should be sent");
+        props.updateExpired(props.userId)
         }
     };
 
     return (
         <section className='single-msg'>
-            <h3 className='msg-title'> {props.first_name} </h3>
+            <h3 className='msg-title'> {props.firstName} </h3>
             <p className='msg-text'> {props.email} </p>
-            <button onClick={markDeceased(props.user_id,  props.first_name, props.email)} className='skull-btn'> 
+            <button onClick={markDeceasedClick} className='skull-btn'> 
                 <FontAwesomeIcon icon={faSkull} />
             </button>
             <button onClick={toggleDelete} className='delete-btn'>
@@ -33,8 +35,8 @@ const TrusteeFor = (props) => {
 };
 
 TrusteeFor.propTypes = {
-    user_id: PropTypes.number,
-    first_name: PropTypes.string.isRequired,
+    userId: PropTypes.number,
+    firstName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     deleteTrusteeFor: PropTypes.func.isRequired
 }
