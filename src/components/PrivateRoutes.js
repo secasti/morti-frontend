@@ -88,28 +88,123 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
   }
   
   // TRUSTEE functions
-    const addTrustee = (newTrustee) => {
-    setTrustees([...trustees, newTrustee]);
-  };
+
+  const getTrustees = () => {
+    console.log("inside getTrustees")
+    axios({
+      method: "GET",
+      url:'https://morti-back-end.onrender.com/trust/trustees',
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+    .then((response) => {
+      console.log("inside .then")
+      console.log(response.data)
+      const trusteesData = [];
+      response.data.forEach((trustee) => {
+        trusteesData.push(trustee);
+      });
+      setTrustees(trusteesData)
+    })
+    .catch((error) => {
+        console.log("error: ", error.response);
+        alert(error.response)
+    })
+};
+useEffect(getTrustees, [token])
+
+// ADD TRUSTEE FUNCTION
+    const addTrustee = (trusteeEmail) => {
+      console.log("addTrustee called")
+  
+      console.log("request data:",trusteeEmail)
+    
+      axios({
+          method: "POST",
+          url:'https://morti-back-end.onrender.com/trust',
+          headers: {
+            Authorization: "Bearer " + token
+          },
+          data: trusteeEmail 
+        })
+        .then((response) => {
+            console.log("response data: ", response)
+            getTrustees()
+          })
+          .catch((error)=> {
+            console.log("error: ", error)
+          })
+    };
   
     const updateDeleteTrustee = (trusteeId) => {
-      const updatedTrustees = trustees.filter(function (trustees) {
-        return trustees.user_id !== trusteeId;
-      });
-  
-      setTrustees(updatedTrustees)
-    };
+      console.log("inside updateDeleteTrustee, trusteeId:", trusteeId)
+      axios({
+        method: "DELETE",
+        url: `https://morti-back-end.onrender.com/trust/${trusteeId}`,
+        headers: {
+          Authorization: "Bearer " + token
+        },
+      })
+      .then((response) => {
+          console.log("response data: ", response)
+          getTrustees()
+        })
+        .catch((error)=> {
+          console.log("error: ", error)
+          alert(error)
+        })
+    }
   
   // TRUSTEE FOR functions
-    const deleteTrusteeFor = (trusteeId) => {
-      const updatedTrustees = trusteeFor.filter(function (trusteeFor) {
-        return trusteeFor.user_id !== trusteeId;
+  // NO ROUTE ON BACK END TO DELETE A TRUSTED BY USER
+  const deleteTrusteeFor = () => {
+    console.log("in delete trustee for")
+  }
+  const getTrustedBy = () => {
+    console.log("inside getTrusteeBy")
+    axios({
+      method: "GET",
+      url:'https://morti-back-end.onrender.com/trust/trusted_by',
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+    .then((response) => {
+      console.log("inside .then")
+      console.log(response.data)
+      const trustedByData = [];
+      response.data.forEach((trustedBy) => {
+        trustedByData.push(trustedBy);
       });
-  
-      setTrusteeFor(updatedTrustees)
-    };
-  
-  
+      setTrusteeFor(trustedByData)
+    })
+    .catch((error) => {
+        console.log("error: ", error.response);
+        alert(error.response)
+    })
+};
+useEffect(getTrustedBy, [token])
+
+const updateExpired = (trustedById) => {
+  console.log("inside updateExpired, trustedById:", trustedById)
+  axios({
+    method: "PUT",
+    url: `https://morti-back-end.onrender.com/trust/expired/${trustedById}`,
+    headers: {
+      Authorization: "Bearer " + token
+    },
+  })
+  .then((response) => {
+      console.log("response data: ", response)
+      getTrustedBy()
+    })
+    .catch((error)=> {
+      console.log("error: ", error)
+      alert(error)
+    })
+  }
+
   // RECEIVED MESSAGES functions
     const getReceivedMessages = () => {
       axios({
@@ -234,11 +329,13 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
             path="/trustees"
             element={
               <TrusteePage
+                token={token}
                 trustees={trustees}
                 addTrustee={addTrustee}
                 updateDeleteTrustee={updateDeleteTrustee}
                 trusteeFor={trusteeFor}
                 deleteTrusteeFor={deleteTrusteeFor}
+                updateExpired={updateExpired}
               />
             }
           />

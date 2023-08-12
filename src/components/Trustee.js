@@ -7,6 +7,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 const Trustee = (props) => {
 
     const toggleDelete = () => {
+        console.log("inside toggleDelete, trustee id:", props.user_id)
         props.updateDeleteTrustee(props.user_id)
     }
 

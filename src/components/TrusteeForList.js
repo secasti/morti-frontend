@@ -12,10 +12,12 @@ const TrusteeForList = (props) => {
             return (
                 <li key={trustee.user_id}>
                     <TrusteeFor
-                        user_id={trustee.user_id}
-                        first_name={trustee.first_name}
+                        key={trustee.email}
+                        firstName={trustee.first_name}
+                        lastName={trustee.last_name}
                         email={trustee.email}
                         deleteTrusteeFor={props.deleteTrusteeFor}
+                        updateExpired={props.updateExpired}
                     ></TrusteeFor>
                 </li>
             );
@@ -32,12 +34,13 @@ const TrusteeForList = (props) => {
 TrusteeForList.propTypes = {
     trusteeFor: PropTypes.arrayOf(
         PropTypes.shape({
-            user_id: PropTypes.number,
-            first_name: PropTypes.string.isRequired,
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
             email: PropTypes.string.isRequired
         })
     ).isRequired,
     deleteTrusteeFor: PropTypes.func.isRequired,
+    updateExpired: PropTypes.func.isRequired
 };
 
 export default TrusteeForList;

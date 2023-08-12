@@ -6,7 +6,7 @@ import './TrusteePage.css';
 import TrusteeForList from './TrusteeForList'
 
 
-const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor, removeToken, handleLogout}) => {
+const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor, updateExpired, removeToken, handleLogout}) => {
     
     //set up states to create an accordion menu that shows trustee for and trustee list. 
     const [isTrusteeListExpanded, setIsTrusteeListExpanded] = useState(false);
@@ -29,7 +29,7 @@ const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, tr
             <div className="accordion--container">
                  {/* Trustee List */}
             <div className={`trustee-list ${isTrusteeListExpanded ? 'expanded' : ''}`}>
-                <h2 className='accordion-heading' onClick={toggleTrusteeList}>My Trustees:</h2>
+                <h2 className='accordion-heading' onClick={toggleTrusteeList}>My Trustees 'clickme'</h2>
                 {isTrusteeListExpanded && (
                     <TrusteeList
                     trustees={trustees}
@@ -39,11 +39,12 @@ const TrusteePage = ({trustees, getTrustees, addTrustee, updateDeleteTrustee, tr
             </div>
             {/* Trustee For List */}
             <div className={`trustee-for-list ${isTrusteeForListExpanded ? 'expanded' : ''}`}>
-                <h2 className='accordion-heading' onClick={toggleTrusteeForList}>I am a Trustee For:</h2>
+                <h2 className='accordion-heading' onClick={toggleTrusteeForList}>I am a Trustee For 'click me'</h2>
                 {isTrusteeForListExpanded && (
                     <TrusteeForList
                     trusteeFor={trusteeFor}
                     deleteTrusteeFor={deleteTrusteeFor}
+                    updateExpired={updateExpired}
                     />
                 )}
                 </div>
