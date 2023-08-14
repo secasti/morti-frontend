@@ -4,7 +4,6 @@ import "./NewTrusteeForm.css";
 
 const INITIAL_FORM_DATA = {
     user_id: "",
-    first_name: "",
     email: ""
 };
 
@@ -32,19 +31,11 @@ const NewTrusteeForm = (props) => {
             <h3 className="create-card-title">New Trustee</h3>
             {/* is below class same as other form? */}
             <form onSubmit={onFormSubmit} className="cardform">
-                <div className="message">
-                    <label htmlFor='first_name'>Name:</label>
+                <label htmlFor='email'></label>
                     <input
                     type="text"
-                    id="first_name"
-                    name="first_name"
-                    value={trusteeFormData.first_name}
-                    onChange={anInputChanged}
-                    ></input>
-                </div>
-                <label htmlFor='email'>Email:</label>
-                    <input
-                    type="text"
+                    text="Email"
+                    placeholder="Email"
                     id="email"
                     name="email"
                     value={trusteeFormData.email}
