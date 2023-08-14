@@ -21,6 +21,10 @@
   position: relative;
 }
 
+.audio {
+  padding-right: 5px;
+  padding-bottom:25px;
+}
 .msg-title {
   font-size: 20px;
   font-weight: bold;
@@ -58,7 +62,7 @@
   background-color: transparent; /* Transparent background for the button */
   color: var(--primary-color); /* Blue color for the button text */
   border: none; /* No border */
-  padding: 0; /* Remove padding to make the button compact */
+  padding: 10px; /* Remove padding to make the button compact */
   cursor: pointer;
   font-size: 18px;
   position: absolute;

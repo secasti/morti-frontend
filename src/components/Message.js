@@ -33,7 +33,7 @@ const Message = (props) => {
                     </button>
                 )}
             </p>
-            <audio src={audio} controls></audio>
+            <audio src={audio} controls className='audio'></audio>
             {/* if  isMsgExpanded is true, show button that says show less and runs expand msg func */}
             {props.isMsgExpanded[props.messageId] && (
                 <button onClick={() => props.expandMessage(props.messageId)} className='read-more-btn'>
