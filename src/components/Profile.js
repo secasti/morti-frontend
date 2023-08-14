@@ -7,7 +7,7 @@ const Profile = ({isAuthenticated}) => {
   
     return (
         <div className="welcome-container">
-            <h2>Welcome, !</h2>
+            <h2>Welcome, {localStorage.getItem('email')}!</h2>
             <p>We hope that with our app you can record meaningful messages for your loved ones, set new trustees to manage your messages, and view messages you've received from loved ones.</p>
             <p className="started">To get started:</p>
             <ul>
