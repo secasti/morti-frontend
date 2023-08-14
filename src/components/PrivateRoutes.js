@@ -248,37 +248,6 @@ const updateExpired = (trustedById) => {
         })
     }
     
-    // const deleteMessage = (messageId, messageType) => {
-    //   let updatedMessages;
-      
-    //   axios.delete(`https://morti-back-end.onrender.com/messages/${messageId}/delete`)
-    //   .then((response) => {
-  
-    //   switch (messageType) {
-        
-    //     case 'receivedMessage':
-    //       updatedMessages = receivedMessages.filter(function (receivedMessages) {
-    //         return receivedMessages.message_id !== messageId;
-    //       });
-    //       setReceivedMessages(updatedMessages);
-    //       break;
-  
-    //     case 'message':
-    //       console.log('in message switch')
-    //       updatedMessages = messages.filter(function (messages) {
-    //         return messages.message_id !== messageId;
-    //       });
-    //       setMessages(updatedMessages);
-    //       break;
-  
-    //     default:
-    //       console.error('Invalid messageType', messageType);
-
-    // }).catch((error) => {
-    //   console.log("error: ", error);
-    // })
-    
-    // };
   
     const expandMessage = (message_id) => {
       console.log("inside expand Message")

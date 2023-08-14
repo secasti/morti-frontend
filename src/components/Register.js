@@ -23,30 +23,6 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
     console.log('inside register')
     const [registerForm, setRegisterForm] = useState(INITIAL_FORM_DATA);
     const [isTypingEmail, setIsTypingEmail] = useState(false);
-    const [emailValidation, setEmailValidation] = useState (INITIAL_EMAIL_DATA);
-
-    // const navigate = useNavigate()
-
-    const validateEmail = debounce(async (email) => {
-        //when enter this function set validation status to validating
-        setEmailValidation({ isValidating: true, isValid: false});
-        console.log("entered validate email function and set:",emailValidation)
-        //make API call to route that validates email
-        try {
-            //const response = await axios.get(`/validateEmail?email=${email}`)//route for validating email
-            //this assumes that the reposnse we get is a json with key isValid and value of true or false
-            //const isValidEmail = response.data.isValid;
-                const isValidEmail = true
-            //set validation status accordingly
-            setEmailValidation({isValidating: false, isValid:isValidEmail});
-            console.log("email successfully validated by axios fake call", emailValidation)
-        
-        } catch (error) {
-            console.error("Error validating email:", error)
-            // set validation to false
-            setEmailValidation({isValidating: false, isValid: false});
-        }
-    }, 1000); // this 1000 adjust the debounce delay to every 500ms
 
     const handleChange = (evt) => {
         const newUserFormData = {
@@ -59,8 +35,6 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
                 //set state to is typing in email 
                 setIsTypingEmail(true)
                 //perform email validation for recipient email fied. 
-                const isValid = validateEmail(evt.target.value);
-                setEmailValidation({isValidating: true, isValid: isValid})
             }
         };
     
@@ -86,8 +60,6 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
         setRegisterForm(INITIAL_FORM_DATA);
 
         alert('Registration successful! Please wait to be redirected to your new Profile.');
-
-        backToLogin()
         
         };
     return (
@@ -127,12 +99,6 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
                         placeholder='Password'
                     ></input>
             {/* Email validation feedback */}
-            {isTypingEmail && emailValidation.isValidating &&
-                <p className="validating-email">Validating email...</p>}
-
-            {isTypingEmail && !emailValidation.isValid && (
-                <p className="invalid-email">Invalid email</p>
-            )}
             <button className='form-submit-button'> 
                 {isRegisterFormVisible ? 'SIGN UP' : 'LOGIN'}
             </button>

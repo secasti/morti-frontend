@@ -140,8 +140,6 @@ function App() {
             isAuthenticated={isAuthenticated}
             token={token}
             setToken={setToken}
-            // handleAuthentication={handleAuthentication}
-            // registerNewUser={registerNewUser}
             setIsAuthenticated={setIsAuthenticated}
           />
       )
