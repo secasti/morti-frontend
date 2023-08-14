@@ -7,11 +7,15 @@ import NavigationMenu from './components/NavigationMenu'
 import useToken from './components/useToken';
 import Register from './components/Register';
 import PrivateRoutes from './components/PrivateRoutes'
+import axios from 'axios';
+import { useNavigate} from 'react-router-dom';
 
 
 
 
 function App() {
+
+  const navigate = useNavigate()
 
   //token for authenticating users
   const { token, removeToken, setToken } = useToken();
@@ -29,10 +33,69 @@ function App() {
   setIsAuthenticated(false);
   };
 
+  //HANDLE LOGIN
+  const handleLogin = async (event, loginData) => {
+    if (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+    }
+  
+    try {
+      const response = await axios({
+        method: "POST",
+        url: "https://morti-back-end.onrender.com/token",
+        data: {
+          email: loginData.email,
+          password: loginData.password
+        }
+      });
+  
+      console.log("token:", response.data.access_token);
+      setToken(response.data.access_token);
+      alert("Successful Login");
+      localStorage.setItem("email", loginData.email);
+      navigate("/profile");
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        alert("Error:", error.response);
+      }
+    }
+  };
+  
+
   //REGISTER NEW USER
   const registerNewUser = (newUser) => {
-    console.log("newUser info:", newUser)
+    console.log("newUser info:", newUser);
+  
+    console.log("inside RegisterNewUser");
+    axios({
+      method: "POST",
+      url: "https://morti-back-end.onrender.com/register",
+      data: {
+        email: newUser.email,
+        password: newUser.password,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name
+      }
+    })
+      .then((response) => {
+      handleLogin(null, newUser);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          alert("Error:", error.response);
+        }
+      });
   };
+  
+
+
+  
 
   return (
     <div className="website-container">
@@ -53,9 +116,8 @@ function App() {
             <Login
               setToken={setToken}
               token={token}
-              // handleAuthentication={handleAuthentication}
               registerNewUser={registerNewUser}
-              // users={users}
+              handleLogin={handleLogin}
             />
           }
         />
@@ -65,9 +127,8 @@ function App() {
             <Login
               setToken={setToken}
               token={token}
-              // handleAuthentication={handleAuthentication}
               registerNewUser={registerNewUser}
-              // users={users}
+              handleLogin={handleLogin}
             />
           }
         />

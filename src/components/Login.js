@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import './Login.css'
 import Register from './Register';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const Login = ({token, setToken, handleAuthentication, registerNewUser}) => {
+
+
+const Login = ({token, setToken, handleAuthentication, registerNewUser, handleLogin}) => {
   
 
   //login form initial data
@@ -14,43 +15,13 @@ const Login = ({token, setToken, handleAuthentication, registerNewUser}) => {
           })
 
   //define var to handle useNavigate
-  const navigate = useNavigate()
 
   //what happens upon login
-  const handleLogin = (event) => {
-    console.log("inside HandleLogin");
-    console.log("event:", event)
-
-    axios({
-      method: "POST",
-      url:"https://morti-back-end.onrender.com/token",
-      data:{
-        email: loginForm.email,
-        password: loginForm.password
-      }
-    })
-    .then((response) => {
-      console.log("token:",response.data.access_token)
-      setToken(response.data.access_token)
-      alert("Successful Login")
-      localStorage.setItem('email', loginForm.email)
-      navigate('/profile');
-    }).catch((error) => {
-        if (error.response) {
-            console.log(error.response)
-            console.log(error.response.status)
-            console.log(error.response.headers)
-            alert("Error:",error.response)
-        };
-    });
-
+ 
     // Clear the login form fields
-    setloginForm({
-      email: "",
-      password: ""
-    });
+    
 
-    event.preventDefault()
+    
     //HARD CODED DATA
     // Check if the submitted form matches any valid user credentials
     // const validUser = users.find(
@@ -67,7 +38,7 @@ const Login = ({token, setToken, handleAuthentication, registerNewUser}) => {
     //   alert('Invalid username or password');
     // }
 
-  };
+  
 
   //what happens if there is any typing in the login form
     function handleChange(event) {
@@ -93,7 +64,14 @@ const Login = ({token, setToken, handleAuthentication, registerNewUser}) => {
           {isRegisterFormVisible ? (
             <Register registerNewUser={registerNewUser} setIsRegisterFormVisible={setIsRegisterFormVisible} isRegisterFormVisible={isRegisterFormVisible} setToken={setToken} handleAuthentication={handleAuthentication}/>
           ):
-          (<form className="login-form" onSubmit={handleLogin}>
+          (<form className="login-form" onSubmit={(event) => 
+                                            { event.preventDefault();
+                                              handleLogin(event, loginForm);
+                                              setloginForm({
+                                                email: "",
+                                                password: ""
+                                              });
+                                              }} >
                         <input onChange={handleChange} 
                             type="email"
                             text={loginForm.email} 
@@ -107,7 +85,7 @@ const Login = ({token, setToken, handleAuthentication, registerNewUser}) => {
                             name="password" 
                             placeholder="Password" 
                             value={loginForm.password} />
-            <button className="form-submit-button" > 
+            <button className="form-submit-button"> 
               {isRegisterFormVisible ? 'REGISTER' : 'LOGIN'}
             </button>
             <p className="not-a-member">
@@ -132,7 +110,6 @@ const Login = ({token, setToken, handleAuthentication, registerNewUser}) => {
             </p>
           </form>
           )}
-         
         </div>
       </div>
     );

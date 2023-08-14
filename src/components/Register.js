@@ -85,7 +85,7 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
 
         setRegisterForm(INITIAL_FORM_DATA);
 
-        alert('Registration successful! Please proceed to login.');
+        alert('Registration successful! Please wait to be redirected to your new Profile.');
 
         backToLogin()
         
