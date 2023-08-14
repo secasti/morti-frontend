@@ -93,37 +93,38 @@ const Register = ({ registerNewUser, isRegisterFormVisible, setIsRegisterFormVis
     return (
         <section className="register-form--container">
             <form onSubmit={handleSubmit} className='register-form'>
-                <label htmlFor='firstName'>First name:</label>
                     <input
                         type="text"
                         id="first_name"
                         name="first_name"
                         value={registerForm.first_name}
                         onChange={handleChange}
+                        placeholder='First Name'
                     ></input>
-                <label htmlFor='lastName'>Last name:</label>
                     <input
                         type="text"
                         id="last_name"
                         name="last_name"
                         value={registerForm.last_name}
                         onChange={handleChange}
+                        placeholder="Last Name"
+
                     ></input>
-                <label htmlFor='email'>Email:</label>
                     <input
                         type="text"
                         id="email"
                         name="email"
                         value={registerForm.email}
                         onChange={handleChange}
+                        placeholder='Email'
                     ></input>
-                <label htmlFor='password'>Password:</label>
                     <input
                         type="password"
                         id="password"
                         name="password"
                         value={registerForm.password}
                         onChange={handleChange}
+                        placeholder='Password'
                     ></input>
             {/* Email validation feedback */}
             {isTypingEmail && emailValidation.isValidating &&

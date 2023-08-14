@@ -51,7 +51,7 @@ function App() {
   
       console.log("token:", response.data.access_token);
       setToken(response.data.access_token);
-      alert("Successful Login");
+      alert("Successful Login!");
       localStorage.setItem("email", loginData.email);
       navigate("/profile");
     } catch (error) {
@@ -92,8 +92,6 @@ function App() {
         }
       });
   };
-  
-
 
   
 
