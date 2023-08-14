@@ -40,3 +40,17 @@ body {
   color: var(--text-color); /* Light text color for the footer */
 }
 
+.logo {
+  display: flex;
+  align-items: center; /* Align logo vertically with text */
+  gap: 1px; /* Adjust the gap between logo and text */
+}
+
+.logo img {
+  width: auto; /* Allow the logo's width to adjust automatically */
+  height: 5em; /* Set the logo's height to match font size */
+}
+
+.app-title {
+  font-size: 1.5em;
+}

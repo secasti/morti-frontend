@@ -9,6 +9,7 @@ import Register from './components/Register';
 import PrivateRoutes from './components/PrivateRoutes'
 import axios from 'axios';
 import { useNavigate} from 'react-router-dom';
+import logo from './morti.png';
 
 
 
@@ -99,7 +100,10 @@ function App() {
     <div className="website-container">
       <div className='app-page-container'>
 
-        <h1>M O R T I</h1>
+        <div className='logo'>
+          <img src={logo} alt="Logo" />
+          {/* <h1 className='app-title'>M O R T I</h1> */}
+        </div>
 
         <NavigationMenu className={!token?  "invisible-menu": ""} token={token} setToken={setToken} removeToken={removeToken} handleLogout={handleLogout} isAuthenticated={isAuthenticated} token={token}/>
 
