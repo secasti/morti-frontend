@@ -1,3 +1,73 @@
-.create-card-title{
-    text-align: center;
-}
+/* NewTrusteeForm.css */
+
+/* Dark Mode color palette */
+:root {
+    --bg-color: #1a1a1a; /* Dark background color for the main content */
+    --text-color: #f2f2f2; /* Light text color for dark mode */
+    --primary-color: #4CAF50; /* Green for accent elements */
+    --secondary-color: #2196F3; /* Blue for buttons and links */
+  }
+  
+  .trustee-form--container {
+    background-color: var(--bg-color);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    margin-bottom: 16px;
+  }
+  
+  .trustee-form-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .trustee-form-title:hover {
+    color: var(--primary-color);
+  }
+  
+  .trustee-form-title::after {
+    content: ""; /* Use Unicode for − and + symbols */
+    font-size: 20px;
+    margin-left: 10px; /* Add spacing between icon and text */
+  }
+
+  .new-trustee-form {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-expanded .new-trustee-form {
+    display: flex;
+  }
+  
+  .new-trustee-form input[type="text"] {
+    padding: 10px;
+    border: none;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .trustee-form-submit-button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .trustee-form-submit-button:hover {
+    background-color: var(--secondary-color);
+  }
+  

@@ -1,66 +1,37 @@
 /* TrusteePage.css */
 
 :root {
-    /* Colors */
-    --dark-bg-color: #1a1a1a;
-    --light-text-color: #f2f2f2;
-    --list-bg-color: #272727;
-    --form-bg-color: #272727;
-    --list-width: 50%;
-  }
-  
-  .trustee__page {
-    display: flex;
-    gap: 1%;
-    padding: 5%;
-  }
-  
-  .accordion-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex: 1;
-  }
-  
-  .accordion-heading {
-    cursor: pointer;
-    margin: 0;
-    padding: 16px;
-    background-color: var(--list-bg-color);
-    color: var(--light-text-color);
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .expanded {
-    max-height: 500px; /* Adjust the value based on your content height */
-    transition: max-height 0.3s ease-in-out;
-    overflow: hidden; /* Hide any overflow content */
-    overflow-y: auto; /* Enable vertical scrolling */
-    position: relative;
-    /* Hide the default scrollbar on WebKit browsers */
-    scrollbar-width: none; /* Firefox doesn't support this property, but it won't affect the arrows */
+  --bg-color: #1a1a1a; /* Dark background color for the main content */
+  --text-color: #f2f2f2; /* Light text color for dark mode */
+  --primary-color: #4CAF50; /* Green for accent elements */
+  --secondary-color: #2196F3; /* Blue for buttons and links */
+}
 
-  /* Hide the default scrollbar on other browsers (like Chrome, Edge, etc.) */
-    &::-webkit-scrollbar {
-    display: none;
-    }
-    }
+.trustee__page {
+  display: flex;
+  gap: 1%;
+  padding: 5%;
+}
 
-  .trustee-list,
-  .trustee-for-list {
-    background-color: var(--dark-bg-color);
-    color: var(--light-text-color);
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .new-trustee-form {
-    background-color: var(--form-bg-color);
-    color: var(--light-text-color);
-    flex: 1;
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+.left-column,
+.right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Trustee List & Trustee For List */
+.trustee-list,
+.trustee-for-list {
+  background-color: var(--bg-color);
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+

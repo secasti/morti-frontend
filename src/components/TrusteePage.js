@@ -8,54 +8,40 @@ import TrusteeForList from './TrusteeForList'
 
 const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor, updateExpired, removeToken, handleLogout}) => {
     
-    //set up states to create an accordion menu that shows trustee for and trustee list. 
-    const [isTrusteeListExpanded, setIsTrusteeListExpanded] = useState(false);
-    const [isTrusteeForListExpanded, setIsTrusteeForListExpanded] = useState(false);
-
-    const toggleTrusteeList = () => {
-    setIsTrusteeListExpanded(!isTrusteeListExpanded);
-
-    };
-
-    const toggleTrusteeForList = () => {
-    setIsTrusteeForListExpanded(!isTrusteeForListExpanded);
-
-    };
 
 
     return (
         <section className='trustee__page'>
     
-            <div className="accordion--container">
-                 {/* Trustee List */}
-            <div className={`trustee-list ${isTrusteeListExpanded ? 'expanded' : ''}`}>
-                <h2 className='accordion-heading' onClick={toggleTrusteeList}>My Trustees 'clickme'</h2>
-                {isTrusteeListExpanded && (
-                    <TrusteeList
-                    trustees={trustees}
-                    updateDeleteTrustee={updateDeleteTrustee}
-                    />
-                )}
-            </div>
+        <div className="left-column">
             {/* Trustee For List */}
-            <div className={`trustee-for-list ${isTrusteeForListExpanded ? 'expanded' : ''}`}>
-                <h2 className='accordion-heading' onClick={toggleTrusteeForList}>I am a Trustee For 'click me'</h2>
-                {isTrusteeForListExpanded && (
+            <div className={`trustee-for-list`}>
+                <h2 className='accordion-heading'>I am a Trustee For </h2>
+                
                     <TrusteeForList
                     trusteeFor={trusteeFor}
                     deleteTrusteeFor={deleteTrusteeFor}
                     updateExpired={updateExpired}
                     />
-                )}
-                </div>
+    
+            </div>
         </div>
+        <div className='right-column'>
+             {/* Trustee List */}
+            <div className='trustee-list'>
+                <h2 className='accordion-heading' >My Trustees</h2>
+                    <TrusteeList
+                    trustees={trustees}
+                    updateDeleteTrustee={updateDeleteTrustee}
+                    />
+            </div>
             {/* Set a new Trustee Form */}
-            <div className='new-trustee-form'>
+            <div className=''>
                 <NewTrusteeForm 
                 addTrustee={addTrustee}
                 ></NewTrusteeForm>
             </div>
-            
+        </div>
         </section>
     );
 };

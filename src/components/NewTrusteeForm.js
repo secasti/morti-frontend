@@ -9,6 +9,8 @@ const INITIAL_FORM_DATA = {
 
 const NewTrusteeForm = (props) => {
     const [trusteeFormData, setTrusteeFormData] = useState(INITIAL_FORM_DATA);
+    const [isFormExpanded, setIsFormExpanded] = useState(false);
+
 
     const anInputChanged = (evt) => {
         const newTrusteeFormData = {
@@ -16,6 +18,7 @@ const NewTrusteeForm = (props) => {
             [evt.target.name]: evt.target.value
         };
         setTrusteeFormData(newTrusteeFormData);
+        
     };
 
     const onFormSubmit = (evt) => {
@@ -26,11 +29,15 @@ const NewTrusteeForm = (props) => {
         setTrusteeFormData(INITIAL_FORM_DATA)
     };
 
+    const toggleForm = () => {
+        setIsFormExpanded(!isFormExpanded);
+    };
+
     return (
-        <section className="cardform__container">
-            <h3 className="create-card-title">New Trustee</h3>
+        <section className={`trustee-form--container ${isFormExpanded ? 'form-expanded': ''} `}>
+            <h3 className="trustee-form-title" onClick={toggleForm}> {isFormExpanded ? '−' : '+'} Add New Trustee</h3>
             {/* is below class same as other form? */}
-            <form onSubmit={onFormSubmit} className="cardform">
+            <form onSubmit={onFormSubmit} className="new-trustee-form">
                 <label htmlFor='email'></label>
                     <input
                     type="text"
@@ -45,7 +52,7 @@ const NewTrusteeForm = (props) => {
                 type="submit" 
                 value="submit"
                 onClick={onFormSubmit}
-                className="submit"
+                className="trustee-form-submit-button"
                 ></input>
             </form>
         </section>
