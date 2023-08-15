@@ -274,7 +274,7 @@ const updateExpired = (trustedById) => {
       );
     } else if (token) {
       return (
-        <Routes>
+        <Routes className="pirate-font">
           <Route path="/profile" element={<Profile token={token} setCurrentUser={setCurrentUser} currentUser={currentUser} />} />
           <Route
             path="/messages"

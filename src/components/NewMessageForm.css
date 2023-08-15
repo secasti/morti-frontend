@@ -59,3 +59,8 @@
   .validating-email {
     color: var(--primary-color);
   }
+
+  .submit {
+    font-family: 'Pirata One', cursive;
+    font-size: 20px;
+  }
