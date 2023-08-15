@@ -101,7 +101,7 @@ function App() {
       <div className='app-page-container'>
 
         <div className='logo'>
-          <img src={logo} alt="Logo" />
+          <img src={logo} alt="Logo"  />
           {/* <h1 className='app-title'>M O R T I</h1> */}
         </div>
 
