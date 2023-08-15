@@ -10,7 +10,7 @@ const TrusteeForList = (props) => {
     const getTrusteesJSX = (trusteeFor) => {
         return trusteeFor.map((trustee) => {
             return (
-                <li key={trustee.user_id}>
+                <li key={trustee.id}>
                     <TrusteeFor
                         key={trustee.email}
                         firstName={trustee.first_name}
@@ -18,6 +18,7 @@ const TrusteeForList = (props) => {
                         email={trustee.email}
                         deleteTrusteeFor={props.deleteTrusteeFor}
                         updateExpired={props.updateExpired}
+                        userId={trustee.id}
                     ></TrusteeFor>
                 </li>
             );

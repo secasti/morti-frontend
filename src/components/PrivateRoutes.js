@@ -173,6 +173,7 @@ useEffect(getTrustees, [token])
         trustedByData.push(trustedBy);
       });
       setTrusteeFor(trustedByData)
+      console.log("GET trustees data", trustedByData)
     })
     .catch((error) => {
         console.log("error: ", error.response);

@@ -6,8 +6,10 @@ import { faTrash, faSkull } from '@fortawesome/free-solid-svg-icons';
 
 const TrusteeFor = (props) => {
 
+    console.log("user id", props.userId)
+
     const toggleDelete = () => {
-        props.deleteTrusteeFor(props.userId)
+        props.deleteTrusteeFor("prop",props)
     }
 
     const markDeceasedClick = () => {
