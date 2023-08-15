@@ -25,7 +25,7 @@
     font-size: 18px;
     position: absolute;
     bottom: 8px;
-    left: 8px; /* Set the button to the bottom left corner */
+    right: 8px; /* Set the button to the bottom right corner */
   }
   
   .skull-btn:hover {

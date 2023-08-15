@@ -29,9 +29,9 @@ const TrusteeFor = (props) => {
             <button onClick={markDeceasedClick} className='skull-btn'> 
                 <FontAwesomeIcon icon={faSkull} />
             </button>
-            <button onClick={toggleDelete} className='delete-btn'>
+            {/* <button onClick={toggleDelete} className='delete-btn'>
                 <FontAwesomeIcon icon={faTrash} />
-            </button>
+            </button> */}
         </section>
     );
 };

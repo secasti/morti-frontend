@@ -25,7 +25,7 @@ const ReceivedMessage = (props) => {
                 <h3 className='msg-title'>{props.title} </h3>
                 <p className='msg-text'> {props.text} </p>
                 <audio src={audio} controls></audio>
-                <button onClick={toggleDelete}>🗑</button>
+                {/* <button onClick={toggleDelete}>🗑</button> */}
             </div>
         </div>
     )
