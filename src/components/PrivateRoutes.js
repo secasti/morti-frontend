@@ -8,7 +8,7 @@ import axios from 'axios';
 import Profile from './Profile'
 import Register from './Register';
 
-function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication, users, setUsers }) {
+function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication, users, setUsers, registerNewUser}) {
 
     // States
     const [messages, setMessages] = useState([]);
@@ -24,13 +24,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
       });
       return initialMsgExpandedState;
       })
-    
-    //REGISTER NEW USER
-    const registerNewUser = (newUser) => {
-      console.log("newUser info:", newUser)
-      setUsers([...users, newUser]);
-      console.log("all users now:", users)
-    };
+
 
   //GET MESSAGE API CALL
     const getMessages = () => {

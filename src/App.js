@@ -145,6 +145,7 @@ function App() {
             token={token}
             setToken={setToken}
             setIsAuthenticated={setIsAuthenticated}
+            registerNewUser={registerNewUser}
           />
       )
       
