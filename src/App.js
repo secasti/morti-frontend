@@ -50,7 +50,7 @@ function App() {
         }
       });
   
-      console.log("token:", response.data.access_token);
+      // console.log("token:", response.data.access_token);
       setToken(response.data.access_token);
       alert("Successful Login!");
       localStorage.setItem("email", loginData.email);
