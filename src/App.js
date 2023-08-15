@@ -8,7 +8,7 @@ import useToken from './components/useToken';
 import Register from './components/Register';
 import PrivateRoutes from './components/PrivateRoutes'
 import axios from 'axios';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 import logo from './morti.png';
 
 
@@ -101,7 +101,9 @@ function App() {
       <div className='app-page-container'>
 
         <div className='logo'>
-          <img src={logo} alt="Logo"  />
+          <Link to="/profile">
+            <img src={logo} alt="Logo"  />
+          </Link>
           {/* <h1 className='app-title'>M O R T I</h1> */}
         </div>
 
