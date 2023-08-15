@@ -15,6 +15,7 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     const [trustees, setTrustees] = useState([]);
     const [trusteeFor, setTrusteeFor] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState([]);
+    const [currentUser, setCurrentUser] = useState([]);
     
     const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
     // initial dictionary with each message id as key, and boolean value for if it is expanded. 
@@ -273,7 +274,7 @@ const updateExpired = (trustedById) => {
     } else if (token) {
       return (
         <Routes>
-          <Route path="/profile" element={<Profile token={token} isAuthenticated={isAuthenticated} />} />
+          <Route path="/profile" element={<Profile token={token} setCurrentUser={setCurrentUser} currentUser={currentUser} />} />
           <Route
             path="/messages"
             element={

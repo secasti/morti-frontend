@@ -4,9 +4,9 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 
-const Profile = ({isAuthenticated, token}) => {
+const Profile = ({token, setCurrentUser, currentUser}) => {
   console.log("inside profile")
-  const [currentUser, setCurrentUser] = useState([]);
+ 
 
   const getUserInfo = () => {
       axios({
