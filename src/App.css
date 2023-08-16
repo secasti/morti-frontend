@@ -10,7 +10,7 @@
 
 body {
   margin: 5%;
-  font-family: 'Kavivanar', cursive;
+  font-family: Arial, sans-serif;
   background-color: var(--bg-color); /* Dark background color for dark mode */
   color: var(--text-color); /* Light text color for dark mode */
 }
@@ -53,9 +53,4 @@ body {
 
 .app-title {
   font-size: 1.5em;
-}
-
-.pirate-button {
-  font-family: 'Pirata One', cursive;
-  font-size: 20px;
 }
