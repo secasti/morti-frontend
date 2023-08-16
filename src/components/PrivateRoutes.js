@@ -7,8 +7,10 @@ import ReceivedMessageList from './ReceivedMessageList';
 import axios from 'axios';
 import Profile from './Profile'
 import Register from './Register';
+import { debounce } from "lodash";
 
-function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication, users, setUsers, registerNewUser}) {
+
+function PrivateRoutes({ token, setToken, handleAuthentication, registerNewUser}) {
 
     // States
     const [messages, setMessages] = useState([]);
@@ -16,6 +18,11 @@ function PrivateRoutes({ isAuthenticated, token, setToken, handleAuthentication,
     const [trusteeFor, setTrusteeFor] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
+    // state to tract the validation status of email input (prob needs to be raised to be used by trustee form)
+    const [emailValidation, setEmailValidation] = useState ({
+      isValidating: false,
+      isValid: false,
+  });
     
     const [isMsgExpanded, setIsMsgExpanded] = useState(() => {
     // initial dictionary with each message id as key, and boolean value for if it is expanded. 
@@ -253,6 +260,34 @@ const updateExpired = (trustedById) => {
         })); 
     };
     
+    // Validate Email axios call
+    const validateEmail = async (email) => {
+      try {
+        const response = await axios({
+          method: "POST",
+          url: "https://morti-back-end.onrender.com/validate",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+          data: { email: email },
+        });
+  
+        const isValidEmail = response.data.isValid;
+        console.log("validate Email response.data.isValid", isValidEmail)
+  
+        setEmailValidation({
+          isValidating: false,
+          isValid: isValidEmail,
+        });
+      } catch (error) {
+        console.error("Error validating email:", error);
+        setEmailValidation({
+          isValidating: false,
+          isValid: false,
+        });
+      }
+    };
+  
     
     if (!token && token !== "" && token !== undefined) {
       return (
@@ -262,7 +297,6 @@ const updateExpired = (trustedById) => {
             setToken={setToken}
             handleAuthentication={handleAuthentication}
             registerNewUser={registerNewUser}
-            users={users}
           />
           <Routes>
           <Route
@@ -287,6 +321,9 @@ const updateExpired = (trustedById) => {
                 expandMessage={expandMessage}
                 isMsgExpanded={isMsgExpanded}
                 getMessages={getMessages}
+                validateEmail={validateEmail}
+                setEmailValidation={setEmailValidation}
+                emailValidation={emailValidation}
               />
             }
           />
@@ -301,6 +338,9 @@ const updateExpired = (trustedById) => {
                 trusteeFor={trusteeFor}
                 deleteTrusteeFor={deleteTrusteeFor}
                 updateExpired={updateExpired}
+                validateEmail={validateEmail}
+                setEmailValidation={setEmailValidation}
+                emailValidation={emailValidation}
               />
             }
           />
@@ -329,7 +369,6 @@ const updateExpired = (trustedById) => {
               setToken={setToken}
               handleAuthentication={handleAuthentication}
               registerNewUser={registerNewUser}
-              users={users}
             />
           }
         />

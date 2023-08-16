@@ -1,9 +1,13 @@
-import React, { useState , useEffect} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { debounce } from "lodash";
-import axios from "axios"; 
 import "./NewMessageForm.css";
 import AudioRecorder from "./AudioRecorder";
+import debounce from "lodash/debounce";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+
+
+
 
 
 //empty form data to reset form to
@@ -14,34 +18,12 @@ const INITIAL_FORM_DATA = {
     recipient_email: ""
 };
 
-const NewMessageForm = ({ token, addMessage }) => {
+const NewMessageForm = ({ token, addMessage, validateEmail, setEmailValidation, emailValidation }) => {
     
     const [messageFormData, setMessageFormData] = useState(INITIAL_FORM_DATA);
-    const [isTypingEmail, setIsTypingEmail] = useState(false);
 
+    const validateEmailDebounced = debounce(validateEmail, 500);
 
-
-    //Async validation function using debounce from Lodash
-    const validateEmail = debounce(async (email) => {
-        //when enter this function set validation status to validating
-        setEmailValidation({ isValidating: true, isValid: false});
-        console.log("entered validate email function and set:",emailValidation)
-        //make API call to route that validates email
-        try {
-            //const response = await axios.get(`/validateEmail?email=${email}`)//route for validating email
-            //this assumes that the reposnse we get is a json with key isValid and value of true or false
-            //const isValidEmail = response.data.isValid;
-                const isValidEmail = true
-            //set validation status accordingly
-            setEmailValidation({isValidating: false, isValid:isValidEmail});
-            console.log("email successfully validated by axios fake call", emailValidation)
-        
-        } catch (error) {
-            console.error("Error validating email:", error)
-            // set validation to false
-            setEmailValidation({isValidating: false, isValid: false});
-        }
-    }, 1000); // this 1000 adjust the debounce delay to every 500ms
 
     const handleChange = (event) => {
         const newFormData = {
@@ -51,20 +33,14 @@ const NewMessageForm = ({ token, addMessage }) => {
         setMessageFormData(newFormData);
 
         //check if email field is being changed
-        if (event.target.name === "recipientEmail") {
-            //set state to is typing in email 
-            setIsTypingEmail(true)
+        if (event.target.name === "recipient_email") {
             //perform email validation for recipient email fied. 
-            const isValid = validateEmail(event.target.value);
-            setEmailValidation({isValidating: true, isValid: isValid})
+            validateEmailDebounced(event.target.value);
+
         }
     };
 
-    // state to tract the validation status of email input (prob needs to be raised to be used by trustee form)
-    const [emailValidation, setEmailValidation] = useState ({
-        isValidating: false,
-        isValid: false,
-    });
+    
 
     // function to save 64baseString to FormData
     const handleAudioData = (base64String) => {
@@ -124,11 +100,12 @@ const NewMessageForm = ({ token, addMessage }) => {
                     onChange={handleChange}
                 /> 
             {/* Email validation feedback */}
-            {isTypingEmail && emailValidation.isValidating &&
-                <p className="validating-email">Validating email...</p>}
-
-            {isTypingEmail && !emailValidation.isValid && (
-                <p className="invalid-email">Invalid email</p>
+            {emailValidation.isValidating ? (
+                <p className="validating-email">Validating email...</p>
+            ) : emailValidation.isValid ? (
+                <p className="valid-email"> <FontAwesomeIcon icon={faCheckCircle} /> &nbsp; Valid email </p>
+            ) : (
+                <p className="invalid-email"> <FontAwesomeIcon icon={faTimesCircle} /> &nbsp; Invalid email</p>
             )}
             {/* submit button */}
             <input type="submit" value="submit" onClick={handleSubmit} className="submit"/>
@@ -139,6 +116,7 @@ const NewMessageForm = ({ token, addMessage }) => {
 
     NewMessageForm.propTypes = {
         addMessage: PropTypes.func.isRequired,
+        validateEmail: PropTypes.func.isRequired
     };
 
     export default NewMessageForm;
