@@ -81,7 +81,7 @@ const NewTrusteeForm = (props) => {
                 )}
                 <input 
                 type="submit" 
-                value="submit"
+                value="Submit"
                 onClick={onFormSubmit}
                 className="trustee-form-submit-button"
                 ></input>

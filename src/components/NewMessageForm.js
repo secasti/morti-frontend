@@ -118,7 +118,7 @@ const NewMessageForm = ({ token, addMessage, validateEmail, emailValidation }) =
                 </p>
                 )}
             {/* submit button */}
-            <input type="submit" value="submit" onClick={handleSubmit} className="submit"/>
+            <input type="submit" value="Submit" onClick={handleSubmit} className="submit"/>
         </form>
         </section>
     );
