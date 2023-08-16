@@ -322,7 +322,6 @@ const updateExpired = (trustedById) => {
                 isMsgExpanded={isMsgExpanded}
                 getMessages={getMessages}
                 validateEmail={validateEmail}
-                setEmailValidation={setEmailValidation}
                 emailValidation={emailValidation}
               />
             }
@@ -339,7 +338,6 @@ const updateExpired = (trustedById) => {
                 deleteTrusteeFor={deleteTrusteeFor}
                 updateExpired={updateExpired}
                 validateEmail={validateEmail}
-                setEmailValidation={setEmailValidation}
                 emailValidation={emailValidation}
               />
             }
