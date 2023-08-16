@@ -18,7 +18,7 @@ const INITIAL_FORM_DATA = {
     recipient_email: ""
 };
 
-const NewMessageForm = ({ token, addMessage, validateEmail, setEmailValidation, emailValidation }) => {
+const NewMessageForm = ({ token, addMessage, validateEmail, emailValidation }) => {
     
     const [messageFormData, setMessageFormData] = useState(INITIAL_FORM_DATA);
 
@@ -100,13 +100,23 @@ const NewMessageForm = ({ token, addMessage, validateEmail, setEmailValidation, 
                     onChange={handleChange}
                 /> 
             {/* Email validation feedback */}
-            {emailValidation.isValidating ? (
-                <p className="validating-email">Validating email...</p>
-            ) : emailValidation.isValid ? (
-                <p className="valid-email"> <FontAwesomeIcon icon={faCheckCircle} /> &nbsp; Valid email </p>
-            ) : (
-                <p className="invalid-email"> <FontAwesomeIcon icon={faTimesCircle} /> &nbsp; Invalid email</p>
-            )}
+            {messageFormData.recipient_email && (
+                <p className="email-validation-message">
+                    {emailValidation.isValidating && (
+                    <span className="validating-email">Validating email...</span>
+                    )}
+                    {!emailValidation.isValidating && emailValidation.isValid && (
+                    <span className="valid-email">
+                        <FontAwesomeIcon icon={faCheckCircle} className="icon" /> Valid email
+                    </span>
+                    )}
+                    {!emailValidation.isValidating && !emailValidation.isValid && (
+                    <span className="invalid-email">
+                        <FontAwesomeIcon icon={faTimesCircle} className="icon" /> Invalid email
+                    </span>
+                    )}
+                </p>
+                )}
             {/* submit button */}
             <input type="submit" value="submit" onClick={handleSubmit} className="submit"/>
         </form>

@@ -6,7 +6,7 @@ import './TrusteePage.css';
 import TrusteeForList from './TrusteeForList'
 
 
-const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor, updateExpired, removeToken, handleLogout}) => {
+const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee, trusteeFor, deleteTrusteeFor, updateExpired, emailValidation, validateEmail }) => {
     
 
 
@@ -39,6 +39,9 @@ const TrusteePage = ({trustees, addTrustee, updateDeleteTrustee, trusteeFor, del
             <div className=''>
                 <NewTrusteeForm 
                 addTrustee={addTrustee}
+                emailValidation={emailValidation}
+                validateEmail={validateEmail}
+
                 ></NewTrusteeForm>
             </div>
         </div>
@@ -64,6 +67,8 @@ TrusteePage.propTypes = {
         addTrustee: PropTypes.func.isRequired,
         updateDeleteTrustee: PropTypes.func.isRequired,
         deleteTrusteeFor: PropTypes.func.isRequired,
+        emailValidation: PropTypes.object.isRequired,
+        validateEmail: PropTypes.func.isRequired
 };
 
 export default TrusteePage;
