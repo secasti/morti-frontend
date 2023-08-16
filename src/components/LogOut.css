@@ -8,3 +8,8 @@
   .logOut:hover {
     background-color: red;
   }
+
+  .logOut {
+    font-family: 'Pirata One', cursive;
+    font-size: 20px;
+  }

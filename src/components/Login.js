@@ -64,9 +64,9 @@ const Login = ({token, setToken, handleAuthentication, registerNewUser, handleLo
         </section>
         {/* login form  */}
         <div className = "login-form--container">
-          <h2 className="form-title">
+          {/* <h2 className="form-title">
             {isRegisterFormVisible ? "Sign Up" : "Log in"}
-          </h2>
+          </h2> */}
           {isRegisterFormVisible ? (
             <Register registerNewUser={registerNewUser} setIsRegisterFormVisible={setIsRegisterFormVisible} isRegisterFormVisible={isRegisterFormVisible} setToken={setToken} handleAuthentication={handleAuthentication}/>
           ):
@@ -92,7 +92,7 @@ const Login = ({token, setToken, handleAuthentication, registerNewUser, handleLo
                             placeholder="Password" 
                             value={loginForm.password} />
             <button className="form-submit-button"> 
-              {isRegisterFormVisible ? 'REGISTER' : 'LOGIN'}
+              {isRegisterFormVisible ? 'REGISTER' : 'Log In'}
             </button>
             <p className="not-a-member">
             {isRegisterFormVisible ? (
@@ -109,7 +109,7 @@ const Login = ({token, setToken, handleAuthentication, registerNewUser, handleLo
                     className="link-button"
                     onClick={() => setIsRegisterFormVisible(true)}
                   >
-                    Sign Up.
+                    Sign Up
                   </button>
                 </>
               )}
