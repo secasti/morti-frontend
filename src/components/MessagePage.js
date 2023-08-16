@@ -5,7 +5,7 @@ import MessageList from './MessageList';
 
 
 
-const MessagePage = ({token, messages, addMessage, deleteMessage, expandMessage, isMsgExpanded}) =>{
+const MessagePage = ({token, messages, addMessage, deleteMessage, expandMessage, isMsgExpanded, validateEmail, setEmailValidation, emailValidation}) =>{
     console.log("MessagePage rendered");
     //set up navigate from browserRouter
 
@@ -28,7 +28,11 @@ const MessagePage = ({token, messages, addMessage, deleteMessage, expandMessage,
                 <NewMessageForm 
                 token={token}
                 addMessage={ addMessage }
-                messages={ messages } />
+                messages={ messages }
+                validateEmail={validateEmail} 
+                setEmailValidation={setEmailValidation}
+                emailValidation={emailValidation}
+                />
             </div>
         </section> 
         </div>
@@ -41,7 +45,8 @@ MessagePage.propTypes = {
     addMessage: PropTypes.func.isRequired,
     deleteMessage:PropTypes.func.isRequired,
     isMsgExpanded: PropTypes.object.isRequired,
-    expandMessage: PropTypes.func.isRequired
+    expandMessage: PropTypes.func.isRequired,
+    validateEmail: PropTypes.func.isRequired
 };
 
 export default MessagePage;

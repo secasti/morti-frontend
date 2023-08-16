@@ -10,6 +10,8 @@ import PrivateRoutes from './components/PrivateRoutes'
 import axios from 'axios';
 import { useNavigate, Link} from 'react-router-dom';
 import logo from './morti.png';
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
