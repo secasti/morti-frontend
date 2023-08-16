@@ -13,9 +13,9 @@ const NavigationMenu = ({token, setToken, removeToken, handleLogout, isAuthentic
           
           <header className="logged-nav-menu">
             <nav>
-              <button className="pirate-button" onClick={() => navigate('/messages')}>Messages</button>
-              <button className="pirate-button" onClick={() => navigate('/trustees')}>Mortals</button>
-              <button className="pirate-button" onClick={() => navigate('/messages/received-messages')}>Received Messages</button>
+              <button onClick={() => navigate('/messages')}>Messages</button>
+              <button onClick={() => navigate('/trustees')}>Trusted Persons</button>
+              <button onClick={() => navigate('/messages/received-messages')}>Received Messages</button>
               <LogOut removeToken = { removeToken } handleLogout={ handleLogout } />
             </nav>
           </header>
