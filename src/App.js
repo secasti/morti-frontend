@@ -59,10 +59,7 @@ function App() {
       navigate("/profile");
     } catch (error) {
       if (error.response) {
-        console.log(error.response);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-        alert("Error:", error.response.data);
+        alert("Incorrect email or password.", error.response.data.msg);
       }
     }
   };
