@@ -62,7 +62,7 @@ function App() {
         console.log(error.response);
         console.log(error.response.status);
         console.log(error.response.headers);
-        alert("Error:", error.response);
+        alert("Error:", error.response.data);
       }
     }
   };
